@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
-import SearchPage from './components/SearchPage';
+import React from 'react'
+import './App.css'
+import SearchPage from './components/SearchPage'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <SearchPage />
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

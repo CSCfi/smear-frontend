@@ -1,37 +1,33 @@
 import React from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import Boost from 'highcharts/modules/boost';
+import Boost from 'highcharts/modules/boost'
 
-import testdata from './pamb0.json';
+import testdata from './pamb0.json'
 
-Boost(Highcharts);
+Boost(Highcharts)
 
-const foo = testdata.data.map(entry => entry["HYY_META.Pamb0"]);
+const foo = testdata.data.map((entry) => entry['HYY_META.Pamb0'])
 
 const options: Highcharts.Options = {
   title: {
-      text: 'My chart'
+    text: 'My chart',
   },
   plotOptions: {
     series: {
-      boostThreshold: 1
-    }
+      boostThreshold: 1,
+    },
   },
-  series: [{
+  series: [
+    {
       type: 'line',
-      data: foo
-  }]
+      data: foo,
+    },
+  ],
 }
 
 const SearchPage: React.FC = (props: HighchartsReact.Props) => {
-  return (
-    <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-        {...props}
-    />
-  )
+  return <HighchartsReact highcharts={Highcharts} options={options} {...props} />
 }
 
 export default SearchPage
