@@ -10,7 +10,7 @@ type TimeSeries = {
 
 export const timeSeriesSlice = createSlice({
   name: 'timeSeries',
-  initialState: {},
+  initialState: {} as TimeSeries,
   reducers: {
     setTimeSeries: (state, action: PayloadAction<TimeSeries>) => action.payload,
   },
