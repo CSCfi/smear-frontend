@@ -59,7 +59,7 @@ export const menuItemSlice = createSlice({
 
 export const { setMenuItems } = menuItemSlice.actions
 
-const menuItemsSelector = (state: RootState) => state.menuitems
+const menuItemsSelector = (state: RootState) => state.menuItems
 
 export const treeDataSelector = createSelector(menuItemsSelector, (menuItems) =>
   stationsToTreeData(menuItems)
