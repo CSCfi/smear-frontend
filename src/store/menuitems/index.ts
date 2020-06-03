@@ -3,7 +3,7 @@ import { RootState } from '../index'
 
 export type Variable = {
   tablevariable: string
-  description: string
+  title: string
 }
 
 export type Category = {
