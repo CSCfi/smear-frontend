@@ -4,29 +4,39 @@ import { Tree } from 'antd'
 import 'antd/dist/antd.css'
 import { Station, Category, Variable, menuItemsSelector } from '../../store/menuitems'
 
-const variablesToTreeData = (variables: Variable[]) =>
+type TreeNode = {
+  key: string
+  title: string
+  isVariable: boolean
+  children?: TreeNode[]
+}
+
+const variablesToTreeData = (variables: Variable[]): TreeNode[] =>
   variables.map((variable) => {
     return {
       key: variable.tablevariable,
-      title: variable.description,
+      title: variable.title,
+      isVariable: true,
     }
   })
 
-const categoriesToTreeData = (categories: Category[]) =>
+const categoriesToTreeData = (categories: Category[]): TreeNode[] =>
   categories.map((category) => {
     return {
       key: category.id,
       title: category.name,
       children: variablesToTreeData(category.variables),
+      isVariable: false,
     }
   })
 
-const stationsToTreeData = (stations: Station[]) =>
+const stationsToTreeData = (stations: Station[]): TreeNode[] =>
   stations.map((station) => {
     return {
-      key: station.id,
+      key: String(station.id),
       title: station.name,
       children: categoriesToTreeData(station.categories),
+      isVariable: false,
     }
   })
 
@@ -46,8 +56,11 @@ const TreeMenu = () => {
     setAutoExpandParent(false)
   }
 
-  const onCheck = (checkedKeys: any) => {
-    console.log('onCheck', checkedKeys)
+  const onCheck = (checkedKeys: any, info: any) => {
+    const tablevariables = info.checkedNodes
+      .filter((node: TreeNode) => node.isVariable)
+      .map((node: TreeNode) => node.key)
+    console.log('tablevariables', tablevariables)
     setCheckedKeys(checkedKeys)
   }
 
