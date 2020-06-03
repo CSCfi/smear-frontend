@@ -26,8 +26,8 @@ const options: Highcharts.Options = {
   ],
 }
 
-const SearchPage: React.FC = (props: HighchartsReact.Props) => {
+const TimeSeriesChart: React.FC = (props: HighchartsReact.Props) => {
   return <HighchartsReact highcharts={Highcharts} options={options} {...props} />
 }
 
-export default SearchPage
+export default TimeSeriesChart
