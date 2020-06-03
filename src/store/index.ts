@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import menuItemReducer from './menuitems'
+import timeSeriesReducer from './timeseries'
 
 export const store = configureStore({
   reducer: {
-    menuitems: menuItemReducer,
+    menuItems: menuItemReducer,
+    timeSeries: timeSeriesReducer,
   },
 })
 
