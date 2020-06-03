@@ -8,7 +8,6 @@ import testdata from './pamb0.json'
 Boost(Highcharts)
 
 const foo = testdata.data.map((entry) => entry['HYY_META.Pamb0'])
-console.log(foo)
 
 const options: Highcharts.Options = {
   title: {
