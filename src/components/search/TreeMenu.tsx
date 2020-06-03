@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Tree } from 'antd'
 import 'antd/dist/antd.css'
 import { treeDataSelector } from '../../store/menuitems'
+import { fetchTimeSeries } from '../../service/timeseries'
 import { TreeNode } from '../../types'
 
 const TreeMenu: React.FC = () => {
+  const dispatch = useDispatch()
   const treeData = useSelector(treeDataSelector)
   const [expandedKeys, setExpandedKeys] = useState([])
   const [checkedKeys, setCheckedKeys] = useState([])
@@ -21,7 +23,7 @@ const TreeMenu: React.FC = () => {
     const tablevariables = info.checkedNodes
       .filter((node: TreeNode) => node.isVariable)
       .map((node: TreeNode) => node.key)
-    console.log('tablevariables', tablevariables)
+    dispatch(fetchTimeSeries(tablevariables))
     setCheckedKeys(checkedKeys)
   }
 
