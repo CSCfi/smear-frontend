@@ -1,19 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import Boost from 'highcharts/modules/boost'
-import { timeSeriesSelector } from '../../store/timeseries'
-import { DataPoint } from '../../types'
 
-Boost(Highcharts)
+type TimeSeriesChartProps = {
+  name: string
+  data: number[]
+}
 
-const TimeSeriesChart: React.FC = (props: HighchartsReact.Props) => {
-  const timeSeries = useSelector(timeSeriesSelector)
-  const data = timeSeries.data.map((dataPoint: DataPoint) => dataPoint[timeSeries.columns[0]])
+const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
   const options: Highcharts.Options = {
     title: {
-      text: 'SMEAR data',
+      text: name,
     },
     plotOptions: {
       series: {
@@ -27,8 +24,7 @@ const TimeSeriesChart: React.FC = (props: HighchartsReact.Props) => {
       },
     ],
   }
-
-  return <HighchartsReact highcharts={Highcharts} options={options} {...props} />
+  return <HighchartsReact highcharts={Highcharts} options={options} />
 }
 
 export default TimeSeriesChart
