@@ -14,7 +14,6 @@ export const fetchTimeSeries = (tablevariables: string[]) => {
       return axios
         .get('/api/search/timeseries', { params })
         .then((response) => {
-          console.log(response.data)
           dispatch(setTimeSeries(response.data))
         })
         .catch((error) => {
