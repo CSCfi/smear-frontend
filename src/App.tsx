@@ -6,7 +6,6 @@ import { fetchInitialData } from './service/initialload'
 import SearchPage from './components/search/SearchPage'
 
 import 'antd/dist/antd.css'
-import './App.css'
 
 Boost(Highcharts)
 
@@ -17,10 +16,8 @@ function App() {
   }, [dispatch])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <SearchPage />
-      </header>
+    <div>
+      <SearchPage />
     </div>
   )
 }

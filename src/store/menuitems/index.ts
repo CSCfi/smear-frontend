@@ -25,7 +25,8 @@ const variablesToTreeData = (variables: Variable[]): TreeNode[] =>
     return {
       key: variable.tablevariable,
       title: variable.title,
-      isVariable: true,
+      checkable: true,
+      isLeaf: true,
     }
   })
 
@@ -35,7 +36,8 @@ const categoriesToTreeData = (categories: Category[]): TreeNode[] =>
       key: category.id,
       title: category.name,
       children: variablesToTreeData(category.variables),
-      isVariable: false,
+      checkable: false,
+      isLeaf: false,
     }
   })
 
@@ -45,7 +47,8 @@ const stationsToTreeData = (stations: Station[]): TreeNode[] =>
       key: String(station.id),
       title: station.name,
       children: categoriesToTreeData(station.categories),
-      isVariable: false,
+      checkable: false,
+      isLeaf: false,
     }
   })
 

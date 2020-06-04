@@ -1,20 +1,25 @@
 import React from 'react'
-import { Row, Col } from 'antd'
+import { Layout } from 'antd'
 import TreeMenu from './TreeMenu'
 import TimeSeriesGrid from './TimeSeriesGrid'
 
 const SearchPage: React.FC = () => {
   return (
-    <>
-      <Row>
-        <Col span={8}>
+    <Layout>
+      <Layout>
+        <Layout.Header>SMEAR</Layout.Header>
+      </Layout>
+      <Layout>
+        <Layout.Sider>
           <TreeMenu />
-        </Col>
-        <Col span={16}>
+        </Layout.Sider>
+      </Layout>
+      <Layout>
+        <Layout.Content>
           <TimeSeriesGrid />
-        </Col>
-      </Row>
-    </>
+        </Layout.Content>
+      </Layout>
+    </Layout>
   )
 }
 

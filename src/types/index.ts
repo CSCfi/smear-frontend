@@ -1,7 +1,8 @@
 export type TreeNode = {
   key: string
   title: string
-  isVariable: boolean
+  isLeaf: boolean
+  checkable: boolean
   children?: TreeNode[]
 }
 

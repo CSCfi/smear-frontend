@@ -21,7 +21,7 @@ const TreeMenu: React.FC = () => {
 
   const onCheck = (checkedKeys: any, info: any) => {
     const tablevariables = info.checkedNodes
-      .filter((node: TreeNode) => node.isVariable)
+      .filter((node: TreeNode) => node.isLeaf)
       .map((node: TreeNode) => node.key)
     dispatch(fetchTimeSeries(tablevariables))
     setCheckedKeys(checkedKeys)
