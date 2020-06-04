@@ -1,7 +1,7 @@
 import React from 'react'
 import { Row, Col } from 'antd'
 import TreeMenu from './TreeMenu'
-import TimeSeriesChart from './TimeSeriesChart'
+import TimeSeriesGrid from './TimeSeriesGrid'
 
 const SearchPage: React.FC = () => {
   return (
@@ -11,7 +11,7 @@ const SearchPage: React.FC = () => {
           <TreeMenu />
         </Col>
         <Col span={16}>
-          <TimeSeriesChart />
+          <TimeSeriesGrid />
         </Col>
       </Row>
     </>
