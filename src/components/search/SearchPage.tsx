@@ -13,10 +13,10 @@ const SearchPage: React.FC = () => {
         <Layout.Sider>
           <TreeMenu />
         </Layout.Sider>
-      </Layout>
-      <Layout>
         <Layout.Content>
-          <TimeSeriesGrid />
+          <Layout>
+            <TimeSeriesGrid />
+          </Layout>
         </Layout.Content>
       </Layout>
     </Layout>
