@@ -12,7 +12,7 @@ export const fetchTimeSeries = (tablevariables: string[]) => {
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
       return axios
-        .get('/api/search/timeseries', { params })
+        .get('/search/timeseries', { params })
         .then((response) => {
           dispatch(setTimeSeries(response.data))
         })

@@ -9,6 +9,9 @@ type TimeSeriesChartProps = {
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
   const options: Highcharts.Options = {
+    xAxis: {
+      type: 'datetime',
+    },
     title: {
       text: name,
     },
