@@ -5,7 +5,7 @@ import { setMenuItems } from '../../store/menuitems'
 export const fetchInitialData = () => {
   return async (dispatch: AppDispatch) => {
     return axios
-      .get('/api/structure')
+      .get('/structure')
       .then((response) => {
         dispatch(setMenuItems(response.data))
       })
