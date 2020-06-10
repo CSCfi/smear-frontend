@@ -2,6 +2,7 @@ import axios from 'axios'
 import { AppDispatch } from '../../store/index'
 import { setTimeSeries } from '../../store/timeseries'
 import { TimeSeries } from '../../types'
+import { API_URL, PATH_TIME_SERIES } from '../../constants'
 
 export const fetchTimeSeries = (tablevariables: string[]) => {
   const params = new URLSearchParams()
@@ -12,7 +13,7 @@ export const fetchTimeSeries = (tablevariables: string[]) => {
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
       return axios
-        .get('/search/timeseries', { params })
+        .get(API_URL + PATH_TIME_SERIES, { params })
         .then((response) => {
           dispatch(setTimeSeries(response.data))
         })
