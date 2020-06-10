@@ -4,10 +4,7 @@ import { RootState } from '../index'
 
 export const timeSeriesSlice = createSlice({
   name: 'timeSeries',
-  initialState: {
-    columns: [],
-    data: [],
-  } as TimeSeries,
+  initialState: {} as TimeSeries,
   reducers: {
     setTimeSeries: (state, action: PayloadAction<TimeSeries>) => action.payload,
   },

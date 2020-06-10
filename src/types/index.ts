@@ -6,11 +6,6 @@ export type TreeNode = {
   children?: TreeNode[]
 }
 
-export type DataPoint = {
-  [key: string]: number | string
-}
-
 export type TimeSeries = {
-  columns: string[]
-  data: DataPoint[]
+  [key: string]: number[]
 }

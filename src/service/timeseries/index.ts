@@ -21,12 +21,7 @@ export const fetchTimeSeries = (tablevariables: string[]) => {
           throw error
         })
     } else {
-      dispatch(
-        setTimeSeries({
-          columns: [],
-          data: [],
-        } as TimeSeries)
-      )
+      dispatch(setTimeSeries({} as TimeSeries))
     }
   }
 }
