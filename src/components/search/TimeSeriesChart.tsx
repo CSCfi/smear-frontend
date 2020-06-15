@@ -9,16 +9,8 @@ type TimeSeriesChartProps = {
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
   const options: Highcharts.Options = {
-    xAxis: {
-      type: 'datetime',
-    },
     title: {
       text: name,
-    },
-    plotOptions: {
-      series: {
-        boostThreshold: 1,
-      },
     },
     series: [
       {
@@ -26,6 +18,29 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
         data,
       },
     ],
+    xAxis: {
+      type: 'datetime',
+      labels: {
+        format: '{value:%Y-%m-%d %H:%M:%S}',
+        padding: 10,
+      },
+    },
+    yAxis: {
+      title: {
+        text: null,
+      },
+    },
+    chart: {
+      zoomType: 'xy',
+    },
+    plotOptions: {
+      series: {
+        boostThreshold: 1,
+      },
+    },
+    legend: {
+      enabled: false,
+    },
   }
   return <HighchartsReact highcharts={Highcharts} options={options} />
 }
