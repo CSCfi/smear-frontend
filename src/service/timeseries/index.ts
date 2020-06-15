@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { AppDispatch } from '../../store/index'
-import { setTimeSeries } from '../../store/timeseries'
+import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries } from '../../types'
 import { API_URL, PATH_TIME_SERIES } from '../../constants'
+
+const { setTimeSeries } = timeSeriesSlice.actions
 
 export const fetchTimeSeries = (tablevariables: string[]) => {
   const params = new URLSearchParams()

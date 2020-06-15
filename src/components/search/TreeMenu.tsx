@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Tree } from 'antd'
 import 'antd/dist/antd.css'
 import { treeDataSelector } from '../../store/menuitems'
-import { fetchTimeSeries } from '../../service/timeseries'
+import searchSlice from '../../store/search'
 import { TreeNode } from '../../types'
+
+const { setTablevariables } = searchSlice.actions
 
 const TreeMenu: React.FC = () => {
   const dispatch = useDispatch()
@@ -23,7 +25,7 @@ const TreeMenu: React.FC = () => {
     const tablevariables = info.checkedNodes
       .filter((node: TreeNode) => node.isLeaf)
       .map((node: TreeNode) => node.key)
-    dispatch(fetchTimeSeries(tablevariables))
+    dispatch(setTablevariables(tablevariables))
     setCheckedKeys(checkedKeys)
   }
 

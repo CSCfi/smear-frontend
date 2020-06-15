@@ -68,4 +68,4 @@ export const treeDataSelector = createSelector(menuItemsSelector, (menuItems) =>
   stationsToTreeData(menuItems)
 )
 
-export default menuItemSlice.reducer
+export default menuItemSlice

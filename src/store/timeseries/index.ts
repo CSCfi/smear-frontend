@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { TimeSeries } from '../../types'
 import { RootState } from '../index'
 
-export const timeSeriesSlice = createSlice({
+const timeSeriesSlice = createSlice({
   name: 'timeSeries',
   initialState: {} as TimeSeries,
   reducers: {
@@ -10,8 +10,6 @@ export const timeSeriesSlice = createSlice({
   },
 })
 
-export const { setTimeSeries } = timeSeriesSlice.actions
-
 export const timeSeriesSelector = (state: RootState) => state.timeSeries
 
-export default timeSeriesSlice.reducer
+export default timeSeriesSlice
