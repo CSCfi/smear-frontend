@@ -1,16 +1,18 @@
 import axios from 'axios'
+import { Moment } from 'moment'
 import { AppDispatch } from '../../store/index'
 import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries } from '../../types'
-import { API_URL, PATH_TIME_SERIES } from '../../constants'
+import { API_URL, ISO_8601_DATE_TIME, PATH_TIME_SERIES } from '../../constants'
 
 const { setTimeSeries } = timeSeriesSlice.actions
 
-export const fetchTimeSeries = (tablevariables: string[]) => {
+export const fetchTimeSeries = (tablevariables: string[], from: Moment, to: Moment) => {
   const params = new URLSearchParams()
-  params.append('from', '2016-06-12T00:00:00.000')
-  params.append('to', '2016-06-12T03:00:00.000')
+
   tablevariables.forEach((tablevariable) => params.append('tablevariable', tablevariable))
+  params.append('from', from.format(ISO_8601_DATE_TIME))
+  params.append('to', to.format(ISO_8601_DATE_TIME))
 
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
