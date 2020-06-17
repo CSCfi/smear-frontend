@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, DatePicker, Space } from 'antd'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import { fetchTimeSeries } from '../../service/timeseries'
 import { tablevariablesSelector } from '../../store/search'
 
 const { RangePicker } = DatePicker
+const defaultTime = moment('00:00', 'HH:mm')
 
 const SearchControls: React.FC = () => {
   const dispatch = useDispatch()
@@ -18,7 +19,7 @@ const SearchControls: React.FC = () => {
   return (
     <Space>
       <RangePicker
-        showTime={{ format: 'HH:mm' }}
+        showTime={{ format: 'HH:mm', defaultValue: [defaultTime, defaultTime] }}
         format="YYYY-MM-DD HH:mm"
         onChange={onDateRangeChange}
       />

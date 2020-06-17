@@ -1,13 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import menuItemSlice from './menuitems'
+import optionsSlice from './options'
 import searchSlice from './search'
 import timeSeriesSlice from './timeseries'
+import treeDataSlice from './treedata'
 
 export const store = configureStore({
   reducer: {
-    menuItems: menuItemSlice.reducer,
+    options: optionsSlice.reducer,
     search: searchSlice.reducer,
     timeSeries: timeSeriesSlice.reducer,
+    treeData: treeDataSlice.reducer,
   },
 })
 

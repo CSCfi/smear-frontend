@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tree } from 'antd'
 import 'antd/dist/antd.css'
-import { treeDataSelector } from '../../store/menuitems'
+import { treeDataSelector } from '../../store/treedata'
 import searchSlice from '../../store/search'
 import { TreeNode } from '../../types'
 

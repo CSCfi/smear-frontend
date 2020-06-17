@@ -3,13 +3,13 @@ import { Moment } from 'moment'
 import { AppDispatch } from '../../store/index'
 import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries } from '../../types'
-import { API_URL, ISO_8601_DATE_TIME, PATH_TIME_SERIES } from '../../constants'
+import { ISO_8601_DATE_TIME } from '../../constants'
+import { API_URL, PATH_TIME_SERIES } from '../../constants'
 
 const { setTimeSeries } = timeSeriesSlice.actions
 
 export const fetchTimeSeries = (tablevariables: string[], from: Moment, to: Moment) => {
   const params = new URLSearchParams()
-
   tablevariables.forEach((tablevariable) => params.append('tablevariable', tablevariable))
   params.append('from', from.format(ISO_8601_DATE_TIME))
   params.append('to', to.format(ISO_8601_DATE_TIME))
