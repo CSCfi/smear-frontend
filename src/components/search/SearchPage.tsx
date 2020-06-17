@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout } from 'antd'
 import TreeMenu from './TreeMenu'
+import SearchControls from './SearchControls'
 import TimeSeriesGrid from './TimeSeriesGrid'
 
 const SearchPage: React.FC = () => {
@@ -15,6 +16,7 @@ const SearchPage: React.FC = () => {
         </Layout.Sider>
         <Layout.Content>
           <Layout>
+            <SearchControls />
             <TimeSeriesGrid />
           </Layout>
         </Layout.Content>

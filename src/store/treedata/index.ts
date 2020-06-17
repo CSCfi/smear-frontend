@@ -52,20 +52,18 @@ const stationsToTreeData = (stations: Station[]): TreeNode[] =>
     }
   })
 
-export const menuItemSlice = createSlice({
-  name: 'menuItem',
+const treeDataSlice = createSlice({
+  name: 'treeData',
   initialState: [] as Station[],
   reducers: {
-    setMenuItems: (state, action: PayloadAction<Station[]>) => action.payload,
+    setDataStructure: (state, action: PayloadAction<Station[]>) => action.payload,
   },
 })
 
-export const { setMenuItems } = menuItemSlice.actions
+const dataStructureSelector = (state: RootState) => state.treeData
 
-const menuItemsSelector = (state: RootState) => state.menuItems
-
-export const treeDataSelector = createSelector(menuItemsSelector, (menuItems) =>
-  stationsToTreeData(menuItems)
+export const treeDataSelector = createSelector(dataStructureSelector, (dataStructure) =>
+  stationsToTreeData(dataStructure)
 )
 
-export default menuItemSlice.reducer
+export default treeDataSlice

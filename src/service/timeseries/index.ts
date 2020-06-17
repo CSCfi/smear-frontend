@@ -1,14 +1,28 @@
 import axios from 'axios'
+import { Moment } from 'moment'
 import { AppDispatch } from '../../store/index'
-import { setTimeSeries } from '../../store/timeseries'
+import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries } from '../../types'
+import { ISO_8601_DATE_TIME } from '../../constants'
 import { API_URL, PATH_TIME_SERIES } from '../../constants'
 
-export const fetchTimeSeries = (tablevariables: string[]) => {
+const { setTimeSeries } = timeSeriesSlice.actions
+
+export const fetchTimeSeries = (
+  tablevariables: string[],
+  from: Moment,
+  to: Moment,
+  quality: string,
+  aggregation: string,
+  interval: number
+) => {
   const params = new URLSearchParams()
-  params.append('from', '2016-06-12T00:00:00.000')
-  params.append('to', '2016-06-12T03:00:00.000')
   tablevariables.forEach((tablevariable) => params.append('tablevariable', tablevariable))
+  params.append('from', from.format(ISO_8601_DATE_TIME))
+  params.append('to', to.format(ISO_8601_DATE_TIME))
+  params.append('quality', quality)
+  params.append('aggregation', aggregation)
+  params.append('interval', interval.toString())
 
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
