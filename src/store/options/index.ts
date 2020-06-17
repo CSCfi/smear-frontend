@@ -1,23 +1,30 @@
 import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../index'
 
+type Quality = {
+  id: string
+  default: boolean
+}
+
 type Aggregation = {
   id: string
   default: boolean
   isGroupedManually: boolean
 }
 
-type Quality = {
-  id: string
-  default: boolean
+type OptionsState = {
+  qualities: Quality[]
+  aggregations: Aggregation[]
+  selectedQuality: string
+  selectedAggregation: string
+  interval: number
 }
 
-type OptionsState = {
-  aggregations: Aggregation[]
-  qualities: Quality[]
-  selectedAggregation: string
-  selectedQuality: string
-}
+const setQualities: CaseReducer<OptionsState, PayloadAction<Quality[]>> = (state, action) => ({
+  ...state,
+  qualities: action.payload,
+  selectedQuality: action.payload.find((quality) => quality.default)?.id ?? action.payload[0].id,
+})
 
 const setAggregations: CaseReducer<OptionsState, PayloadAction<Aggregation[]>> = (
   state,
@@ -29,10 +36,9 @@ const setAggregations: CaseReducer<OptionsState, PayloadAction<Aggregation[]>> =
     action.payload.find((aggregation) => aggregation.default)?.id ?? action.payload[0].id,
 })
 
-const setQualities: CaseReducer<OptionsState, PayloadAction<Quality[]>> = (state, action) => ({
+const selectQuality: CaseReducer<OptionsState, PayloadAction<string>> = (state, action) => ({
   ...state,
-  qualities: action.payload,
-  selectedQuality: action.payload.find((quality) => quality.default)?.id ?? action.payload[0].id,
+  selectedQuality: action.payload,
 })
 
 const selectAggregation: CaseReducer<OptionsState, PayloadAction<string>> = (state, action) => ({
@@ -40,9 +46,9 @@ const selectAggregation: CaseReducer<OptionsState, PayloadAction<string>> = (sta
   selectedAggregation: action.payload,
 })
 
-const selectQuality: CaseReducer<OptionsState, PayloadAction<string>> = (state, action) => ({
+const setInterval: CaseReducer<OptionsState, PayloadAction<number>> = (state, action) => ({
   ...state,
-  selectedQuality: action.payload,
+  interval: action.payload,
 })
 
 const optionsSlice = createSlice({
@@ -50,18 +56,21 @@ const optionsSlice = createSlice({
   initialState: {
     aggregations: [] as Aggregation[],
     qualities: [] as Quality[],
+    interval: 30,
   } as OptionsState,
   reducers: {
     setAggregations,
     setQualities,
-    selectAggregation,
     selectQuality,
+    selectAggregation,
+    setInterval,
   },
 })
 
-export const aggregationsSelector = (state: RootState) => state.options.aggregations
 export const qualitiesSelector = (state: RootState) => state.options.qualities
-export const selectedAggregationSelector = (state: RootState) => state.options.selectedAggregation
+export const aggregationsSelector = (state: RootState) => state.options.aggregations
 export const selectedQualitySelector = (state: RootState) => state.options.selectedQuality
+export const selectedAggregationSelector = (state: RootState) => state.options.selectedAggregation
+export const intervalSelector = (state: RootState) => state.options.interval
 
 export default optionsSlice

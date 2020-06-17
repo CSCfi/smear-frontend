@@ -13,7 +13,8 @@ export const fetchTimeSeries = (
   from: Moment,
   to: Moment,
   quality: string,
-  aggregation: string
+  aggregation: string,
+  interval: number
 ) => {
   const params = new URLSearchParams()
   tablevariables.forEach((tablevariable) => params.append('tablevariable', tablevariable))
@@ -21,6 +22,7 @@ export const fetchTimeSeries = (
   params.append('to', to.format(ISO_8601_DATE_TIME))
   params.append('quality', quality)
   params.append('aggregation', aggregation)
+  params.append('interval', interval.toString())
 
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
