@@ -8,11 +8,19 @@ import { API_URL, PATH_TIME_SERIES } from '../../constants'
 
 const { setTimeSeries } = timeSeriesSlice.actions
 
-export const fetchTimeSeries = (tablevariables: string[], from: Moment, to: Moment) => {
+export const fetchTimeSeries = (
+  tablevariables: string[],
+  from: Moment,
+  to: Moment,
+  quality: string,
+  aggregation: string
+) => {
   const params = new URLSearchParams()
   tablevariables.forEach((tablevariable) => params.append('tablevariable', tablevariable))
   params.append('from', from.format(ISO_8601_DATE_TIME))
   params.append('to', to.format(ISO_8601_DATE_TIME))
+  params.append('quality', quality)
+  params.append('aggregation', aggregation)
 
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
