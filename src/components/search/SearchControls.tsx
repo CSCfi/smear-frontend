@@ -26,6 +26,7 @@ const SearchControls: React.FC = () => {
   const selectedAggregation = useSelector(selectedAggregationSelector)
   const selectedInterval = useSelector(intervalSelector)
   const [selectedDateRange, setDateRange] = useState<Moment[]>([])
+  const plottingDisabled = tablevariables.length === 0 || selectedDateRange.length === 0
 
   const onQualityChange = (value: string) => dispatch(selectQuality(value))
   const onAggregationChange = (value: string) => dispatch(selectAggregation(value))
@@ -72,7 +73,7 @@ const SearchControls: React.FC = () => {
         format="YYYY-MM-DD HH:mm"
         onChange={onDateRangeChange}
       />
-      <Button onClick={onPlotClick} type="primary">
+      <Button onClick={onPlotClick} type="primary" disabled={plottingDisabled}>
         Plot
       </Button>
     </Space>
