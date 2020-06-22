@@ -3,6 +3,9 @@ import { RootState } from '../index'
 
 type SearchState = {
   tablevariables: string[]
+  quality: string
+  aggregation: string
+  interval: number
 }
 
 const setTablevariables: CaseReducer<SearchState, PayloadAction<string[]>> = (state, action) => ({
@@ -10,13 +13,26 @@ const setTablevariables: CaseReducer<SearchState, PayloadAction<string[]>> = (st
   tablevariables: action.payload,
 })
 
+const setQuality: CaseReducer<SearchState, PayloadAction<string>> = (state, action) => ({
+  ...state,
+  quality: action.payload,
+})
+
+const setAggregation: CaseReducer<SearchState, PayloadAction<string>> = (state, action) => ({
+  ...state,
+  aggregation: action.payload,
+})
+
 const searchSlice = createSlice({
-  name: 'timeSeries',
+  name: 'search',
   initialState: {
-    tablevariables: [],
+    tablevariables: [] as string[],
+    interval: 30,
   } as SearchState,
   reducers: {
     setTablevariables,
+    setQuality,
+    setAggregation,
   },
 })
 
