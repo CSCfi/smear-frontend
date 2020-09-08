@@ -12,6 +12,7 @@ const SearchPage: React.FC = () => {
       </Layout>
       <Layout>
         <Layout.Sider>
+          <span><b>Variables:</b></span>
           <TreeMenu />
         </Layout.Sider>
         <Layout.Content>
