@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { Moment } from 'moment'
 import { AppDispatch } from '../../store/index'
+import searchSlice from '../../store/search'
 import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries } from '../../types'
 import { ISO_8601_DATE_TIME } from '../../constants'
 import { API_URL, PATH_TIME_SERIES } from '../../constants'
 
+const { setFetching } = searchSlice.actions
 const { setTimeSeries } = timeSeriesSlice.actions
 
 export const fetchTimeSeries = (
@@ -26,9 +28,11 @@ export const fetchTimeSeries = (
 
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
+      dispatch(setFetching(true))
       return axios
         .get(API_URL + PATH_TIME_SERIES, { params })
         .then((response) => {
+          dispatch(setFetching(false))
           dispatch(setTimeSeries(response.data))
         })
         .catch((error) => {

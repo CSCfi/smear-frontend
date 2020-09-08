@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, DatePicker, Form, InputNumber, Select } from 'antd'
+import { Button, DatePicker, Form, InputNumber, Select, Spin } from 'antd'
 import moment, { Moment } from 'moment'
 import { fetchTimeSeries } from '../../service/timeseries'
 import optionsSlice, {
@@ -10,7 +10,7 @@ import optionsSlice, {
   selectedQualitySelector,
   intervalSelector,
 } from '../../store/options'
-import { tablevariablesSelector } from '../../store/search'
+import { fetchingSelector, tablevariablesSelector } from '../../store/search'
 
 const { Option } = Select
 const { RangePicker } = DatePicker
@@ -20,6 +20,7 @@ const SearchControls: React.FC = () => {
   const dispatch = useDispatch()
   const qualities = useSelector(qualitiesSelector)
   const aggregations = useSelector(aggregationsSelector)
+  const fetching = useSelector(fetchingSelector)
   const tablevariables = useSelector(tablevariablesSelector)
   const selectedQuality = useSelector(selectedQualitySelector)
   const selectedAggregation = useSelector(selectedAggregationSelector)
@@ -79,8 +80,14 @@ const SearchControls: React.FC = () => {
         <RangePicker format="YYYY-MM-DD HH:mm" onChange={onDateRangeChange} />
       </Form.Item>
       <Form.Item name="plot">
-        <Button onClick={onPlotClick} type="primary">Plot</Button>
+        <Button
+            onClick={onPlotClick}
+            type="primary"
+            disabled={!selectedDateRange || !tablevariables.length || fetching}>
+          Plot
+        </Button>
       </Form.Item>
+      {fetching && <Spin />}
     </Form>
   )
 }
