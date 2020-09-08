@@ -1,3 +1,4 @@
+import { message } from 'antd'
 import axios from 'axios'
 import { Moment } from 'moment'
 import { AppDispatch } from '../../store/index'
@@ -34,6 +35,8 @@ export const fetchTimeSeries = (
         .then((response) => {
           dispatch(setFetching(false))
           dispatch(setTimeSeries(response.data))
+	  !Object.keys(response.data).length &&
+            message.info('Selected variables have no values in this time frame')
         })
         .catch((error) => {
           throw error
