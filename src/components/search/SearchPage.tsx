@@ -17,25 +17,18 @@ const SearchPage: React.FC = () => {
 
   return (
     <Layout>
-      <Layout>
-        <Layout.Header>
-          <img src="company_logo.png" alt="Smart" />
-        </Layout.Header>
-      </Layout>
-      <Layout>
-        <Layout.Sider>
-          <Tooltip placement="rightBottom" title={VARIABLES_TOOLTIP_TEXT}>
-            <span><b>Variables:</b></span>
-          </Tooltip>
-          <TreeMenu />
-        </Layout.Sider>
-        <Layout.Content>
-          <Layout>
-            <SearchControls />
-            <TimeSeriesGrid />
-          </Layout>
-        </Layout.Content>
-      </Layout>
+      <Layout.Sider>
+        <Tooltip placement="rightBottom" title={VARIABLES_TOOLTIP_TEXT}>
+          <span><b>Variables:</b></span>
+        </Tooltip>
+        <TreeMenu />
+      </Layout.Sider>
+      <Layout.Content>
+        <Layout>
+          <SearchControls />
+          <TimeSeriesGrid />
+        </Layout>
+      </Layout.Content>
     </Layout>
   )
 }

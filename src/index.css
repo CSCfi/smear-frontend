@@ -10,6 +10,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.ant-layout-header {
+  background: white;
+}
+
 .ant-layout-sider-children {
   background: white;
+}
+
+.logo {
+  float: left;
 }
