@@ -6,13 +6,12 @@ import { timeSeriesSelector } from '../../store/timeseries'
 
 const TimeSeriesGrid: React.FC = () => {
   const timeSeries = useSelector(timeSeriesSelector)
-  const charts = Object.keys(timeSeries).map((variableName) => {
-    return (
+  const charts = Object.keys(timeSeries).map(variableName => (
       <Col key={variableName} span={8}>
         <TimeSeriesChart name={variableName} data={timeSeries[variableName]} />
       </Col>
     )
-  })
+  )
   return <Row>{charts}</Row>
 }
 

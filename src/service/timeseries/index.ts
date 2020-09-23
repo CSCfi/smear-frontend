@@ -33,6 +33,7 @@ export const fetchTimeSeries = (
       return axios
         .get(API_URL + PATH_TIME_SERIES, { params })
         .then((response) => {
+          console.log(response)
           dispatch(setFetching(false))
           dispatch(setTimeSeries(response.data))
 	  !Object.keys(response.data).length &&

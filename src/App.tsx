@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom'
 import * as Highcharts from 'highcharts'
 import Boost from 'highcharts/modules/boost'
 import { fetchInitialData } from './service/initialload'
+import FrontPage from './components/front/FrontPage'
 import SearchPage from './components/search/SearchPage'
 
 import 'antd/dist/antd.css'
@@ -63,12 +64,6 @@ function App() {
         </Layout>
       </Layout>
     </Router>
-  )
-}
-
-function FrontPage() {
-  return (
-    <div>SMEAR Front Page</div>
   )
 }
 

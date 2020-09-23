@@ -5,9 +5,15 @@ import HighchartsReact from 'highcharts-react-official'
 require('highcharts/modules/no-data-to-display')(Highcharts);
 require('highcharts/modules/accessibility')(Highcharts);
 
+type TimeSeriesData = {
+  name: string
+  color: string
+  data: Array<number[]>|number[]
+}
+
 type TimeSeriesChartProps = {
   name: string
-  data: Array<number[]>|number[]
+  data: TimeSeriesData[]
 }
 
 const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
@@ -15,14 +21,14 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
     title: {
       text: name,
     },
-    series: [
-      {
-        name: 'series',
+    series: data.map(seriesdata => {
+      return {
+        name: seriesdata.name,
         type: 'line',
-        color: 'red',
-        data,
-      },
-    ],
+        color: seriesdata.color,
+        data: seriesdata.data,
+      }
+    }),
     lang: {
       noData: 'No data available'
     },

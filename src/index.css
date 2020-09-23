@@ -18,6 +18,11 @@ code {
   background: white;
 }
 
+.ant-list-item {
+  float: left;
+  margin: 4px;
+}
+
 .logo {
   float: left;
 }
