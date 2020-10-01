@@ -6,6 +6,7 @@ import moment, { Moment } from 'moment'
 import { fetchTimeSeries } from '../../service/timeseries'
 import { timeSeriesSelector } from '../../store/timeseries'
 
+import OpenStreetMap from '../OpenStreetMap'
 import TimeSeriesChart from '../TimeSeriesChart'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
@@ -89,7 +90,7 @@ const FrontPage = () => {
         </List>
       </Content>
       <Sider width={300}>
-        SMEAR Front Page Sider
+        <OpenStreetMap />
       </Sider>
     </Layout>
   )

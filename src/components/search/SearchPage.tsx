@@ -3,6 +3,7 @@ import { Layout, Tooltip } from 'antd'
 import TreeMenu from './TreeMenu'
 import SearchControls from './SearchControls'
 import TimeSeriesGrid from './TimeSeriesGrid'
+import OpenStreetMap from '../OpenStreetMap'
 
 const VARIABLES_TOOLTIP_TEXT = "You may choose stations and variables on the "
   + "left. Clicking a triangle next to station name opens a list of variables "
@@ -29,6 +30,9 @@ const SearchPage: React.FC = () => {
           <TimeSeriesGrid />
         </Layout>
       </Layout.Content>
+      <Layout.Sider width={300}>
+        <OpenStreetMap />
+      </Layout.Sider>
     </Layout>
   )
 }

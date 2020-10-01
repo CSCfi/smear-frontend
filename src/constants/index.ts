@@ -241,3 +241,66 @@ export const FRONT_PAGE_CHARTS = [
     ],
   },
 ]
+
+export const STATIONS = [
+  {
+    name: 'erottaja',
+    text: 'Erottaja; east=24.9454; north=60.1652; elevation=23',
+    coordinates: [24.9454, 60.1652],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'hyytiala',
+    text: 'Hyytiälä; east=24.294795; north=61.847463; elevation=179',
+    coordinates: [24.294795, 61.847463],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'kuivajarvi',
+    text: 'Kuivajärvi; east=24.282; north=61.846; elevation=?',
+    coordinates: [24.282, 61.846],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'kumpula',
+    text: 'Kumpula; east=24.961227; north=60.202887; elevation=45',
+    coordinates: [24.961227, 60.202887],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'pallas',
+    text: 'Pallas; east=24.11233; north=67.96715; elevation=566',
+    coordinates: [24.11233, 67.96715],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'puijo',
+    text: 'Puijo; east=27.65; north=62.9; elevation=306',
+    coordinates: [27.65, 62.9],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'siikaneva1',
+    text: 'Siikaneva 1; east=24.192794; north=61.832702; elevation=162',
+    coordinates: [24.192794, 61.832702],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'siikaneva2',
+    text: 'Siikaneva 2; east=24.169752; north=61.837286; elevation=162',
+    coordinates: [24.169752, 61.837286],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'torni',
+    text: 'Torni; east=24.9387; north=60.1678; elevation=15',
+    coordinates: [24.9387, 60.1678],
+    iconSrc: 'marker-black.png'
+  },
+  {
+    name: 'varrio',
+    text: 'Värriö; east=29.610137; north=67.755044; elevation=390"',
+    coordinates: [29.610137, 67.755044],
+    iconSrc: 'marker-black.png'
+  }
+]
