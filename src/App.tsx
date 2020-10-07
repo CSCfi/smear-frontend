@@ -7,6 +7,7 @@ import Boost from 'highcharts/modules/boost'
 import { fetchInitialData } from './service/initialload'
 import FrontPage from './components/front/FrontPage'
 import SearchPage from './components/search/SearchPage'
+import DownloadPage from './components/download/DownloadPage'
 
 import 'antd/dist/antd.css'
 
@@ -56,6 +57,9 @@ function App() {
           <Switch>
             <Route path="/search">
               <SearchPage />
+            </Route>
+            <Route path="/download">
+              <DownloadPage />
             </Route>
             <Route path="/">
               <FrontPage />
