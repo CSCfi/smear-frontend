@@ -32,13 +32,8 @@ const DownloadPage: React.FC = () => {
     document.title = "AVAA - Download"
   }, [])
 
-  const handleUpdateClick = (
-    selectedStation: any,
-    selectedCategory: any,
-    selectedFilter: any,
-    selectedFilterConditions: any,
-  ) => {
-    setSelectedVariables(selectedCategory.children)
+  const handleUpdateClick = (variables: any) => {
+    setSelectedVariables(variables)
   }
 
   const handleDownload = (variable: any) => {

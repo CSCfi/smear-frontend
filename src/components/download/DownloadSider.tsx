@@ -19,13 +19,8 @@ interface DownloadSiderProps {
   qualities: any[],
   stations: any[],
   options: DownloadOptions,
-  setOptions: any,
-  onUpdateClick: (
-    selectedStation: any,
-    selectedCategory: any,
-    selectedFilter: any,
-    selectedFilterConditions: any
-  ) => void
+  setOptions: (newOptions: DownloadOptions) => void,
+  onUpdateClick: (variables: any) => void
 }
 
 const DownloadSider: React.FC<DownloadSiderProps> = ({
@@ -54,17 +49,14 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
   const handleDateRangeChange = ([from, to]: Moment[]) => {
     setOptions({ ...options, from, to })
   }
-  const handleQualityChange = (value: any) => setOptions({ ...options, quality: value })
-  const handleAveragingChange = (value: any) => setOptions({ ...options, averaging: value })
-  const handleAggregationChange = (value: any) => setOptions({ ...options, aggregation: value })
+  const handleQualityChange = (quality: any) => setOptions({ ...options, quality })
+  const handleAveragingChange = (averaging: any) => setOptions({ ...options, averaging })
+  const handleAggregationChange = (aggregation: any) => setOptions({ ...options, aggregation })
+
   const handleFilterChange = (event: any) => setSelectedFilter(event.target.value)
   const handleFilterConditionChange = (value: any) => setSelectedFilterConditions(value)
-  const handleUpdateClick = (value: any) => onUpdateClick(
-    selectedStation,
-    selectedCategory,
-    selectedFilter,
-    selectedFilterConditions,
-  )
+
+  const handleUpdateClick = (value: any) => onUpdateClick(selectedCategory.children)
 
   return (
     <Layout.Sider>
@@ -102,7 +94,11 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
         selectedFilterConditions={selectedFilterConditions}
         onChangeFilterConditions={handleFilterConditionChange}
       />
-      <Button type="primary" onClick={handleUpdateClick}>Update</Button>
+      <Button
+        type="primary"
+        onClick={handleUpdateClick}
+        disabled={!selectedCategory}
+      >Update</Button>
     </Layout.Sider>
   )
 }

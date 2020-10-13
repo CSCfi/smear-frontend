@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, DatePicker, Form, InputNumber, Select, Spin } from 'antd'
+import { Button, Form, Spin } from 'antd'
 import moment, { Moment } from 'moment'
+
+import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
+
 import { fetchTimeSeries } from '../../service/timeseries'
+
 import optionsSlice, {
   aggregationsSelector,
   qualitiesSelector,
@@ -12,8 +16,6 @@ import optionsSlice, {
 } from '../../store/options'
 import { fetchingSelector, tablevariablesSelector } from '../../store/search'
 
-const { Option } = Select
-const { RangePicker } = DatePicker
 const { selectQuality, selectAggregation, setInterval } = optionsSlice.actions
 
 const SearchControls: React.FC = () => {
@@ -43,50 +45,47 @@ const SearchControls: React.FC = () => {
       )
     )
 
+  const formStyle = {
+    alignItems: 'end'
+  }
+
   return (
-    <Form layout="inline">
-      <Form.Item label="Quality Level" name="quality-level">
-        <Select placeholder={selectedQuality} onChange={onQualityChange}>
-          {qualities.map((quality) => (
-            <Option key={quality.id} value={quality.id}>
-              {quality.id}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item label="Averaging" name="averaging" initialValue={30}>
-        <InputNumber
-          min={1}
-          max={60}
-          value={selectedInterval}
-          onChange={onIntervalChange}
-          disabled={selectedAggregation === 'NONE'}
-        />
-      </Form.Item>
-      <Form.Item label="Averaging Type" name="averaging-type">
-        <Select placeholder={selectedAggregation} onChange={onAggregationChange}>
-          {aggregations.map((aggregation) => (
-            <Option key={aggregation.id} value={aggregation.id}>
-              {aggregation.id}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
+    <Form style={formStyle} layout="inline">
       <Form.Item
         name="time-interval"
-        initialValue={selectedDateRange}
         rules={[{required: true, message: "Select time range"}]}
       >
-        <RangePicker format="YYYY-MM-DD HH:mm" onChange={onDateRangeChange} />
+        <DateRangePicker
+          selectedDateRange={selectedDateRange}
+          onSelectDateRange={onDateRangeChange}
+        />
       </Form.Item>
-      <Form.Item name="plot">
-        <Button
-            onClick={onPlotClick}
-            type="primary"
-            disabled={!selectedDateRange || !tablevariables.length || fetching}>
-          Plot
-        </Button>
+      <Form.Item name="quality-level">
+        <QualitySelect
+          qualities={qualities}
+          selectedQuality={selectedQuality}
+          onSelectQuality={onQualityChange}
+        />
       </Form.Item>
+      <Form.Item name="averaging" initialValue={30}>
+        <AveragingInput
+          selectedAveraging={selectedInterval}
+          onSelectAveraging={onIntervalChange}
+        />
+      </Form.Item>
+      <Form.Item name="averaging-type">
+        <AggregationSelect
+          aggregations={aggregations}
+          selectedAggregation={selectedAggregation}
+          onSelectAggregation={onAggregationChange}
+        />
+      </Form.Item>
+      <Button
+          onClick={onPlotClick}
+          type="primary"
+          disabled={!selectedDateRange || !tablevariables.length || fetching}>
+        Plot
+      </Button>
       {fetching && <Spin />}
     </Form>
   )

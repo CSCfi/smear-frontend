@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, DatePicker, Form, Layout, List } from 'antd'
+import { Button, Form, Layout, List } from 'antd'
 import moment, { Moment } from 'moment'
 
 import { fetchTimeSeries } from '../../service/timeseries'
@@ -8,11 +8,11 @@ import { timeSeriesSelector } from '../../store/timeseries'
 
 import OpenStreetMap from '../OpenStreetMap'
 import TimeSeriesChart from '../TimeSeriesChart'
+import { DateRangePicker } from '../forms'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
 
 const { Item } = Form
-const { RangePicker } = DatePicker
 const { Content, Sider } = Layout
 
 export type FrontPageChart = {
@@ -53,14 +53,18 @@ const FrontPage = () => {
   const handleRangePickerChange = (value:any) => setDateRange(value)
   const handlePlotClick = () => fetchData()
 
+  const formStyle = {
+    alignItems: 'end'
+  }
+
   return (
     <Layout>
       <Content>
-        <Form layout="inline">
-          <Item name="time-interval" initialValue={selectedDateRange}>
-            <RangePicker
-              format="YYYY-MM-DD HH:mm"
-              onChange={handleRangePickerChange}
+        <Form style={formStyle} layout="inline">
+          <Item name="time-interval">
+            <DateRangePicker
+              selectedDateRange={selectedDateRange}
+              onSelectDateRange={handleRangePickerChange}
             />
           </Item>
           <Item>
