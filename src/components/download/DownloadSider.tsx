@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Layout } from 'antd'
-import moment, { Moment } from 'moment'
+import { Moment } from 'moment'
+
+import { DownloadOptions } from '../../types'
 
 import {
   CategorySelect,
@@ -16,13 +18,11 @@ interface DownloadSiderProps {
   aggregations: any[],
   qualities: any[],
   stations: any[],
+  options: DownloadOptions,
+  setOptions: any,
   onUpdateClick: (
     selectedStation: any,
     selectedCategory: any,
-    selectedDateRange: any,
-    selectedQuality: any,
-    selectedAggregation: any,
-    selectedAveraging: any,
     selectedFilter: any,
     selectedFilterConditions: any
   ) => void
@@ -32,16 +32,16 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
   aggregations,
   qualities,
   stations,
+  options,
+  setOptions,
   onUpdateClick
 }) => {
   const [selectedStation, setSelectedStation] = useState<any>()
   const [selectedCategory, setSelectedCategory] = useState<any>()
-  const [selectedDateRange, setDateRange] = useState<Moment[]>([moment().subtract(1, "day"), moment()])
-  const [selectedQuality, setSelectedQuality] = useState<any>()
-  const [selectedAggregation, setSelectedAggregation] = useState<any>()
-  const [selectedAveraging, setSelectedAveraging] = useState<any>(30)
   const [selectedFilter, setSelectedFilter] = useState<any>()
   const [selectedFilterConditions, setSelectedFilterConditions] = useState<any[]>([])
+
+  const { from, to, quality, aggregation, averaging } = options
 
   const handleSelectStation = (event: any) => {
     const station = event.target.value
@@ -51,19 +51,17 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
   const handleSelectCategory = (value: any) =>
     setSelectedCategory(selectedStation.children
                         .find((category: any) => category.key === value))
-  const handleDateRangeChange = (value: any) => setDateRange(value as Moment[])
-  const handleQualityChange = (value: any) => setSelectedQuality(value)
-  const handleAveragingChange = (value: any) => setSelectedAveraging(value)
-  const handleAggregationChange = (value: any) => setSelectedAggregation(value)
+  const handleDateRangeChange = ([from, to]: Moment[]) => {
+    setOptions({ ...options, from, to })
+  }
+  const handleQualityChange = (value: any) => setOptions({ ...options, quality: value })
+  const handleAveragingChange = (value: any) => setOptions({ ...options, averaging: value })
+  const handleAggregationChange = (value: any) => setOptions({ ...options, aggregation: value })
   const handleFilterChange = (event: any) => setSelectedFilter(event.target.value)
   const handleFilterConditionChange = (value: any) => setSelectedFilterConditions(value)
   const handleUpdateClick = (value: any) => onUpdateClick(
     selectedStation,
     selectedCategory,
-    selectedDateRange,
-    selectedQuality,
-    selectedAggregation,
-    selectedAveraging,
     selectedFilter,
     selectedFilterConditions,
   )
@@ -81,21 +79,21 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
         onSelectCategory={handleSelectCategory}
       />
       <DateRangePicker
-        selectedDateRange={selectedDateRange}
+        selectedDateRange={[from, to]}
         onSelectDateRange={handleDateRangeChange}
       />
       <QualitySelect
         qualities={qualities}
-        selectedQuality={selectedQuality}
+        selectedQuality={quality}
         onSelectQuality={handleQualityChange}
       />
       <AveragingInput
-        selectedAveraging={selectedAveraging}
+        selectedAveraging={averaging}
         onSelectAveraging={handleAveragingChange}
       />
       <AggregationSelect
         aggregations={aggregations}
-        selectedAggregation={selectedAggregation}
+        selectedAggregation={aggregation}
         onSelectAggregation={handleAggregationChange}
       />
       <FilterInput

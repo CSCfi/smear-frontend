@@ -1,3 +1,5 @@
+import { Moment } from 'moment'
+
 export type TreeNode = {
   key: string
   title: string
@@ -8,4 +10,12 @@ export type TreeNode = {
 
 export type TimeSeries = {
   [key: string]: number[]
+}
+
+export type DownloadOptions = {
+  from: Moment,
+  to: Moment,
+  quality: string,
+  aggregation: string,
+  averaging: number,
 }
