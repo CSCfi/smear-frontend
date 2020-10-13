@@ -1,6 +1,8 @@
 import React from 'react'
 import { Select } from 'antd'
 
+import { inputStyle } from './styles'
+
 const { Option } = Select
 
 interface QualitySelectProps {
@@ -14,14 +16,11 @@ const QualitySelect: React.FC<QualitySelectProps> = ({
   selectedQuality,
   onSelectQuality
 }) => {
-  const qualitySelectStyle = {
-    minWidth: '200px'
-  }
   return (
     <>
     <div><b>Quality Level:</b></div>
     <Select
-      style={qualitySelectStyle}
+      style={inputStyle}
       value={selectedQuality}
       onChange={onSelectQuality}
     >

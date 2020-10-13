@@ -6,17 +6,10 @@ import moment, { Moment } from 'moment'
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
 
 import { fetchTimeSeries } from '../../service/timeseries'
+import { DownloadOptions } from '../../types'
 
-import optionsSlice, {
-  aggregationsSelector,
-  qualitiesSelector,
-  selectedAggregationSelector,
-  selectedQualitySelector,
-  intervalSelector,
-} from '../../store/options'
+import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import { fetchingSelector, tablevariablesSelector } from '../../store/search'
-
-const { selectQuality, selectAggregation, setInterval } = optionsSlice.actions
 
 const SearchControls: React.FC = () => {
   const dispatch = useDispatch()
@@ -24,26 +17,26 @@ const SearchControls: React.FC = () => {
   const aggregations = useSelector(aggregationsSelector)
   const fetching = useSelector(fetchingSelector)
   const tablevariables = useSelector(tablevariablesSelector)
-  const selectedQuality = useSelector(selectedQualitySelector)
-  const selectedAggregation = useSelector(selectedAggregationSelector)
-  const selectedInterval = useSelector(intervalSelector)
-  const [selectedDateRange, setDateRange] = useState<Moment[]>([moment().subtract(1, "day"), moment()])
 
-  const onQualityChange = (value: string) => dispatch(selectQuality(value))
-  const onAggregationChange = (value: string) => dispatch(selectAggregation(value))
-  const onIntervalChange = (value: any) => dispatch(setInterval(value as number))
-  const onDateRangeChange = (value: any) => setDateRange(value as Moment[])
-  const onPlotClick = () =>
-    dispatch(
-      fetchTimeSeries(
-        tablevariables,
-        selectedDateRange[0],
-        selectedDateRange[1],
-        selectedQuality,
-        selectedAggregation,
-        selectedInterval
-      )
-    )
+  const [options, setOptions] = useState<DownloadOptions>({
+    from: moment().subtract(1, "day"),
+    to: moment(),
+    quality: 'ANY',
+    aggregation: 'NONE',
+    averaging: 30
+  })
+
+  const { from, to, quality, aggregation, averaging } = options
+
+  const onQualityChange = (quality: string) => setOptions({ ...options, quality })
+  const onAggregationChange = (aggregation: string) => setOptions({ ...options, aggregation })
+  const onIntervalChange = (averaging: any) => setOptions({ ...options, averaging })
+  const onDateRangeChange = ([from, to]: Moment[]) => setOptions({ ...options, from, to })
+
+  const onPlotClick = async () => {
+    const response = await dispatch(fetchTimeSeries(tablevariables, options))
+    console.log(typeof(response))
+  }
 
   const formStyle = {
     alignItems: 'end'
@@ -56,34 +49,34 @@ const SearchControls: React.FC = () => {
         rules={[{required: true, message: "Select time range"}]}
       >
         <DateRangePicker
-          selectedDateRange={selectedDateRange}
+          selectedDateRange={[from, to]}
           onSelectDateRange={onDateRangeChange}
         />
       </Form.Item>
       <Form.Item name="quality-level">
         <QualitySelect
           qualities={qualities}
-          selectedQuality={selectedQuality}
+          selectedQuality={quality}
           onSelectQuality={onQualityChange}
         />
       </Form.Item>
       <Form.Item name="averaging" initialValue={30}>
         <AveragingInput
-          selectedAveraging={selectedInterval}
+          selectedAveraging={averaging}
           onSelectAveraging={onIntervalChange}
         />
       </Form.Item>
       <Form.Item name="averaging-type">
         <AggregationSelect
           aggregations={aggregations}
-          selectedAggregation={selectedAggregation}
+          selectedAggregation={aggregation}
           onSelectAggregation={onAggregationChange}
         />
       </Form.Item>
       <Button
           onClick={onPlotClick}
           type="primary"
-          disabled={!selectedDateRange || !tablevariables.length || fetching}>
+          disabled={!to || !from || !tablevariables.length || fetching}>
         Plot
       </Button>
       {fetching && <Spin />}

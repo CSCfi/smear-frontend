@@ -11,6 +11,7 @@ import TimeSeriesChart from '../TimeSeriesChart'
 import { DateRangePicker } from '../forms'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
+import { DownloadOptions } from '../../types'
 
 const { Item } = Form
 const { Content, Sider } = Layout
@@ -24,7 +25,14 @@ export type FrontPageChart = {
 const FrontPage = () => {
   const dispatch = useDispatch()
   const timeSeries = useSelector(timeSeriesSelector)
-  const [selectedDateRange, setDateRange] = useState<Moment[]>([moment().subtract(1, "day"), moment()])
+
+  const [options, setOptions] = useState<DownloadOptions>({
+    from: moment().subtract(1, "day"),
+    to: moment(),
+    quality: 'ANY',
+    aggregation: 'NONE',
+    averaging: 30,
+  })
 
   let tableVariables: string[] = []
   for (let i in FRONT_PAGE_CHARTS) {
@@ -37,20 +45,11 @@ const FrontPage = () => {
     }
   }
 
-  const fetchData = () => {
-    dispatch(fetchTimeSeries(
-      tableVariables,
-      selectedDateRange[0],
-      selectedDateRange[1],
-      'ANY', // CHECKED in production
-      'NONE',
-      30
-    ))
-  }
+  const fetchData = () => { dispatch(fetchTimeSeries(tableVariables, options)) }
 
   useEffect(fetchData, [])
 
-  const handleRangePickerChange = (value:any) => setDateRange(value)
+  const handleRangePickerChange = ([from, to]:Moment[]) => setOptions({ ...options, from, to })
   const handlePlotClick = () => fetchData()
 
   const formStyle = {
@@ -63,7 +62,7 @@ const FrontPage = () => {
         <Form style={formStyle} layout="inline">
           <Item name="time-interval">
             <DateRangePicker
-              selectedDateRange={selectedDateRange}
+              selectedDateRange={[options.from, options.to]}
               onSelectDateRange={handleRangePickerChange}
             />
           </Item>

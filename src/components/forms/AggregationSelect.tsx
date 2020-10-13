@@ -1,6 +1,8 @@
 import React from 'react'
 import { Select } from 'antd'
 
+import { inputStyle } from './styles'
+
 const { Option } = Select
 
 interface AggregationSelectProps {
@@ -14,14 +16,11 @@ const AggregationSelect: React.FC<AggregationSelectProps> = ({
   selectedAggregation,
   onSelectAggregation
 }) => {
-  const qualitySelectStyle = {
-    minWidth: '200px'
-  }
   return (
     <>
     <div><b>Averaging Type:</b></div>
     <Select
-      style={qualitySelectStyle}
+      style={inputStyle}
       value={selectedAggregation}
       onChange={onSelectAggregation}
     >

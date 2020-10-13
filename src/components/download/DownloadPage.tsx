@@ -25,7 +25,7 @@ const DownloadPage: React.FC = () => {
     to: moment(),
     quality: 'ANY',
     aggregation: 'NONE',
-    averaging: 30,
+    averaging: 30
   })
 
   useEffect(() => {

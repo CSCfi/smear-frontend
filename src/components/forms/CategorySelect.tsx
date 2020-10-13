@@ -1,6 +1,8 @@
 import React from 'react'
 import { Select } from 'antd'
 
+import { inputStyle } from './styles'
+
 const { Option } = Select
 
 interface CategorySelectProps {
@@ -14,10 +16,6 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   selectedCategory,
   onSelectCategory
 }) => {
-  const categorySelectStyle = {
-    minWidth: '200px'
-  }
-
   const value = selectedCategory !== undefined ? selectedCategory.key : ""
   const categories = station !== undefined ? station.children : []
 
@@ -25,7 +23,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
     <>
     <div><b>Select variable category</b></div>
     <Select
-      style={categorySelectStyle}
+      style={inputStyle}
       value={value}
       onChange={onSelectCategory}
     >

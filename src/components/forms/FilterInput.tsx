@@ -1,6 +1,8 @@
 import React from 'react'
 import { Checkbox, Input } from 'antd'
 
+import { inputStyle } from './styles'
+
 const { Group } = Checkbox
 
 interface FilterInputProps {
@@ -16,9 +18,6 @@ const FilterInput: React.FC<FilterInputProps> = ({
   selectedFilterConditions,
   onChangeFilterConditions
 }) => {
-  const filterInputStyle = {
-    minWidth: '200px'
-  }
   const options = [
     { label: "Variable", value: "Variable" },
     { label: "Description", value: "Description" },
@@ -28,7 +27,7 @@ const FilterInput: React.FC<FilterInputProps> = ({
     <>
     <div><b>Filter:</b></div>
     <Input
-      style={filterInputStyle}
+      style={inputStyle}
       value={selectedFilter}
       onChange={onChangeFilter}
     />

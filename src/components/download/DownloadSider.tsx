@@ -59,7 +59,7 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
   const handleUpdateClick = (value: any) => onUpdateClick(selectedCategory.children)
 
   return (
-    <Layout.Sider>
+    <Layout.Sider width={240} >
       <StationRadio
         stations={stations}
         selectedStation={selectedStation}
