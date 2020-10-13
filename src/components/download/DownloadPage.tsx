@@ -6,11 +6,14 @@ import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import { treeDataSelector } from '../../store/treedata'
 
 import DownloadSider from './DownloadSider'
+import DownloadTable from './DownloadTable'
 
 const DownloadPage: React.FC = () => {
   const aggregations = useSelector(aggregationsSelector)
   const qualities = useSelector(qualitiesSelector)
   const treeData = useSelector(treeDataSelector)
+
+  const [selectedVariables, setSelectedVariables] = useState([])
 
   useEffect(() => {
     document.title = "AVAA - Download"
@@ -26,17 +29,7 @@ const DownloadPage: React.FC = () => {
     selectedFilter: any,
     selectedFilterConditions: any,
   ) => {
-    console.log('Fetch variables')
-    console.log(selectedStation)
-    console.log(selectedCategory)
-    console.log(selectedDateRange)
-    console.log(selectedStation)
-    console.log(selectedCategory)
-    console.log(selectedQuality)
-    console.log(selectedAggregation)
-    console.log(selectedAveraging)
-    console.log(selectedFilter)
-    console.log(selectedFilterConditions)
+    setSelectedVariables(selectedCategory.children)
   }
 
   return (
@@ -47,9 +40,7 @@ const DownloadPage: React.FC = () => {
         stations={treeData}
         onUpdateClick={handleUpdateClick}
       />
-      <Layout.Content>
-        <div>Download Content</div>
-      </Layout.Content>
+      <DownloadTable variables={selectedVariables} />
     </Layout>
   )
 }
