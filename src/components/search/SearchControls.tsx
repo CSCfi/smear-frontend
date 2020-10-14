@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Form, Spin } from 'antd'
+import { message, Button, Form, Spin } from 'antd'
 import moment, { Moment } from 'moment'
 
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
@@ -20,8 +20,8 @@ const SearchControls: React.FC = () => {
   const tablevariables = useSelector(tablevariablesSelector)
 
   const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(1, "day"),
-    to: moment(),
+    from: moment().subtract(1, "day").startOf('day'),
+    to: moment().startOf('day'),
     quality: 'ANY',
     aggregation: 'NONE',
     averaging: 30
@@ -32,12 +32,15 @@ const SearchControls: React.FC = () => {
   const onQualityChange = (quality: string) => setOptions({ ...options, quality })
   const onAggregationChange = (aggregation: string) => setOptions({ ...options, aggregation })
   const onIntervalChange = (averaging: any) => setOptions({ ...options, averaging })
-  const onDateRangeChange = ([from, to]: Moment[]) => setOptions({ ...options, from, to })
-
-  const onPlotClick = async () => {
-    const response = await dispatch(fetchTimeSeries(tablevariables, options))
-    console.log(typeof(response))
+  const onDateRangeChange = ([from, to]: Moment[]) => {
+    if (to.isAfter()) {
+      message.info('Please do not select a date interval that is in the future')
+    } else {
+      setOptions({ ...options, from, to })
+    }
   }
+
+  const onPlotClick = () =>  dispatch(fetchTimeSeries(tablevariables, options))
 
   return (
     <Form style={formStyle} layout="inline">

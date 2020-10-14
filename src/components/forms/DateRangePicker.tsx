@@ -19,6 +19,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       format="YYYY-MM-DD"
       value={selectedDateRange}
       onChange={onSelectDateRange}
+      allowClear={false}
     />
     </>
   )
