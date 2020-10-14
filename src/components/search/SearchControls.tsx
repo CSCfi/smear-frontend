@@ -5,6 +5,7 @@ import moment, { Moment } from 'moment'
 
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
 
+import { formStyle } from '../forms/styles'
 import { fetchTimeSeries } from '../../service/timeseries'
 import { DownloadOptions } from '../../types'
 
@@ -36,10 +37,6 @@ const SearchControls: React.FC = () => {
   const onPlotClick = async () => {
     const response = await dispatch(fetchTimeSeries(tablevariables, options))
     console.log(typeof(response))
-  }
-
-  const formStyle = {
-    alignItems: 'end'
   }
 
   return (

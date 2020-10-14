@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Form, Layout, List } from 'antd'
-import moment, { Moment } from 'moment'
+import { Layout } from 'antd'
+import moment from 'moment'
 
 import { fetchTimeSeries } from '../../service/timeseries'
 import { timeSeriesSelector } from '../../store/timeseries'
 
+import FrontPageCharts from './FrontPageCharts'
+import FrontPageForm from './FrontPageForm'
 import OpenStreetMap from '../OpenStreetMap'
-import TimeSeriesChart from '../TimeSeriesChart'
-import { DateRangePicker } from '../forms'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
 import { DownloadOptions } from '../../types'
 
-const { Item } = Form
 const { Content, Sider } = Layout
-
-export type FrontPageChart = {
-  name: string
-  series: string
-  data: any 
-}
 
 const FrontPage = () => {
   const dispatch = useDispatch()
@@ -34,63 +27,34 @@ const FrontPage = () => {
     averaging: 30,
   })
 
-  let tableVariables: string[] = []
-  for (let i in FRONT_PAGE_CHARTS) {
-    const chart = FRONT_PAGE_CHARTS[i]
-    if (chart.series === undefined) {
-      continue
+  const fetchData = () => {
+    let tableVariables: string[] = []
+    for (let i in FRONT_PAGE_CHARTS) {
+      const chart = FRONT_PAGE_CHARTS[i]
+      if (chart.series === undefined) {
+        continue
+      }
+      for (let j in chart.series) {
+        tableVariables.push(chart.series[j].tableVariable)
+      }
     }
-    for (let j in chart.series) {
-      tableVariables.push(chart.series[j].tableVariable)
-    }
-  }
 
-  const fetchData = () => { dispatch(fetchTimeSeries(tableVariables, options)) }
+    dispatch(fetchTimeSeries(tableVariables, options))
+  }
 
   useEffect(fetchData, [])
 
-  const handleRangePickerChange = ([from, to]:Moment[]) => setOptions({ ...options, from, to })
   const handlePlotClick = () => fetchData()
-
-  const formStyle = {
-    alignItems: 'end'
-  }
 
   return (
     <Layout>
       <Content>
-        <Form style={formStyle} layout="inline">
-          <Item name="time-interval">
-            <DateRangePicker
-              selectedDateRange={[options.from, options.to]}
-              onSelectDateRange={handleRangePickerChange}
-            />
-          </Item>
-          <Item>
-            <Button
-                type="primary"
-                onClick={handlePlotClick}
-            >
-              Plot
-            </Button>
-          </Item>
-        </Form>
-        <List dataSource={FRONT_PAGE_CHARTS} renderItem={item => (
-          <List.Item>
-            {item.series !== undefined
-              && <TimeSeriesChart
-                  name={item.name}
-                  data={item.series.map(seriesItem => {
-                    return {
-                      name: seriesItem.caption,
-                      color: seriesItem.color,
-                      data: timeSeries[seriesItem.tableVariable] || []
-                    }
-                  })}
-                 />}
-          </List.Item>
-        )}>
-        </List>
+        <FrontPageForm
+          options={options}
+          setOptions={setOptions}
+          handlePlot={handlePlotClick}
+        />
+        <FrontPageCharts timeSeries={timeSeries} />
       </Content>
       <Sider width={300}>
         <OpenStreetMap />
