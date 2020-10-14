@@ -1,32 +1,31 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import { message, Button, Form, Spin } from 'antd'
-import moment, { Moment } from 'moment'
+import { Moment } from 'moment'
 
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
 
 import { formStyle } from '../forms/styles'
-import { fetchTimeSeries } from '../../service/timeseries'
 import { DownloadOptions } from '../../types'
 
-import { aggregationsSelector, qualitiesSelector } from '../../store/options'
-import { fetchingSelector, tablevariablesSelector } from '../../store/search'
+interface SearchFormProps {
+  aggregations: any[],
+  qualities: any,
+  tablevariables: any[],
+  fetching: boolean,
+  options: DownloadOptions,
+  setOptions: (options: DownloadOptions) => void
+  onPlotClick: () => void
+}
 
-const SearchControls: React.FC = () => {
-  const dispatch = useDispatch()
-  const qualities = useSelector(qualitiesSelector)
-  const aggregations = useSelector(aggregationsSelector)
-  const fetching = useSelector(fetchingSelector)
-  const tablevariables = useSelector(tablevariablesSelector)
-
-  const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(1, "day").startOf('day'),
-    to: moment().startOf('day'),
-    quality: 'ANY',
-    aggregation: 'NONE',
-    averaging: 30
-  })
-
+const SearchForm: React.FC<SearchFormProps> = ({
+  aggregations,
+  qualities,
+  tablevariables,
+  fetching,
+  options,
+  setOptions,
+  onPlotClick
+}) => {
   const { from, to, quality, aggregation, averaging } = options
 
   const onQualityChange = (quality: string) => setOptions({ ...options, quality })
@@ -39,8 +38,6 @@ const SearchControls: React.FC = () => {
       setOptions({ ...options, from, to })
     }
   }
-
-  const onPlotClick = () =>  dispatch(fetchTimeSeries(tablevariables, options))
 
   return (
     <Form style={formStyle} layout="inline">
@@ -84,4 +81,4 @@ const SearchControls: React.FC = () => {
   )
 }
 
-export default SearchControls
+export default SearchForm

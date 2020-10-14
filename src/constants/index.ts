@@ -304,3 +304,9 @@ export const STATIONS = [
     iconSrc: 'marker-black.png'
   }
 ]
+
+export const VARIABLES_TOOLTIP_TEXT = "You may choose stations and variables "
+  + "on the left. Clicking a triangle next to station name opens a list of "
+  + "variables divided into different categories. Some variables are measured "
+  + "with several instruments, (2) after name indicates secondary "
+  + "measurement. You may select multiple variables."

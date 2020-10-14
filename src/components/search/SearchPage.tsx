@@ -1,34 +1,58 @@
-import React, { useEffect } from 'react'
-import { Layout, Tooltip } from 'antd'
-import TreeMenu from './TreeMenu'
-import SearchControls from './SearchControls'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Layout } from 'antd'
+import moment from 'moment'
+
+import { fetchTimeSeries } from '../../service/timeseries'
+import { aggregationsSelector, qualitiesSelector } from '../../store/options'
+import searchSlice, { fetchingSelector, tablevariablesSelector } from '../../store/search'
+import { treeDataSelector } from '../../store/treedata'
+import { DownloadOptions } from '../../types'
+
+import SearchForm from './SearchForm'
+import SearchSider from './SearchSider'
 import TimeSeriesGrid from './TimeSeriesGrid'
 import OpenStreetMap from '../OpenStreetMap'
 
-const VARIABLES_TOOLTIP_TEXT = "You may choose stations and variables on the "
-  + "left. Clicking a triangle next to station name opens a list of variables "
-  + "divided into different categories. Some variables are measured with "
-  + "several instruments, (2) after name indicates secondary measurement. You "
-  + "may select multiple variables."
+const { setTablevariables } = searchSlice.actions
 
 const SearchPage: React.FC = () => {
+  const dispatch = useDispatch()
+  const qualities = useSelector(qualitiesSelector)
+  const aggregations = useSelector(aggregationsSelector)
+  const fetching = useSelector(fetchingSelector)
+  const tablevariables = useSelector(tablevariablesSelector)
+  const treeData = useSelector(treeDataSelector)
+
+  const [options, setOptions] = useState<DownloadOptions>({
+    from: moment().subtract(1, "day").startOf('day'),
+    to: moment().startOf('day'),
+    quality: 'ANY',
+    aggregation: 'NONE',
+    averaging: 30
+  })
+
   useEffect(() => {
     document.title = "AVAA - Search"
   }, [])
 
+  const onPlotClick = () =>  dispatch(fetchTimeSeries(tablevariables, options))
+  const setTableVariables = (tablevariables: any) => dispatch(setTablevariables(tablevariables))
+
   return (
     <Layout>
-      <Layout.Sider>
-        <Tooltip placement="rightBottom" title={VARIABLES_TOOLTIP_TEXT}>
-          <span><b>Variables:</b></span>
-        </Tooltip>
-        <TreeMenu />
-      </Layout.Sider>
+      <SearchSider treeData={treeData} setTableVariables={setTableVariables} />
       <Layout.Content>
-        <Layout>
-          <SearchControls />
-          <TimeSeriesGrid />
-        </Layout>
+        <SearchForm
+          aggregations={aggregations}
+          tablevariables={tablevariables}
+          fetching={fetching}
+          qualities={qualities}
+          options={options}
+          setOptions={setOptions}
+          onPlotClick={onPlotClick}
+        />
+        <TimeSeriesGrid />
       </Layout.Content>
       <Layout.Sider width={300}>
         <OpenStreetMap />
