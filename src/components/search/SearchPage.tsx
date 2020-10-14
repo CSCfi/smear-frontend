@@ -6,12 +6,13 @@ import moment from 'moment'
 import { fetchTimeSeries } from '../../service/timeseries'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import searchSlice, { fetchingSelector, tablevariablesSelector } from '../../store/search'
+import { timeSeriesSelector } from '../../store/timeseries'
 import { treeDataSelector } from '../../store/treedata'
 import { DownloadOptions } from '../../types'
 
 import SearchForm from './SearchForm'
 import SearchSider from './SearchSider'
-import TimeSeriesGrid from './TimeSeriesGrid'
+import SearchPageCharts from './SearchPageCharts'
 import OpenStreetMap from '../OpenStreetMap'
 
 const { setTablevariables } = searchSlice.actions
@@ -22,6 +23,7 @@ const SearchPage: React.FC = () => {
   const aggregations = useSelector(aggregationsSelector)
   const fetching = useSelector(fetchingSelector)
   const tablevariables = useSelector(tablevariablesSelector)
+  const timeSeries = useSelector(timeSeriesSelector)
   const treeData = useSelector(treeDataSelector)
 
   const [options, setOptions] = useState<DownloadOptions>({
@@ -52,7 +54,7 @@ const SearchPage: React.FC = () => {
           setOptions={setOptions}
           onPlotClick={onPlotClick}
         />
-        <TimeSeriesGrid />
+        <SearchPageCharts timeSeries={timeSeries} />
       </Layout.Content>
       <Layout.Sider width={300}>
         <OpenStreetMap />

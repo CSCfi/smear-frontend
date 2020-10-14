@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Tree } from 'antd'
-import 'antd/dist/antd.css'
 import { TreeNode } from '../../types'
+import 'antd/dist/antd.css'
 
 interface TreeMenuProps {
   treeData: any,
@@ -13,7 +12,6 @@ const TreeMenu: React.FC<TreeMenuProps> = ({
   treeData,
   setTableVariables
 }) => {
-  const dispatch = useDispatch()
   const [expandedKeys, setExpandedKeys] = useState([])
   const [checkedKeys, setCheckedKeys] = useState([])
   const [selectedKeys, setSelectedKeys] = useState([])
