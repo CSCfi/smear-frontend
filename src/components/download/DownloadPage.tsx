@@ -51,7 +51,9 @@ const DownloadPage: React.FC = () => {
         setOptions={setOptions}
         onUpdateClick={handleUpdateClick}
       />
-      <DownloadTable variables={selectedVariables} onDownload={handleDownload} />
+      <Layout.Content>
+        <DownloadTable variables={selectedVariables} onDownload={handleDownload} />
+      </Layout.Content>
       <DownloadModal
         visible={modalVisible}
         setVisible={setModalVisible}

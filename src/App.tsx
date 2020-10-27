@@ -25,8 +25,8 @@ function App() {
   }, [dispatch])
 
   return (
-    <Router>
-      <Layout>
+      <Layout style={{ backgroundColor: 'white' }}>
+        <Router>
           <Header>
             <img className="logo" src="company_logo.png" alt="Smart" />
             <Menu mode="horizontal">
@@ -53,7 +53,6 @@ function App() {
               </Item>
             </Menu>
           </Header>
-        <Layout>
           <Switch>
             <Route path="/search">
               <SearchPage />
@@ -65,9 +64,8 @@ function App() {
               <FrontPage />
             </Route>
           </Switch>
-        </Layout>
+        </Router>
       </Layout>
-    </Router>
   )
 }
 

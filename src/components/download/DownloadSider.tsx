@@ -59,7 +59,7 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
   const handleUpdateClick = (value: any) => onUpdateClick(selectedCategory.children)
 
   return (
-    <Layout.Sider width={240} >
+    <Layout.Sider breakpoint='md' collapsedWidth={0} width={340}>
       <StationRadio
         stations={stations}
         selectedStation={selectedStation}
@@ -95,7 +95,7 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
         onChangeFilterConditions={handleFilterConditionChange}
       />
       <Button
-        type="primary"
+        style={{ width: '100%' }}
         onClick={handleUpdateClick}
         disabled={!selectedCategory}
       >Update</Button>

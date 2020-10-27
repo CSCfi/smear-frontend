@@ -71,6 +71,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
         />
       </Form.Item>
       <Button
+          style={{ margin: '4px' }}
           onClick={onPlotClick}
           type="primary"
           disabled={!to || !from || !tablevariables.length || fetching}>

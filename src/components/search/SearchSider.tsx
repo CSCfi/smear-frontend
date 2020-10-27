@@ -17,7 +17,7 @@ const SearchSider: React.FC<SearchSiderProps> = ({
   setTableVariables
 }) => {
   return (
-    <Sider>
+    <Sider style={{ backgroundColor: 'white' }} breakpoint='md' collapsedWidth={0} width={340}>
       <Tooltip placement="rightBottom" title={VARIABLES_TOOLTIP_TEXT}>
         <span><b>Variables:</b></span>
       </Tooltip>

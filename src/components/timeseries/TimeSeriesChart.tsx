@@ -47,7 +47,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
     chart: {
       zoomType: 'xy',
       height: 360,
-      width: 360,
+      width: 360
     },
     plotOptions: {
       series: {

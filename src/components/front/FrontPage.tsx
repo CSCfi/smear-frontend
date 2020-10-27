@@ -42,7 +42,10 @@ const FrontPage = () => {
     dispatch(fetchTimeSeries(tableVariables, options))
   }
 
-  useEffect(fetchData, [])
+  useEffect(() => {
+    document.title = "AVAA - SMEAR"
+    fetchData()
+  }, [])
 
   const handlePlotClick = () => fetchData()
 
@@ -56,7 +59,7 @@ const FrontPage = () => {
         />
         <FrontPageCharts timeSeries={timeSeries} />
       </Content>
-      <Sider width={300}>
+      <Sider breakpoint='xl' collapsedWidth={0} width={300}>
         <OpenStreetMap />
       </Sider>
     </Layout>

@@ -20,6 +20,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       value={selectedDateRange}
       onChange={onSelectDateRange}
       allowClear={false}
+      style={{ margin: '4px', width: '240px' }}
     />
     </>
   )

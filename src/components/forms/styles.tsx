@@ -1,9 +1,9 @@
 
 export const formStyle = {
-  alignItems: 'end'
+  alignItems: 'end',
 }
 
 export const inputStyle = {
-  minWidth: '240px',
-  maxWidth: '240px'
+  margin: '4px',
+  width: '100%',
 }

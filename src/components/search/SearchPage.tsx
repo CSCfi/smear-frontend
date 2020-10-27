@@ -56,7 +56,7 @@ const SearchPage: React.FC = () => {
         />
         <SearchPageCharts timeSeries={timeSeries} />
       </Layout.Content>
-      <Layout.Sider width={300}>
+      <Layout.Sider breakpoint='xl' collapsedWidth={0} width={300}>
         <OpenStreetMap />
       </Layout.Sider>
     </Layout>
