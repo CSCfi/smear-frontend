@@ -3,7 +3,7 @@ import { List } from 'antd'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
 
-import TimeSeriesChart from '../TimeSeriesChart'
+import TimeSeriesChart from '../timeseries/TimeSeriesChart'
 
 const { Item } = List
 
