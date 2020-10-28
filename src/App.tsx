@@ -9,6 +9,7 @@ import AppFooter from './AppFooter'
 import AppHeader from './AppHeader'
 import FrontPage from './components/front/FrontPage'
 import SearchPage from './components/search/SearchPage'
+import SmearIVPage from './components/smear-iv/SmearIVPage'
 import TermsOfUsePage from './components/terms-of-use/TermsOfUsePage'
 import DownloadPage from './components/download/DownloadPage'
 
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/terms-of-use">
             <TermsOfUsePage />
+          </Route>
+          <Route path="/smear-iv">
+            <SmearIVPage />
           </Route>
           <Route path="/">
             <FrontPage />
