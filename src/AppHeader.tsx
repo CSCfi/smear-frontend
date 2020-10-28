@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 
+import { API_URL } from './constants'
+
 const { Header } = Layout
 const { Item } = Menu
 
@@ -21,7 +23,7 @@ const AppHeader = () =>
         <Link to="/download">Download</Link>
       </Item>
       <Item key="4">
-        <Link to="/api">API</Link>
+        <a href={`${API_URL}/swagger-ui`}>API</a>
       </Item>
       <Item key="5">
         <Link to="/terms-of-use">Terms Of Use</Link>
