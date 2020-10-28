@@ -15,6 +15,12 @@ code {
 
 .ant-layout-header {
   background: white;
+  margin-bottom: 2px;
+}
+
+.ant-layout-footer {
+  background: #004D79;
+  color: #ffffff;
 }
 
 .ant-layout-content, .ant-layout-sider-children, .ant-tree {
