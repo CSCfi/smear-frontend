@@ -8,12 +8,12 @@ import { timeSeriesSelector } from '../../store/timeseries'
 
 import FrontPageCharts from './FrontPageCharts'
 import FrontPageForm from './FrontPageForm'
-import OpenStreetMap from '../OpenStreetMap'
+import FrontPageSider from './FrontPageSider'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
 import { DownloadOptions } from '../../types'
 
-const { Content, Sider } = Layout
+const { Content } = Layout
 
 const FrontPage = () => {
   const dispatch = useDispatch()
@@ -59,9 +59,7 @@ const FrontPage = () => {
         />
         <FrontPageCharts timeSeries={timeSeries} />
       </Content>
-      <Sider breakpoint='xl' collapsedWidth={0} width={300}>
-        <OpenStreetMap />
-      </Sider>
+      <FrontPageSider />
     </Layout>
   )
 }
