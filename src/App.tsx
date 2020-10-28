@@ -9,6 +9,7 @@ import AppFooter from './AppFooter'
 import AppHeader from './AppHeader'
 import FrontPage from './components/front/FrontPage'
 import SearchPage from './components/search/SearchPage'
+import TermsOfUsePage from './components/terms-of-use/TermsOfUsePage'
 import DownloadPage from './components/download/DownloadPage'
 
 import 'antd/dist/antd.css'
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/download">
             <DownloadPage />
+          </Route>
+          <Route path="/terms-of-use">
+            <TermsOfUsePage />
           </Route>
           <Route path="/">
             <FrontPage />

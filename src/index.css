@@ -6,12 +6,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+#root {
+  height: 100%;
 }
 
-.ant.layout {
-  padding: 4px;
+.ant-layout {
+  min-height: 100%;
 }
 
 .ant-layout-header {
@@ -26,6 +26,10 @@ code {
 
 .ant-layout-content, .ant-layout-sider-children, .ant-tree {
   background: #e5f2f7;
+}
+
+.ant-layout-content {
+  padding: 8px;
 }
 
 .ant-btn, .ant-list-item {
