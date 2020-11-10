@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Button, Modal } from 'antd'
 
+import { downloadSelector } from '../../store/download'
 import { getDownloadLink } from '../../service/timeseries'
-import { DownloadOptions } from '../../types'
 
 interface DownloadSelectedModalProps {
   visible: boolean,
   setVisible: (visible: boolean) => void,
-  variables: any[],
-  options: DownloadOptions
+  variables: any[]
 }
 
 const DownloadSelectedModal: React.FC<DownloadSelectedModalProps> = ({
   visible,
   setVisible,
-  variables,
-  options
+  variables
 }) => {
+  const { options } = useSelector(downloadSelector)
   const [selectedType, setSelectedType] = useState('csv')
 
   if (variables.length === 0 || !options) {

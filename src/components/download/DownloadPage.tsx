@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Layout } from 'antd'
-import moment from 'moment'
-
-import { aggregationsSelector, qualitiesSelector } from '../../store/options'
-import { treeDataSelector } from '../../store/treedata'
-import { DownloadOptions } from '../../types'
 
 import DownloadSelectedModal from './DownloadSelectedModal'
 import DownloadModal from './DownloadModal'
@@ -13,31 +7,14 @@ import DownloadSider from './DownloadSider'
 import DownloadTable from './DownloadTable'
 
 const DownloadPage: React.FC = () => {
-  const aggregations = useSelector(aggregationsSelector)
-  const qualities = useSelector(qualitiesSelector)
-  const treeData = useSelector(treeDataSelector)
-
-  const [selectedVariables, setSelectedVariables] = useState([])
   const [downloadVariable, setDownloadVariable] = useState(null)
   const [downloadVariables, setDownloadVariables] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedModalVisible, setSelectedModalVisible] = useState(false)
 
-  const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(1, "day").startOf('day'),
-    to: moment().startOf('day'),
-    quality: 'ANY',
-    aggregation: 'NONE',
-    averaging: 30
-  })
-
   useEffect(() => {
     document.title = "AVAA - Download"
   }, [])
-
-  const handleUpdateClick = (variables: any) => {
-    setSelectedVariables(variables)
-  }
 
   const handleDownload = (variable: any) => {
     setDownloadVariable(variable)
@@ -51,17 +28,9 @@ const DownloadPage: React.FC = () => {
 
   return (
     <Layout>
-      <DownloadSider
-        aggregations={aggregations}
-        qualities={qualities}
-        stations={treeData}
-        options={options}
-        setOptions={setOptions}
-        onUpdateClick={handleUpdateClick}
-      />
+      <DownloadSider />
       <Layout.Content>
         <DownloadTable
-          variables={selectedVariables}
           onDownload={handleDownload}
           onDownloadSelected={handleDownloadSelected}
         />
@@ -70,13 +39,11 @@ const DownloadPage: React.FC = () => {
         visible={modalVisible}
         setVisible={setModalVisible}
         variable={downloadVariable}
-        options={options}
       />
       <DownloadSelectedModal
         visible={selectedModalVisible}
         setVisible={setSelectedModalVisible}
         variables={downloadVariables}
-        options={options}
       />
     </Layout>
   )

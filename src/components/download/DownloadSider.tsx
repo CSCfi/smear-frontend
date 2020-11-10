@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Layout } from 'antd'
 import { Moment } from 'moment'
 
-import { DownloadOptions } from '../../types'
+import downloadSlice, { downloadSelector } from '../../store/download'
+import { aggregationsSelector, qualitiesSelector } from '../../store/options'
+import { treeDataSelector } from '../../store/treedata'
 
 import {
   CategorySelect,
@@ -14,49 +17,46 @@ import {
   StationRadio 
 } from '../forms'
 
-interface DownloadSiderProps {
-  aggregations: any[],
-  qualities: any[],
-  stations: any[],
-  options: DownloadOptions,
-  setOptions: (newOptions: DownloadOptions) => void,
-  onUpdateClick: (variables: any) => void
-}
+const {
+  setSelectedStation,
+  setSelectedCategory,
+  setSelectedVariables,
+  setOptions
+} = downloadSlice.actions
 
-const DownloadSider: React.FC<DownloadSiderProps> = ({
-  aggregations,
-  qualities,
-  stations,
-  options,
-  setOptions,
-  onUpdateClick
-}) => {
-  const [selectedStation, setSelectedStation] = useState<any>()
-  const [selectedCategory, setSelectedCategory] = useState<any>()
+const DownloadSider = () => {
+  const dispatch = useDispatch()
+  const aggregations = useSelector(aggregationsSelector)
+  const qualities = useSelector(qualitiesSelector)
+  const treeData = useSelector(treeDataSelector)
+  const {
+    selectedStation,
+    selectedCategory,
+    options
+  } = useSelector(downloadSelector)
 
   const { from, to, quality, aggregation, averaging } = options
 
   const handleSelectStation = (event: any) => {
     const station = event.target.value
-    setSelectedStation(station)
-    setSelectedCategory(station.children[0])
+    dispatch(setSelectedStation(station))
+    dispatch(setSelectedCategory(station.children[0]))
   }
   const handleSelectCategory = (value: any) =>
-    setSelectedCategory(selectedStation.children
-                        .find((category: any) => category.key === value))
-  const handleDateRangeChange = ([from, to]: Moment[]) => {
-    setOptions({ ...options, from, to })
-  }
-  const handleQualityChange = (quality: any) => setOptions({ ...options, quality })
-  const handleAveragingChange = (averaging: any) => setOptions({ ...options, averaging })
-  const handleAggregationChange = (aggregation: any) => setOptions({ ...options, aggregation })
+    dispatch(setSelectedCategory(selectedStation.children
+        .find((category: any) => category.key === value))
+    )
+  const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({ ...options, from, to }))
+  const handleQualityChange = (quality: any) => dispatch(setOptions({ ...options, quality }))
+  const handleAveragingChange = (averaging: any) => dispatch(setOptions({ ...options, averaging }))
+  const handleAggregationChange = (aggregation: any) => dispatch(setOptions({ ...options, aggregation }))
 
-  const handleUpdateClick = (value: any) => onUpdateClick(selectedCategory.children)
+  const handleUpdateClick = (value: any) => dispatch(setSelectedVariables(selectedCategory.children))
 
   return (
     <Layout.Sider breakpoint='md' collapsedWidth={0} width={340}>
       <StationRadio
-        stations={stations}
+        stations={treeData}
         selectedStation={selectedStation}
         onSelectStation={handleSelectStation}
       />

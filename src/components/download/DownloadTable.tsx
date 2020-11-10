@@ -5,18 +5,16 @@ import { Button, Table } from 'antd'
 import { downloadSelector } from '../../store/download'
 
 interface DownloadTableProps {
-  variables: any[],
   onDownload: (variableKey: any) => void,
   onDownloadSelected: (variableKeys: any[]) => void 
 }
 
 const DownloadTable: React.FC<DownloadTableProps> = ({
-  variables,
   onDownload,
   onDownloadSelected
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
-  const { filter, filterConditions } = useSelector(downloadSelector)
+  const { filter, filterConditions, selectedVariables } = useSelector(downloadSelector)
 
   const columns = [
     {
@@ -44,7 +42,7 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
     onChange: (keys: any) => setSelectedRowKeys(keys)
   }
 
-  const tableData = variables.filter(variable => {
+  const tableData = selectedVariables.filter(variable => {
     if (filter === '' || filterConditions.length === 0) {
       return true
     } else if (filterConditions.includes('Variable')) {

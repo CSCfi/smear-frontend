@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Button, Input, Modal } from 'antd'
 
+import { downloadSelector } from '../../store/download'
 import { getDownloadLink } from '../../service/timeseries'
 import { ISO_8601_DATE_TIME } from '../../constants'
-import { DownloadOptions } from '../../types'
 
 const { TextArea } = Input
 
 interface DownloadModalProps {
   visible: boolean,
   setVisible: (visible: boolean) => void,
-  variable: any,
-  options: DownloadOptions
+  variable: any
 }
 
 const DownloadModal: React.FC<DownloadModalProps> = ({
   visible,
   setVisible,
-  variable,
-  options,
+  variable
 }) => {
+  const { options } = useSelector(downloadSelector)
   const [selectedType, setSelectedType] = useState('csv')
   const { from, to, averaging, quality, aggregation } = options
 
