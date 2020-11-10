@@ -32,6 +32,10 @@ body {
   padding: 8px;
 }
 
+.ant-modal-footer {
+  height: 60px;
+}
+
 .ant-btn, .ant-list-item {
   float: left;
   margin: 4px;
