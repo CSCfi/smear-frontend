@@ -27,7 +27,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({
     return null
   }
 
-  const downloadLink = getDownloadLink(selectedType, variable.key, options)
+  const downloadLink = getDownloadLink(selectedType, [variable.key], options)
 
   return (
     <Modal

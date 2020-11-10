@@ -6,12 +6,14 @@ import { downloadSelector } from '../../store/download'
 
 interface DownloadTableProps {
   variables: any[],
-  onDownload: (variableKey: any) => void 
+  onDownload: (variableKey: any) => void,
+  onDownloadSelected: (variableKeys: any[]) => void 
 }
 
 const DownloadTable: React.FC<DownloadTableProps> = ({
   variables,
-  onDownload
+  onDownload,
+  onDownloadSelected
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const { filter, filterConditions } = useSelector(downloadSelector)
@@ -56,12 +58,24 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
       title: variable.title,
     }
   })
+
   return (
-    <Table
-      rowSelection={rowSelection}
-      columns={columns}
-      dataSource={tableData}
-    />
+    <div>
+      <Table
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={tableData}
+      />
+      {tableData.length > 0 && (
+        <Button
+          disabled={selectedRowKeys.length === 0}
+          onClick={() => onDownloadSelected(selectedRowKeys)}
+          style={{ float: 'right', marginRight: 8 }}
+        >
+          Download Selected
+        </Button>
+      )}
+    </div>
   )
 }
 

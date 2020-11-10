@@ -15,7 +15,9 @@ export const fetchTimeSeries = (
 ) => {
   const { from, to, quality, aggregation, averaging } = options
   const params = new URLSearchParams()
-  tablevariables.forEach((tablevariable) => params.append('tablevariable', tablevariable))
+  tablevariables.forEach(tablevariable =>
+      params.append('tablevariable', tablevariable)
+  )
   params.append('from', from.format(ISO_8601_DATE_TIME))
   params.append('to', to.format(ISO_8601_DATE_TIME))
   params.append('quality', quality)
@@ -42,13 +44,15 @@ export const fetchTimeSeries = (
 
 export const getDownloadLink = (
   type: string,
-  tablevariable: string,
+  tablevariables: string[],
   options: DownloadOptions
 ) => {
   const { from, to, quality, aggregation, averaging } = options
 
   const params = new URLSearchParams()
-  params.append('tablevariable', tablevariable)
+  tablevariables.forEach(tablevariable =>
+      params.append('tablevariable', tablevariable)
+  )
   params.append('from', from.format(ISO_8601_DATE_TIME))
   params.append('to', to.format(ISO_8601_DATE_TIME))
   params.append('quality', quality)

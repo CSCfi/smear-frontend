@@ -7,6 +7,7 @@ import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import { treeDataSelector } from '../../store/treedata'
 import { DownloadOptions } from '../../types'
 
+import DownloadSelectedModal from './DownloadSelectedModal'
 import DownloadModal from './DownloadModal'
 import DownloadSider from './DownloadSider'
 import DownloadTable from './DownloadTable'
@@ -18,7 +19,9 @@ const DownloadPage: React.FC = () => {
 
   const [selectedVariables, setSelectedVariables] = useState([])
   const [downloadVariable, setDownloadVariable] = useState(null)
+  const [downloadVariables, setDownloadVariables] = useState([])
   const [modalVisible, setModalVisible] = useState(false)
+  const [selectedModalVisible, setSelectedModalVisible] = useState(false)
 
   const [options, setOptions] = useState<DownloadOptions>({
     from: moment().subtract(1, "day").startOf('day'),
@@ -41,6 +44,11 @@ const DownloadPage: React.FC = () => {
     setModalVisible(true)
   }
 
+  const handleDownloadSelected = (variables: any) => {
+    setDownloadVariables(variables)
+    setSelectedModalVisible(true)
+  }
+
   return (
     <Layout>
       <DownloadSider
@@ -52,12 +60,22 @@ const DownloadPage: React.FC = () => {
         onUpdateClick={handleUpdateClick}
       />
       <Layout.Content>
-        <DownloadTable variables={selectedVariables} onDownload={handleDownload} />
+        <DownloadTable
+          variables={selectedVariables}
+          onDownload={handleDownload}
+          onDownloadSelected={handleDownloadSelected}
+        />
       </Layout.Content>
       <DownloadModal
         visible={modalVisible}
         setVisible={setModalVisible}
         variable={downloadVariable}
+        options={options}
+      />
+      <DownloadSelectedModal
+        visible={selectedModalVisible}
+        setVisible={setSelectedModalVisible}
+        variables={downloadVariables}
         options={options}
       />
     </Layout>
