@@ -38,7 +38,6 @@ const DownloadModal: React.FC<DownloadModalProps> = ({
         <Button key="1" onClick={(e:any) => setSelectedType('csv')}>CSV</Button>,
         <Button key="2" onClick={(e:any) => setSelectedType('tsv')}>TXT</Button>,
         <Button key="3" onClick={(e:any) => setSelectedType('meta')}>Meta</Button>,
-        <Button key="4" onClick={(e:any) => setSelectedType('hdf5')}>HDF5</Button>,
         <Button key="5" type="primary" href={downloadLink}>Download</Button>
       ]}
     >
