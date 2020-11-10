@@ -33,8 +33,6 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
 }) => {
   const [selectedStation, setSelectedStation] = useState<any>()
   const [selectedCategory, setSelectedCategory] = useState<any>()
-  const [selectedFilter, setSelectedFilter] = useState<any>()
-  const [selectedFilterConditions, setSelectedFilterConditions] = useState<any[]>([])
 
   const { from, to, quality, aggregation, averaging } = options
 
@@ -52,9 +50,6 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
   const handleQualityChange = (quality: any) => setOptions({ ...options, quality })
   const handleAveragingChange = (averaging: any) => setOptions({ ...options, averaging })
   const handleAggregationChange = (aggregation: any) => setOptions({ ...options, aggregation })
-
-  const handleFilterChange = (event: any) => setSelectedFilter(event.target.value)
-  const handleFilterConditionChange = (value: any) => setSelectedFilterConditions(value)
 
   const handleUpdateClick = (value: any) => onUpdateClick(selectedCategory.children)
 
@@ -88,12 +83,7 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
         selectedAggregation={aggregation}
         onSelectAggregation={handleAggregationChange}
       />
-      <FilterInput
-        selectedFilter={selectedFilter}
-        onChangeFilter={handleFilterChange}
-        selectedFilterConditions={selectedFilterConditions}
-        onChangeFilterConditions={handleFilterConditionChange}
-      />
+      <FilterInput />
       <Button
         style={{ width: '100%' }}
         onClick={handleUpdateClick}
