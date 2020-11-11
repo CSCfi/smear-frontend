@@ -17,6 +17,7 @@ body {
 .ant-layout-header {
   background: white;
   margin-bottom: 2px;
+  height: 136px;
 }
 
 .ant-layout-footer {
