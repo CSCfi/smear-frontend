@@ -3,6 +3,7 @@ export const PATH_AGGREGATION = '/aggregation'
 export const PATH_QUALITY = '/quality'
 export const PATH_STRUCTURE = '/structure'
 export const PATH_TIME_SERIES = '/search/timeseries'
+export const PATH_VARIABLE = API_URL + '/search/variable'
 export const PATH_VARIABLE_CSV = '/search/variable/csv'
 export const ISO_8601_DATE_TIME = 'YYYY-MM-DDTHH:mm:ss.SSS'
 export const FRONT_PAGE_CHARTS = [

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Button, Table } from 'antd'
 
 import { downloadSelector } from '../../store/download'
+import { variablesSelector } from '../../store/variables'
 
 interface DownloadTableProps {
   onDownload: (variableKey: any) => void,
@@ -15,6 +16,7 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const { filter, filterConditions, selectedVariables } = useSelector(downloadSelector)
+  const variables = useSelector(variablesSelector)
 
   const columns = [
     {
@@ -22,14 +24,16 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
       dataIndex: 'title'
     },
     {
-      title: 'Description'
+      title: 'Description',
+      dataIndex: 'description'
     },
     {
-      title: 'Source'
+      title: 'Source',
+      dataIndex: 'source'
     },
     {
       title: 'Availability %',
-      render: () => <span>Not Calculated</span>
+      dataIndex: 'availability'
     },
     {
       title: 'Download',
@@ -42,19 +46,38 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
     onChange: (keys: any) => setSelectedRowKeys(keys)
   }
 
-  const tableData = selectedVariables.filter(variable => {
+  const tableData = selectedVariables.map(variable => {
+    const variableData = variables
+      .find(v => `${v.tableName}.${v.name}` === variable.key)
+    if (variableData) {
+      return {
+        key: variable.key,
+        title: variable.title,
+        description: variableData.description,
+        source: variableData.source,
+        availability: variableData.coverage,
+      }
+    } else {
+      return {
+        key: variable.key,
+        title: variable.title,
+        description: '',
+        source: '',
+        availability: '',
+      }
+    }
+  }).filter(variableData => {
     if (filter === '' || filterConditions.length === 0) {
       return true
     } else if (filterConditions.includes('Variable')) {
-      return variable.title.toLowerCase().includes(filter.toLowerCase())
+      return variableData.title.toLowerCase().includes(filter.toLowerCase())
+    } else if (filterConditions.includes('Description')) {
+      return variableData.description.toLowerCase().includes(filter.toLowerCase())
+    } else if (filterConditions.includes('Source')) {
+      return variableData.source.toLowerCase().includes(filter.toLowerCase())
     }
 
     return false
-  }).map(variable => {
-    return {
-      key: variable.key,
-      title: variable.title,
-    }
   })
 
   return (

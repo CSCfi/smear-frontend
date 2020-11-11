@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Layout } from 'antd'
 import { Moment } from 'moment'
 
+import { fetchVariableMetadata } from '../../service/variable'
 import downloadSlice, { downloadSelector } from '../../store/download'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import { treeDataSelector } from '../../store/treedata'
@@ -51,7 +52,14 @@ const DownloadSider = () => {
   const handleAveragingChange = (averaging: any) => dispatch(setOptions({ ...options, averaging }))
   const handleAggregationChange = (aggregation: any) => dispatch(setOptions({ ...options, aggregation }))
 
-  const handleUpdateClick = (value: any) => dispatch(setSelectedVariables(selectedCategory.children))
+  const handleUpdateClick = (value: any) => {
+    dispatch(setSelectedVariables(selectedCategory.children))
+    dispatch(fetchVariableMetadata(
+      selectedStation.title,
+      selectedCategory.title,
+      selectedCategory.children.map((tablevariable:any) => tablevariable.key)
+    ))
+  }
 
   return (
     <Layout.Sider breakpoint='md' collapsedWidth={0} width={340}>

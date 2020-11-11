@@ -4,6 +4,7 @@ import optionsSlice from './options'
 import searchSlice from './search'
 import timeSeriesSlice from './timeseries'
 import treeDataSlice from './treedata'
+import variablesSlice from './variables'
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     search: searchSlice.reducer,
     timeSeries: timeSeriesSlice.reducer,
     treeData: treeDataSlice.reducer,
+    variables: variablesSlice.reducer
   },
 })
 
