@@ -1,17 +1,16 @@
 import axios from 'axios'
 import { AppDispatch } from '../../store/index'
 import searchSlice from '../../store/search'
-import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries, DownloadOptions } from '../../types'
 import { ISO_8601_DATE_TIME } from '../../constants'
 import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../../constants'
 
 const { setFetching } = searchSlice.actions
-const { setTimeSeries } = timeSeriesSlice.actions
 
 export const fetchTimeSeries = (
   tablevariables: string[],
-  options: DownloadOptions
+  options: DownloadOptions,
+  setTimeSeries: any
 ) => {
   const { from, to, quality, aggregation, averaging } = options
   const params = new URLSearchParams()

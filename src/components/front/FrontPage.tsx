@@ -4,7 +4,7 @@ import { Layout } from 'antd'
 import moment from 'moment'
 
 import { fetchTimeSeries } from '../../service/timeseries'
-import { timeSeriesSelector } from '../../store/timeseries'
+import timeSeriesSlice, { timeSeriesSelector } from '../../store/timeseries'
 
 import FrontPageCharts from './FrontPageCharts'
 import FrontPageForm from './FrontPageForm'
@@ -14,6 +14,8 @@ import { FRONT_PAGE_CHARTS } from '../../constants'
 import { DownloadOptions } from '../../types'
 
 const { Content } = Layout
+
+const { setTimeSeries } = timeSeriesSlice.actions
 
 const FrontPage = () => {
   const dispatch = useDispatch()
@@ -39,7 +41,7 @@ const FrontPage = () => {
       }
     }
 
-    dispatch(fetchTimeSeries(tableVariables, options))
+    dispatch(fetchTimeSeries(tableVariables, options, setTimeSeries))
   }
 
   useEffect(() => {
