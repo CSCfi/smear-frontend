@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Button, Modal } from 'antd'
 
 import { downloadSelector } from '../../store/download'
-import { getDownloadLink } from '../../service/timeseries'
+import { getDownloadLink, getVariableMetaLink } from '../../service/timeseries'
 
 interface DownloadSelectedModalProps {
   visible: boolean,
@@ -16,18 +16,20 @@ const DownloadSelectedModal: React.FC<DownloadSelectedModalProps> = ({
   setVisible,
   variables
 }) => {
-  const { options } = useSelector(downloadSelector)
+  const {
+    selectedStation,
+    selectedCategory,
+    options
+  } = useSelector(downloadSelector)
   const [selectedType, setSelectedType] = useState('csv')
 
   if (variables.length === 0 || !options) {
     return null
   }
 
-  const downloadLink = getDownloadLink(
-    selectedType,
-    variables,
-    options
-  )
+  const downloadLink = selectedType === 'meta'
+    ? getVariableMetaLink(selectedStation.title, selectedCategory.title, variables)
+    : getDownloadLink(selectedType, variables, options)
 
   return (
     <Modal

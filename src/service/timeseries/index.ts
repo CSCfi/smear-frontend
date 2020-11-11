@@ -4,7 +4,7 @@ import searchSlice from '../../store/search'
 import timeSeriesSlice from '../../store/timeseries'
 import { TimeSeries, DownloadOptions } from '../../types'
 import { ISO_8601_DATE_TIME } from '../../constants'
-import { API_URL, PATH_TIME_SERIES } from '../../constants'
+import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../../constants'
 
 const { setFetching } = searchSlice.actions
 const { setTimeSeries } = timeSeriesSlice.actions
@@ -60,4 +60,20 @@ export const getDownloadLink = (
   params.append('interval', averaging.toString())
 
   return `${API_URL}${PATH_TIME_SERIES}/${type}?${params.toString()}`
+}
+
+export const getVariableMetaLink = (
+  station: string,
+  category: string,
+  tablevariables: any[]
+) => {
+  const params = new URLSearchParams()
+
+  params.append('station', station)
+  params.append('category', category)
+  tablevariables.forEach(tablevariable =>
+      params.append('tablevariable', tablevariable)
+  )
+
+  return `${API_URL}${PATH_VARIABLE_CSV}?${params.toString()}`
 }
