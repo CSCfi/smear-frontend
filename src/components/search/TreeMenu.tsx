@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Tree } from 'antd'
-import { TreeNode } from '../../types'
 import 'antd/dist/antd.css'
 
-interface TreeMenuProps {
-  treeData: any,
-  setTableVariables: any
-}
+import searchSlice from '../../store/search'
+import { treeDataSelector } from '../../store/treedata'
+import { TreeNode } from '../../types'
 
-const TreeMenu: React.FC<TreeMenuProps> = ({
-  treeData,
-  setTableVariables
-}) => {
+const { setTablevariables } = searchSlice.actions
+
+const TreeMenu = () => {
+  const dispatch = useDispatch()
+  const treeData = useSelector(treeDataSelector)
+
   const [expandedKeys, setExpandedKeys] = useState([])
   const [checkedKeys, setCheckedKeys] = useState([])
   const [selectedKeys, setSelectedKeys] = useState([])
@@ -26,7 +27,7 @@ const TreeMenu: React.FC<TreeMenuProps> = ({
     const tablevariables = info.checkedNodes
       .filter((node: TreeNode) => node.isLeaf)
       .map((node: TreeNode) => node.key)
-    setTableVariables(tablevariables)
+    dispatch(setTablevariables(tablevariables))
     setCheckedKeys(checkedKeys)
   }
 
