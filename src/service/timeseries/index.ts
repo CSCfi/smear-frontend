@@ -41,6 +41,40 @@ export const fetchTimeSeries = (
   }
 }
 
+export const fetchAvailability = (
+  tablevariables: string[],
+  options: DownloadOptions,
+  setAvailability: any,
+  setFetchingAvailability: any
+) => {
+  const { from, to, quality, aggregation, averaging } = options
+  const params = new URLSearchParams()
+  tablevariables.forEach(tablevariable =>
+      params.append('tablevariable', tablevariable)
+  )
+  params.append('from', from.format(ISO_8601_DATE_TIME))
+  params.append('to', to.format(ISO_8601_DATE_TIME))
+  params.append('quality', quality)
+  params.append('aggregation', 'AVAILABILITY')
+  params.append('interval', averaging.toString())
+
+  return async (dispatch: AppDispatch) => {
+    if (tablevariables.length > 0) {
+      dispatch(setFetchingAvailability(true))
+      try {
+        const response = await axios.get(API_URL + PATH_TIME_SERIES, { params })
+        dispatch(setFetchingAvailability(false))
+        dispatch(setAvailability(response.data))
+      } catch (error) {
+        dispatch(setFetchingAvailability(false))
+        dispatch(setAvailability({ data: [{ samptime: "" }] }))
+      }
+    } else {
+      dispatch(setAvailability({ data: [{ samptime: "" }] }))
+    }
+  }
+}
+
 export const getDownloadLink = (
   type: string,
   tablevariables: string[],

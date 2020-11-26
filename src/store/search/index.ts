@@ -36,7 +36,7 @@ const searchSlice = createSlice({
     fetching: false,
     options: {
       from: moment().subtract(1, "day").startOf('day'),
-      to: moment().startOf('day'),
+      to: moment().endOf('day'),
       quality: 'ANY',
       aggregation: 'NONE',
       averaging: 30

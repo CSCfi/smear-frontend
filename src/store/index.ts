@@ -1,4 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import availabilitySlice from './availability'
 import downloadSlice from './download'
 import optionsSlice from './options'
 import searchSlice from './search'
@@ -8,6 +9,7 @@ import variablesSlice from './variables'
 
 export const store = configureStore({
   reducer: {
+    availability: availabilitySlice.reducer,
     download: downloadSlice.reducer,
     options: optionsSlice.reducer,
     search: searchSlice.reducer,

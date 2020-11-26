@@ -29,14 +29,14 @@ const FrontPageForm: React.FC<FrontPageFormProps> = ({
     if (to.diff(from, 'days') > 15) {
       message.info('Please select a date interval no longer than 15 days')
       if (from === options.from) {
-        setOptions({ ...options, from: moment(to).subtract(15, 'days'), to })
+        setOptions({ ...options, from: moment(to).subtract(15, 'days'), to: to.endOf('day') })
       } else {
-        setOptions({ ...options, from, to: moment(from).add(15, 'days') })
+        setOptions({ ...options, from, to: moment(from).add(15, 'days').endOf('day') })
       }
     } else if (to.isAfter()) {
       message.info('Please do not select a date interval that is in the future')
     } else {
-      setOptions({ ...options, from, to })
+      setOptions({ ...options, from, to: to.endOf('day') })
     }
   }
 

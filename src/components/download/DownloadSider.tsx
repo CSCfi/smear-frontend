@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Button, Layout } from 'antd'
 import { Moment } from 'moment'
 
+import { fetchAvailability } from '../../service/timeseries'
 import { fetchVariableMetadata } from '../../service/variable'
+import availabilitySlice from '../../store/availability'
 import downloadSlice, { downloadSelector } from '../../store/download'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import { treeDataSelector } from '../../store/treedata'
@@ -15,7 +17,7 @@ import {
   AggregationSelect,
   AveragingInput,
   FilterInput,
-  StationRadio 
+  StationRadio
 } from '../forms'
 
 const {
@@ -24,6 +26,8 @@ const {
   setSelectedVariables,
   setOptions
 } = downloadSlice.actions
+
+const { setFetching, setAvailaibility } = availabilitySlice.actions
 
 const DownloadSider = () => {
   const dispatch = useDispatch()
@@ -47,17 +51,27 @@ const DownloadSider = () => {
     dispatch(setSelectedCategory(selectedStation.children
         .find((category: any) => category.key === value))
     )
-  const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({ ...options, from, to }))
+  const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
   const handleQualityChange = (quality: any) => dispatch(setOptions({ ...options, quality }))
   const handleAveragingChange = (averaging: any) => dispatch(setOptions({ ...options, averaging }))
   const handleAggregationChange = (aggregation: any) => dispatch(setOptions({ ...options, aggregation }))
 
   const handleUpdateClick = (value: any) => {
+    const selectedVariables = selectedCategory.children
+      .map((tablevariable:any) => tablevariable.key)
+
     dispatch(setSelectedVariables(selectedCategory.children))
     dispatch(fetchVariableMetadata(
       selectedStation.title,
       selectedCategory.title,
-      selectedCategory.children.map((tablevariable:any) => tablevariable.key)
+      selectedVariables
+    ))
+
+    dispatch(fetchAvailability(
+      selectedVariables,
+      options,
+      setAvailaibility,
+      setFetching
     ))
   }
 

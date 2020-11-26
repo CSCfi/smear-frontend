@@ -26,7 +26,7 @@ const SearchForm = () => {
     if (to.isAfter()) {
       message.info('Please do not select a date interval that is in the future')
     } else {
-      dispatch(setOptions({ ...options, from, to }))
+      dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
     }
   }
 
