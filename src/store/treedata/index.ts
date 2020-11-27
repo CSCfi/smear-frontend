@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
 import { RootState } from '../index'
 import { TreeNode } from '../../types'
+import { STATION_NAMES_TO_TITLES } from '../../constants'
 
 type Variable = {
   tablevariable: string
@@ -43,9 +44,11 @@ const categoriesToTreeData = (categories: Category[]): TreeNode[] =>
 
 const stationsToTreeData = (stations: Station[]): TreeNode[] =>
   stations.map((station) => {
+    const stationToTitle = STATION_NAMES_TO_TITLES
+      .find(s => s.name === station.name)
     return {
       key: String(station.id),
-      title: station.name,
+      title: stationToTitle === undefined ? station.name : stationToTitle.title,
       children: categoriesToTreeData(station.categories),
       checkable: false,
       isLeaf: false,

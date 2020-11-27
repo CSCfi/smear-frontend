@@ -306,6 +306,52 @@ export const STATIONS = [
     iconSrc: 'marker-black.png'
   }
 ]
+export const STATION_NAMES_TO_TITLES = [
+  {
+    name: 'Erottaja',
+    title: 'SMEAR III Helsinki Erottaja Fire Station'
+  },
+  {
+    name: 'Hyytiälä',
+    title: 'SMEAR II Hyytiälä forest'
+  },
+  {
+    name: 'Kuivajärvi',
+    title: 'SMEAR II Lake Kuivajärvi'
+  },
+  {
+    name: 'Kumpula',
+    title: 'SMEAR III Helsinki Kumpula'
+  },
+  {
+    name: 'Nuorttiaapa',
+    title: 'SMEAR I Nuorttiaapa wetland'
+  },
+  {
+    name: 'Puijo',
+    title: 'SMEAR IV Puijo tower'
+  },
+  {
+    name: 'Siikaneva 1',
+    title: 'SMEAR II Siikaneva 1 peatland'
+  },
+  {
+    name: 'Siikaneva 2',
+    title: 'SMEAR II Siikaneva 2 peatland'
+  },
+  {
+    name: 'Torni',
+    title: 'SMEAR III Helsinki Hotel Torni'
+  },
+  {
+    name: 'Viikki',
+    title: 'SMEAR III Viikki cropland'
+  },
+  {
+    name: 'Värriö',
+    title: 'SMEAR I Värriö forest'
+  }
+]
 
 export const VARIABLES_TOOLTIP_TEXT = "You may choose stations and variables "
   + "on the left. Clicking a triangle next to station name opens a list of "
