@@ -54,7 +54,7 @@ const downloadSlice = createSlice({
       to: moment().endOf('day'),
       quality: 'ANY',
       aggregation: 'NONE',
-      averaging: 30
+      averaging: 1
     },
     filter: '',
     filterConditions: [],
