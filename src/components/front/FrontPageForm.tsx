@@ -33,7 +33,7 @@ const FrontPageForm: React.FC<FrontPageFormProps> = ({
       } else {
         setOptions({ ...options, from, to: moment(from).add(15, 'days').endOf('day') })
       }
-    } else if (to.isAfter()) {
+    } else if (to.isAfter(moment().endOf('day'))) {
       message.info('Please do not select a date interval that is in the future')
     } else {
       setOptions({ ...options, from, to: to.endOf('day') })

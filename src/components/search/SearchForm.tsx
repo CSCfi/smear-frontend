@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { message, Button, Form, Spin } from 'antd'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 
 import { fetchTimeSeries } from '../../service/timeseries'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
@@ -23,7 +23,7 @@ const SearchForm = () => {
   const onAggregationChange = (aggregation: string) => dispatch(setOptions({ ...options, aggregation }))
   const onIntervalChange = (averaging: any) => dispatch(setOptions({ ...options, averaging }))
   const onDateRangeChange = ([from, to]: Moment[]) => {
-    if (to.isAfter()) {
+    if (to.isAfter(moment().endOf('day'))) {
       message.info('Please do not select a date interval that is in the future')
     } else {
       dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
