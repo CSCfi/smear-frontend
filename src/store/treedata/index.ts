@@ -53,7 +53,7 @@ const stationsToTreeData = (stations: Station[]): TreeNode[] =>
       checkable: false,
       isLeaf: false,
     }
-  })
+  }).sort((s1: any, s2: any) => s1.title.localeCompare(s2.title))
 
 const treeDataSlice = createSlice({
   name: 'treeData',
