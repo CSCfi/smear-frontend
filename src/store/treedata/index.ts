@@ -63,7 +63,7 @@ const treeDataSlice = createSlice({
   },
 })
 
-const dataStructureSelector = (state: RootState) => state.treeData
+export const dataStructureSelector = (state: RootState) => state.treeData
 
 export const treeDataSelector = createSelector(dataStructureSelector, (dataStructure) =>
   stationsToTreeData(dataStructure)

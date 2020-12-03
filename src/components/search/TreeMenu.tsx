@@ -1,17 +1,61 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Tree } from 'antd'
+import { Tooltip, Tree } from 'antd'
 import 'antd/dist/antd.css'
 
+import { STATION_NAMES_TO_TITLES } from '../../constants'
+import { fetchVariableMetadata } from '../../service/variable'
 import searchSlice from '../../store/search'
-import { treeDataSelector } from '../../store/treedata'
+import { dataStructureSelector } from '../../store/treedata'
+import { variablesSelector } from '../../store/variables'
 import { TreeNode } from '../../types'
 
 const { setTablevariables } = searchSlice.actions
 
+interface VariableTooltipProps {
+  variableData: any|null
+}
+
+const VariableTooltip: React.FC<VariableTooltipProps> = ({ variableData }) => {
+  if (!variableData) {
+    return null
+  }
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <td className="tooltip-data">TABLEVARIABLE</td>
+          <td className="tooltip-data">{variableData.tableName}.{variableData.name}</td>
+        </tr>
+        <tr>
+          <td className="tooltip-data">DESCRIPTION</td>
+          <td className="tooltip-data">{variableData.description}</td>
+        </tr>
+        <tr>
+          <td className="tooltip-data">UNIT</td>
+          <td className="tooltip-data">{variableData.unit}</td>
+        </tr>
+        <tr>
+          <td className="tooltip-data">SOURCE</td>
+          <td className="tooltip-data">{variableData.source}</td>
+        </tr>
+        <tr>
+          <td className="tooltip-data">PERIOD_START</td>
+          <td className="tooltip-data">{variableData.periodStart || '-'}</td>
+        </tr>
+        <tr>
+          <td className="tooltip-data">PERIOD_END</td>
+          <td className="tooltip-data">{variableData.periodEnd || '-'}</td>
+        </tr>
+      </tbody>
+    </table>
+  )
+}
+
 const TreeMenu = () => {
   const dispatch = useDispatch()
-  const treeData = useSelector(treeDataSelector)
+  const treeData = useSelector(dataStructureSelector)
+  const variables = useSelector(variablesSelector)
 
   const [expandedKeys, setExpandedKeys] = useState([])
   const [checkedKeys, setCheckedKeys] = useState([])
@@ -35,6 +79,33 @@ const TreeMenu = () => {
     setSelectedKeys(selectedKeys)
   }
 
+  const onLoadData = (node: any) => new Promise<void>(resolve => {
+    if (node.children === 0 || !node.children[0].isLeaf) {
+      resolve()
+      return
+    }
+    dispatch(fetchVariableMetadata(
+      null,
+      null,
+      node.children.map((variableNode: any) => variableNode.key)
+    ))
+    resolve()
+    return
+  })
+
+  const stationSort = (s1: any, s2: any) =>
+    getStationTitle(s1.name).localeCompare(getStationTitle(s2.name))
+
+  const getStationTitle = (stationName: string) => {
+    const stationToTitle = STATION_NAMES_TO_TITLES
+      .find(s => s.name === stationName)
+    return stationToTitle ? stationToTitle.title : stationName
+  }
+
+  const getVariableData = (variable: any) => {
+    return variables.find((v: any) => v.tableName + '.' + v.name === variable.tablevariable)
+  }
+
   return (
     <Tree
       checkable
@@ -45,8 +116,41 @@ const TreeMenu = () => {
       checkedKeys={checkedKeys}
       onSelect={onSelect}
       selectedKeys={selectedKeys}
-      treeData={treeData}
-    />
+      loadData={onLoadData}
+    >
+      {treeData.slice().sort(stationSort).map((station: any) => (
+        <Tree.TreeNode
+          key={station.id}
+          checkable={false}
+          title={getStationTitle(station.name)}
+        >
+          {station.categories.map((category: any) => (
+            <Tree.TreeNode
+              key={category.id}
+              checkable={false}
+              title={category.name}
+            >
+              {category.variables.map((variable: any) => (
+                  <Tree.TreeNode
+                    key={variable.tablevariable}
+                    checkable
+                    isLeaf
+                    title={
+                      <Tooltip
+                        title={<VariableTooltip variableData={getVariableData(variable)} />}
+                        placement="bottomLeft"
+                      >
+                        <span>{variable.title}</span>
+                      </Tooltip>
+                    }
+                  >
+                  </Tree.TreeNode>
+              ))}
+            </Tree.TreeNode>
+          ))}
+        </Tree.TreeNode>
+      ))}
+    </Tree>
   )
 }
 

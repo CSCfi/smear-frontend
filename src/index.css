@@ -48,8 +48,17 @@ body {
   border-color: #03881c;
 }
 
+.ant-tooltip-inner {
+  width: 400px;
+}
+
 .logo {
   float: left;
+}
+
+.tooltip-data {
+  vertical-align: top;
+  padding: 4px;
 }
 
 #map {

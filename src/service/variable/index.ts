@@ -6,8 +6,8 @@ import { PATH_VARIABLE } from '../../constants'
 const { setVariables } = variablesSlice.actions
 
 export const fetchVariableMetadata = (
-  station: string,
-  category: string,
+  station: string|null,
+  category: string|null,
   tablevariables: string[]
 ) => {
   return async (dispatch: AppDispatch) => {
@@ -16,8 +16,12 @@ export const fetchVariableMetadata = (
     }
     const params = new URLSearchParams()
 
-    params.append('station', station)
-    params.append('category', category)
+    if (station) {
+      params.append('station', station)
+    }
+    if (category) {
+      params.append('category', category)
+    }
     tablevariables.forEach(tablevariable =>
       params.append('tablevariable', tablevariable)
     )
