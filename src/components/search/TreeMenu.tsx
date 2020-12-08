@@ -96,6 +96,18 @@ const TreeMenu = () => {
   const stationSort = (s1: any, s2: any) =>
     getStationTitle(s1.name).localeCompare(getStationTitle(s2.name))
 
+  const variableSort = (v1: any, v2: any) => {
+    if (v1.sortOrder !== null && v2.sortOrder !== null) {
+      return v1.sortOrder - v2.sortOrder
+    } else if (v1.sortOrder !== null) {
+      return -1
+    } else if (v2.sortOrder !== null) {
+      return 1
+    } else {
+      return v1.variableID - v2.variableID
+    }
+  }
+
   const getStationTitle = (stationName: string) => {
     const stationToTitle = STATION_NAMES_TO_TITLES
       .find(s => s.name === stationName)
@@ -130,7 +142,7 @@ const TreeMenu = () => {
               checkable={false}
               title={category.name}
             >
-              {category.variables.map((variable: any) => (
+              {category.variables.slice().sort(variableSort).map((variable: any) => (
                   <Tree.TreeNode
                     key={variable.tablevariable}
                     checkable
