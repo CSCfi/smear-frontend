@@ -53,8 +53,24 @@ const DownloadSider = () => {
     )
   const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
   const handleQualityChange = (quality: any) => dispatch(setOptions({ ...options, quality }))
-  const handleAveragingChange = (averaging: any) => dispatch(setOptions({ ...options, averaging }))
-  const handleAggregationChange = (aggregation: any) => dispatch(setOptions({ ...options, aggregation }))
+  const handleAggregationChange = (aggregation: string) => {
+    if (aggregation === 'NONE') {
+      dispatch(setOptions({ ...options, aggregation, averaging: 1 }))
+    } else if (averaging === 1) {
+      dispatch(setOptions({ ...options, aggregation, averaging: 60 }))
+    } else {
+      dispatch(setOptions({ ...options, aggregation }))
+    }
+  }
+  const handleAveragingChange = (averaging: any) => {
+    if (averaging === 1) {
+      dispatch(setOptions({ ...options, aggregation: 'NONE', averaging }))
+    } else if (aggregation === 'NONE') {
+      dispatch(setOptions({ ...options, aggregation: 'ARITHMETIC', averaging }))
+    } else {
+      dispatch(setOptions({ ...options, averaging }))
+    }
+  }
 
   const handleUpdateClick = (value: any) => {
     const selectedVariables = selectedCategory.children

@@ -20,8 +20,24 @@ const SearchForm = () => {
   const { from, to, quality, aggregation, averaging } = options
 
   const onQualityChange = (quality: string) => dispatch(setOptions({ ...options, quality }))
-  const onAggregationChange = (aggregation: string) => dispatch(setOptions({ ...options, aggregation }))
-  const onIntervalChange = (averaging: any) => dispatch(setOptions({ ...options, averaging }))
+  const onAggregationChange = (aggregation: string) => {
+    if (aggregation === 'NONE') {
+      dispatch(setOptions({ ...options, aggregation, averaging: 1 }))
+    } else if (averaging === 1) {
+      dispatch(setOptions({ ...options, aggregation, averaging: 60 }))
+    } else {
+      dispatch(setOptions({ ...options, aggregation }))
+    }
+  }
+  const onIntervalChange = (averaging: any) => {
+    if (averaging === 1) {
+      dispatch(setOptions({ ...options, aggregation: 'NONE', averaging }))
+    } else if (aggregation === 'NONE') {
+      dispatch(setOptions({ ...options, aggregation: 'ARITHMETIC', averaging }))
+    } else {
+      dispatch(setOptions({ ...options, averaging }))
+    }
+  }
   const onDateRangeChange = ([from, to]: Moment[]) => {
     if (to.isAfter(moment().endOf('day'))) {
       message.info('Please do not select a date interval that is in the future')
