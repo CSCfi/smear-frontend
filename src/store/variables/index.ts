@@ -7,6 +7,7 @@ type Variable = {
   tableName: string,
   name: string,
   description: string,
+  title: string,
   unit: string,
   source: string,
   coverage: number
