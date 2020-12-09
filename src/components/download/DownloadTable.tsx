@@ -59,20 +59,32 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
     }
   }
 
-  const tableData = selectedVariables.map(variable => {
+  const variableSort = (v1: any, v2: any) => {
+    if (v1.sortOrder !== null && v2.sortOrder !== null) {
+      return v1.sortOrder - v2.sortOrder
+    } else if (v1.sortOrder !== null) {
+      return -1
+    } else if (v2.sortOrder !== null) {
+      return 1
+    } else {
+      return v1.variableID - v2.variableID
+    }
+  }
+
+  const tableData = selectedVariables.slice().sort(variableSort).map(variable => {
     const variableData = variables
-      .find(v => `${v.tableName}.${v.name}` === variable.key)
+      .find(v => `${v.tableName}.${v.name}` === variable.tablevariable)
     if (variableData) {
       return {
-        key: variable.key,
+        key: variable.tablevariable,
         title: variable.title,
         description: variableData.description,
         source: variableData.source,
-        availability: fetching ? 'fetching...' : getAvailability(variable.key)
+        availability: fetching ? 'fetching...' : getAvailability(variable.tablevariable)
       }
     } else {
       return {
-        key: variable.key,
+        key: variable.tablevariable,
         title: variable.title,
         description: '',
         source: '',

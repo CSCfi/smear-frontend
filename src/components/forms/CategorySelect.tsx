@@ -16,8 +16,8 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   selectedCategory,
   onSelectCategory
 }) => {
-  const value = selectedCategory !== undefined ? selectedCategory.key : ""
-  const categories = station !== undefined ? station.children : []
+  const value = selectedCategory !== undefined ? selectedCategory.id : ""
+  const categories = station !== undefined ? station.categories : []
 
   return (
     <>
@@ -28,7 +28,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
       onChange={onSelectCategory}
     >
       {categories.map((category: any) =>
-      <Option key={category.key} value={category.key}>{category.title}</Option>)}
+      <Option key={category.id} value={category.id}>{category.name}</Option>)}
     </Select>
     </>
   )

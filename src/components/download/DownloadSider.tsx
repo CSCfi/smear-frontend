@@ -8,7 +8,7 @@ import { fetchVariableMetadata } from '../../service/variable'
 import availabilitySlice from '../../store/availability'
 import downloadSlice, { downloadSelector } from '../../store/download'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
-import { treeDataSelector } from '../../store/treedata'
+import { dataStructureSelector } from '../../store/treedata'
 
 import {
   CategorySelect,
@@ -33,7 +33,7 @@ const DownloadSider = () => {
   const dispatch = useDispatch()
   const aggregations = useSelector(aggregationsSelector)
   const qualities = useSelector(qualitiesSelector)
-  const treeData = useSelector(treeDataSelector)
+  const treeData = useSelector(dataStructureSelector)
   const {
     selectedStation,
     selectedCategory,
@@ -45,11 +45,11 @@ const DownloadSider = () => {
   const handleSelectStation = (event: any) => {
     const station = event.target.value
     dispatch(setSelectedStation(station))
-    dispatch(setSelectedCategory(station.children[0]))
+    dispatch(setSelectedCategory(station.categories[0]))
   }
   const handleSelectCategory = (value: any) =>
-    dispatch(setSelectedCategory(selectedStation.children
-        .find((category: any) => category.key === value))
+    dispatch(setSelectedCategory(selectedStation.categories
+        .find((category: any) => category.id === value))
     )
   const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
   const handleQualityChange = (quality: any) => dispatch(setOptions({ ...options, quality }))
@@ -73,10 +73,10 @@ const DownloadSider = () => {
   }
 
   const handleUpdateClick = (value: any) => {
-    const selectedVariables = selectedCategory.children
-      .map((tablevariable:any) => tablevariable.key)
+    const selectedVariables = selectedCategory.variables
+      .map((variable:any) => variable.tablevariable)
 
-    dispatch(setSelectedVariables(selectedCategory.children))
+    dispatch(setSelectedVariables(selectedCategory.variables))
     dispatch(fetchVariableMetadata(
       selectedStation.title,
       selectedCategory.title,
