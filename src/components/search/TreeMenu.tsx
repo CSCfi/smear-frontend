@@ -136,7 +136,9 @@ const TreeMenu = () => {
           checkable={false}
           title={getStationTitle(station.name)}
         >
-          {station.categories.map((category: any) => (
+          {station.categories
+              .filter((category: any) => category.id !== 'Tree2')
+              .map((category: any) => (
             <Tree.TreeNode
               key={category.id}
               checkable={false}
