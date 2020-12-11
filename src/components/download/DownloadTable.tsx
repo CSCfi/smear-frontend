@@ -52,7 +52,7 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
     const { data } = availability
     if(data.length != 0) {
       return variableKey in data[0]
-        ? (data[0][variableKey] / 100.0).toFixed(1)
+        ? variableKey === 'HYY_TREE.cuv_no' ? 100.0 : (data[0][variableKey] / 100.0).toFixed(1)
         : '-'
     } else {
       return '-'
