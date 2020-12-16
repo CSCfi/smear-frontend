@@ -18,7 +18,7 @@ const QualitySelect: React.FC<QualitySelectProps> = ({
 }) => {
   return (
     <>
-    <div><b>Quality Level:</b></div>
+    <div><b>Processing Level:</b></div>
     <Select
       style={inputStyle}
       value={selectedQuality}
