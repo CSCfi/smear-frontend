@@ -312,6 +312,10 @@ export const STATION_NAMES_TO_TITLES = [
     title: 'SMEAR III Helsinki Erottaja Fire Station'
   },
   {
+    name: 'Haltiala',
+    title: 'SMEAR Agri Helsinki Haltiala'
+  },
+  {
     name: 'Hyytiälä',
     title: 'SMEAR II Hyytiälä forest'
   },
@@ -333,11 +337,11 @@ export const STATION_NAMES_TO_TITLES = [
   },
   {
     name: 'Siikaneva 1',
-    title: 'SMEAR II Siikaneva 1 peatland'
+    title: 'SMEAR II Siikaneva 1 wetland'
   },
   {
     name: 'Siikaneva 2',
-    title: 'SMEAR II Siikaneva 2 peatland'
+    title: 'SMEAR II Siikaneva 2 wetland'
   },
   {
     name: 'Torni',
@@ -345,7 +349,7 @@ export const STATION_NAMES_TO_TITLES = [
   },
   {
     name: 'Viikki',
-    title: 'SMEAR III Viikki cropland'
+    title: 'SMEAR Agri Helsinki Viikki'
   },
   {
     name: 'Värriö',
