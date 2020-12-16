@@ -8,7 +8,9 @@ import timeSeriesSlice, { timeSeriesSelector } from '../../store/timeseries'
 
 import FrontPageCharts from './FrontPageCharts'
 import FrontPageForm from './FrontPageForm'
-import FrontPageSider from './FrontPageSider'
+import About from './About'
+import Instructions from './Instructions'
+import Acknowledgements from './Acknowledgements'
 
 import { FRONT_PAGE_CHARTS } from '../../constants'
 import { DownloadOptions } from '../../types'
@@ -54,14 +56,18 @@ const FrontPage = () => {
   return (
     <Layout>
       <Content>
-        <FrontPageForm
-          options={options}
-          setOptions={setOptions}
-          handlePlot={handlePlotClick}
-        />
-        <FrontPageCharts timeSeries={timeSeries} />
+        <About /><br />
+        <div>
+          <FrontPageForm
+            options={options}
+            setOptions={setOptions}
+            handlePlot={handlePlotClick}
+          />
+          <FrontPageCharts timeSeries={timeSeries} />
+        </div><br />
+        <Instructions /><br />
+        <Acknowledgements />
       </Content>
-      <FrontPageSider />
     </Layout>
   )
 }

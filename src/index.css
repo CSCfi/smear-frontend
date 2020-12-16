@@ -42,6 +42,10 @@ body {
   margin: 4px;
 }
 
+.ant-list-items {
+  float: inline-end;
+}
+
 .ant-btn {
   color: #ffffff;
   background: #03881c;
