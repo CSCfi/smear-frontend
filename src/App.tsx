@@ -28,7 +28,7 @@ function App() {
       <Router>
         <AppHeader />
         <Switch>
-          <Route path="/search">
+          <Route path="/preview">
             <SearchPage />
           </Route>
           <Route path="/download">

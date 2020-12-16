@@ -9,7 +9,7 @@ const About = () =>
       measurements at <a href='https://www.atm.helsinki.fi/SMEAR/'>SMEAR</a>
       {' '}research stations of the University of Helsinki and the University
       of Eastern Finland. Data with basic metadata can be visualized and
-      downloaded using Search and Download pages. Application programming
+      downloaded using Preview and Download pages. Application programming
       interface (API) provides access to additional variables and more complete
       metadata than the graphical user interface (UI).
     </div>

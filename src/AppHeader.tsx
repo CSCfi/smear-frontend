@@ -23,7 +23,7 @@ const AppHeader = () =>
             <Link to="/">About</Link>
           </Item>
           <Item key="2">
-            <Link to="/search">Search</Link>
+            <Link to="/preview">Preview</Link>
           </Item>
           <Item key="3">
             <Link to="/download">Download</Link>
