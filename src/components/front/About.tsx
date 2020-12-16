@@ -11,7 +11,8 @@ const About = () =>
       of Eastern Finland. Data with basic metadata can be visualized and
       downloaded using Preview and Download pages. Application programming
       interface (API) provides access to additional variables and more complete
-      metadata than the graphical user interface (UI).
+      metadata than the graphical user interface (UI). See use instruction
+      later in this page.
     </div>
   </>
 
