@@ -9,34 +9,61 @@ export const ISO_8601_DATE_TIME = 'YYYY-MM-DDTHH:mm:ss.SSS'
 export const FRONT_PAGE_CHARTS = [
   {
     name: "CO₂ flux",
-    tableVariable: "HYY_EDDY233.F_c",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_EDDY233.F_c",
+        tableVariable: "HYY_EDDYMAST.F_c_270",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_EDDY.F_c_ep",
+      },
+      {
+        caption: "Värriö",
+        color: "blue",
+        tableVariable: "VAR_EDDY.F_c",
       }
     ],
   },
   {
     name: "CO₂",
-    tableVariable: "HYY_META.CO2168",
     series: [
       {
-        caption: "Hyytiälä 16m",
+        caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.CO2168",
+        tableVariable: "HYY_EDDYMAST.av_c_270",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_EDDY.av_c_ep",
+      },
+      {
+        caption: "Värriö",
+        color: "blue",
+        tableVariable: "VAR_EDDY.av_c",
       }
     ],
   },
   {
     name: "Evapotranspiration",
-    tableVariable: "HYY_EDDY233.E",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_EDDY233.E",
+        tableVariable: "HYY_EDDYMAST.E_270",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_EDDY.E_ep",
+      },
+      {
+        caption: "Värriö",
+        color: "blue",
+        tableVariable: "VAR_EDDY.E",
       }
     ],
   },
@@ -50,12 +77,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Ozone",
-    tableVariable: "HYY_META.O3168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
         tableVariable: "HYY_META.O3168",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_META.O_3",
       },
       {
         caption: "Värriö",
@@ -66,7 +97,6 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "SO₂ 15-16m",
-    tableVariable: "HYY_META.SO2168",
     series: [
       {
         caption: "Hyytiälä",
@@ -87,12 +117,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "NO 15-16m",
-    tableVariable: "HYY_META.NO168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
         tableVariable: "HYY_META.NO168",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_META.NO",
       },
       {
         caption: "Värriö",
@@ -103,12 +137,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "NOx 15-16m",
-    tableVariable: "HYY_META.NOx168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
         tableVariable: "HYY_META.NOx168",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_META.NO_x",
       },
       {
         caption: "Värriö",
@@ -119,17 +157,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Global shortwave radiation",
-    tableVariable: "HYY_META.Glob",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.Glob",
+        tableVariable: "HYY_META.Glob67",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.glob",
+        tableVariable: "KUM_META.Tower_GLOB_32m",
       },
       {
         caption: "Värriö",
@@ -207,12 +244,11 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Relative humidity",
-    tableVariable: "HYY_META.RHIRGA168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.RHIRGA168",
+        tableVariable: "HYY_META.RH168icos",
       },
       {
         caption: "Kumpula",
@@ -222,7 +258,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.HUM_RH",
+        tableVariable: "VAR_META.RH0",
       }
     ],
   },
