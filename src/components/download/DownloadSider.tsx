@@ -16,7 +16,6 @@ import {
   QualitySelect,
   AggregationSelect,
   AveragingInput,
-  FilterInput,
   StationRadio
 } from '../forms'
 
@@ -121,7 +120,6 @@ const DownloadSider = () => {
         selectedAggregation={aggregation}
         onSelectAggregation={handleAggregationChange}
       />
-      <FilterInput />
       <Button
         style={{ width: '100%' }}
         onClick={handleUpdateClick}

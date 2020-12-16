@@ -6,6 +6,8 @@ import { availabilitySelector } from '../../store/availability'
 import { downloadSelector } from '../../store/download'
 import { variablesSelector } from '../../store/variables'
 
+import { FilterInput } from '../forms'
+
 interface DownloadTableProps {
   onDownload: (variableKey: any) => void,
   onDownloadSelected: (variableKeys: any[]) => void
@@ -107,6 +109,7 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
 
   return (
     <div>
+      <FilterInput />
       <Table
         rowSelection={rowSelection}
         columns={columns}

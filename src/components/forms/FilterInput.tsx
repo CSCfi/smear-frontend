@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Checkbox, Input } from 'antd'
+import { Checkbox, Col, Input, Row } from 'antd'
 
 import downloadSlice, { downloadSelector } from '../../store/download'
 
@@ -24,19 +24,26 @@ const FilterInput = () => {
   const handleFilterConditionsChance = (value:any[]) => dispatch(setFilterConditions(value))
 
   return (
-    <>
-    <div><b>Filter:</b></div>
-    <Input
-      style={inputStyle}
-      value={filter}
-      onChange={handleFilterChance}
-    />
-    <Group
-      options={FILTER_ATTRIBUTE_OPTIONS}
-      value={filterConditions}
-      onChange={handleFilterConditionsChance}
-    />
-    </>
+    <Row style={{ margin: '4px' }}>
+      <Col>
+        <div style={{ margin: '0 4px 0 0' }}><b>Filter:</b></div>
+      </Col>
+      <Col flex='auto'>
+        <Input
+          value={filter}
+          onChange={handleFilterChance}
+        />
+      </Col>
+      <Col>
+        <div style={{ margin: '0 0 0 4px' }}>
+          <Group
+            options={FILTER_ATTRIBUTE_OPTIONS}
+            value={filterConditions}
+            onChange={handleFilterConditionsChance}
+          />
+        </div>
+      </Col>
+    </Row>
   )
 }
 
