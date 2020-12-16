@@ -8,7 +8,7 @@ import OpenStreetMap from '../OpenStreetMap'
 
 const SearchPage: React.FC = () => {
   useEffect(() => {
-    document.title = "AVAA - Search"
+    document.title = "SmartSMEAR - Search"
   }, [])
 
   return (

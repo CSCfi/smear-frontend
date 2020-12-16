@@ -10,6 +10,10 @@ body {
   height: 100%;
 }
 
+.title-header {
+  color: #00a83b;
+}
+
 .ant-layout {
   min-height: 100%;
 }

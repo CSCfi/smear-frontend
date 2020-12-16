@@ -13,14 +13,14 @@ const AppHeader = () =>
   <Header>
     <Row>
       <Col>
-        <img className="logo" src="AVAA_300px.png" alt="Smart" /><br />
+        <img className="logo" src="AVAA_300px.png" alt="Smart" />
       </Col>
     </Row>
     <Row>
       <Col>
         <Menu mode="horizontal" inlineIndent={7}>
           <Item key="1">
-            <Link to="/">SMEAR</Link>
+            <Link to="/">About</Link>
           </Item>
           <Item key="2">
             <Link to="/search">Search</Link>

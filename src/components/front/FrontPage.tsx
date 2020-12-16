@@ -47,7 +47,7 @@ const FrontPage = () => {
   }
 
   useEffect(() => {
-    document.title = "AVAA - SMEAR"
+    document.title = "SmartSMEAR - About"
     fetchData()
   }, [])
 

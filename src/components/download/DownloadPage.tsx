@@ -13,7 +13,7 @@ const DownloadPage: React.FC = () => {
   const [selectedModalVisible, setSelectedModalVisible] = useState(false)
 
   useEffect(() => {
-    document.title = "AVAA - Download"
+    document.title = "SmartSMEAR - Download"
   }, [])
 
   const handleDownload = (variable: any) => {
