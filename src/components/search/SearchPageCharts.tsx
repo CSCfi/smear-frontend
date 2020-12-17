@@ -2,29 +2,32 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { List } from 'antd'
 
-import { tablevariablesSelector } from '../../store/search'
+import { searchSelector } from '../../store/search'
+import { variablesSelector } from '../../store/variables'
 
 import TimeSeriesChart from '../timeseries/TimeSeriesChart'
 
 const { Item } = List
 
-interface SearchPageChartsProps {
-  timeSeries: any
-}
+const SearchPageCharts = () => {
+  const { timeseries } = useSelector(searchSelector)
+  const variables = useSelector(variablesSelector)
 
-const SearchPageCharts: React.FC<SearchPageChartsProps> = ({ timeSeries }) => {
-  const tablevariables = useSelector(tablevariablesSelector)
+  const getVariableTitle = (tablevariable: any) => {
+    const variableMetadata = variables.find((v: any) => v.tableName + '.' + v.name === tablevariable)
+    return variableMetadata ? variableMetadata.title : tablevariable
+  }
 
   const renderItem = (variableName: string) => {
     const data = [{
       name: variableName,
       color: 'red',
-      data: timeSeries[variableName]
+      data: timeseries[variableName]
     }]
     return (
       <Item key={variableName}>
         <TimeSeriesChart
-          name={variableName}
+          name={getVariableTitle(variableName)}
           data={data}
         />
       </Item>
@@ -33,8 +36,7 @@ const SearchPageCharts: React.FC<SearchPageChartsProps> = ({ timeSeries }) => {
 
   return (
     <List
-      dataSource={Object.keys(timeSeries)
-        .filter(timeSerie => tablevariables.includes(timeSerie))}
+      dataSource={Object.keys(timeseries)}
       renderItem={renderItem}
     />
   )

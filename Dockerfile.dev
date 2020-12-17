@@ -1,0 +1,27 @@
+FROM node
+
+RUN apt update -y
+
+# Install application
+WORKDIR /app
+COPY package.json .
+COPY yarn.lock .
+
+RUN yarn install
+
+COPY . .
+
+# User management
+ARG DEVELOPER_UID=1001
+ARG DEVELOPER_GID=1001
+
+RUN groupadd -g $DEVELOPER_GID developer
+RUN useradd -m -s /bin/bash -u $DEVELOPER_UID -g $DEVELOPER_GID developer
+
+# Set locale
+ENV LANG C.UTF-8
+
+# Start application
+EXPOSE 3000
+
+CMD ["yarn", "start"]

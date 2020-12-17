@@ -10,6 +10,10 @@ body {
   height: 100%;
 }
 
+.title-header {
+  color: #00a83b;
+}
+
 .ant-layout {
   min-height: 100%;
 }
@@ -17,6 +21,7 @@ body {
 .ant-layout-header {
   background: white;
   margin-bottom: 2px;
+  height: 136px;
 }
 
 .ant-layout-footer {
@@ -32,9 +37,17 @@ body {
   padding: 8px;
 }
 
+.ant-modal-footer {
+  height: 60px;
+}
+
 .ant-btn, .ant-list-item {
   float: left;
   margin: 4px;
+}
+
+.ant-list-items {
+  float: inline-end;
 }
 
 .ant-btn {
@@ -43,8 +56,17 @@ body {
   border-color: #03881c;
 }
 
+.ant-tooltip-inner {
+  width: 400px;
+}
+
 .logo {
   float: left;
+}
+
+.tooltip-data {
+  vertical-align: top;
+  padding: 4px;
 }
 
 #map {

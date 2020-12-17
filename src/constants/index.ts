@@ -3,38 +3,67 @@ export const PATH_AGGREGATION = '/aggregation'
 export const PATH_QUALITY = '/quality'
 export const PATH_STRUCTURE = '/structure'
 export const PATH_TIME_SERIES = '/search/timeseries'
+export const PATH_VARIABLE = API_URL + '/search/variable'
+export const PATH_VARIABLE_CSV = '/search/variable/csv'
 export const ISO_8601_DATE_TIME = 'YYYY-MM-DDTHH:mm:ss.SSS'
 export const FRONT_PAGE_CHARTS = [
   {
     name: "CO₂ flux",
-    tableVariable: "HYY_EDDY233.F_c",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_EDDY233.F_c",
+        tableVariable: "HYY_EDDYMAST.F_c_270",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_EDDY.F_c_ep",
+      },
+      {
+        caption: "Värriö",
+        color: "blue",
+        tableVariable: "VAR_EDDY.F_c",
       }
     ],
   },
   {
     name: "CO₂",
-    tableVariable: "HYY_META.CO2168",
     series: [
       {
-        caption: "Hyytiälä 16m",
+        caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.CO2168",
+        tableVariable: "HYY_EDDYMAST.av_c_270",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_EDDY.av_c_ep",
+      },
+      {
+        caption: "Värriö",
+        color: "blue",
+        tableVariable: "VAR_EDDY.av_c",
       }
     ],
   },
   {
     name: "Evapotranspiration",
-    tableVariable: "HYY_EDDY233.E",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_EDDY233.E",
+        tableVariable: "HYY_EDDYMAST.E_270",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_EDDY.E_ep",
+      },
+      {
+        caption: "Värriö",
+        color: "blue",
+        tableVariable: "VAR_EDDY.E",
       }
     ],
   },
@@ -48,12 +77,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Ozone",
-    tableVariable: "HYY_META.O3168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
         tableVariable: "HYY_META.O3168",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_META.O_3",
       },
       {
         caption: "Värriö",
@@ -64,7 +97,6 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "SO₂ 15-16m",
-    tableVariable: "HYY_META.SO2168",
     series: [
       {
         caption: "Hyytiälä",
@@ -85,12 +117,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "NO 15-16m",
-    tableVariable: "HYY_META.NO168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
         tableVariable: "HYY_META.NO168",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_META.NO",
       },
       {
         caption: "Värriö",
@@ -101,12 +137,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "NOx 15-16m",
-    tableVariable: "HYY_META.NOx168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
         tableVariable: "HYY_META.NOx168",
+      },
+      {
+        caption: "Kumpula",
+        color: "black",
+        tableVariable: "KUM_META.NO_x",
       },
       {
         caption: "Värriö",
@@ -117,17 +157,16 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Global shortwave radiation",
-    tableVariable: "HYY_META.Glob",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.Glob",
+        tableVariable: "HYY_META.Glob67",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.glob",
+        tableVariable: "KUM_META.Tower_GLOB_32m",
       },
       {
         caption: "Värriö",
@@ -205,12 +244,11 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Relative humidity",
-    tableVariable: "HYY_META.RHIRGA168",
     series: [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.RHIRGA168",
+        tableVariable: "HYY_META.RH168icos",
       },
       {
         caption: "Kumpula",
@@ -220,7 +258,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.HUM_RH",
+        tableVariable: "VAR_META.RH0",
       }
     ],
   },
@@ -302,6 +340,56 @@ export const STATIONS = [
     text: 'Värriö; east=29.610137; north=67.755044; elevation=390"',
     coordinates: [29.610137, 67.755044],
     iconSrc: 'marker-black.png'
+  }
+]
+export const STATION_NAMES_TO_TITLES = [
+  {
+    name: 'Erottaja',
+    title: 'SMEAR III Helsinki Erottaja Fire Station'
+  },
+  {
+    name: 'Haltiala',
+    title: 'SMEAR Agri Helsinki Haltiala'
+  },
+  {
+    name: 'Hyytiälä',
+    title: 'SMEAR II Hyytiälä forest'
+  },
+  {
+    name: 'Kuivajärvi',
+    title: 'SMEAR II Lake Kuivajärvi'
+  },
+  {
+    name: 'Kumpula',
+    title: 'SMEAR III Helsinki Kumpula'
+  },
+  {
+    name: 'Nuorttiaapa',
+    title: 'SMEAR I Nuorttiaapa wetland'
+  },
+  {
+    name: 'Puijo',
+    title: 'SMEAR IV Puijo tower'
+  },
+  {
+    name: 'Siikaneva 1',
+    title: 'SMEAR II Siikaneva 1 wetland'
+  },
+  {
+    name: 'Siikaneva 2',
+    title: 'SMEAR II Siikaneva 2 wetland'
+  },
+  {
+    name: 'Torni',
+    title: 'SMEAR III Helsinki Hotel Torni'
+  },
+  {
+    name: 'Viikki',
+    title: 'SMEAR Agri Helsinki Viikki'
+  },
+  {
+    name: 'Värriö',
+    title: 'SMEAR I Värriö forest'
   }
 ]
 

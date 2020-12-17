@@ -1,42 +1,49 @@
 import React from 'react'
-import { Checkbox, Input } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { Checkbox, Col, Input, Row } from 'antd'
+
+import downloadSlice, { downloadSelector } from '../../store/download'
 
 import { inputStyle } from './styles'
 
 const { Group } = Checkbox
 
-interface FilterInputProps {
-  selectedFilter: string,
-  onChangeFilter: (value: any) => void,
-  selectedFilterConditions: any[],
-  onChangeFilterConditions: (value: any) => void
-}
+const { setFilter, setFilterConditions } = downloadSlice.actions
 
-const FilterInput: React.FC<FilterInputProps> = ({
-  selectedFilter,
-  onChangeFilter,
-  selectedFilterConditions,
-  onChangeFilterConditions
-}) => {
-  const options = [
-    { label: "Variable", value: "Variable" },
-    { label: "Description", value: "Description" },
-    { label: "Source", value: "Source" }
-  ]
+const FILTER_ATTRIBUTE_OPTIONS = [
+  { label: "Variable", value: "Variable" },
+  { label: "Description", value: "Description" },
+  { label: "Source", value: "Source" }
+]
+
+const FilterInput = () => {
+  const dispatch = useDispatch()
+  const { filter, filterConditions } = useSelector(downloadSelector)
+
+  const handleFilterChance = (event:any) => dispatch(setFilter(event.target.value))
+  const handleFilterConditionsChance = (value:any[]) => dispatch(setFilterConditions(value))
+
   return (
-    <>
-    <div><b>Filter:</b></div>
-    <Input
-      style={inputStyle}
-      value={selectedFilter}
-      onChange={onChangeFilter}
-    />
-    <Group
-      options={options}
-      value={selectedFilterConditions}
-      onChange={onChangeFilterConditions}
-    />
-    </>
+    <Row style={{ margin: '4px' }}>
+      <Col>
+        <div style={{ margin: '0 4px 0 0' }}><b>Filter:</b></div>
+      </Col>
+      <Col flex='auto'>
+        <Input
+          value={filter}
+          onChange={handleFilterChance}
+        />
+      </Col>
+      <Col>
+        <div style={{ margin: '0 0 0 4px' }}>
+          <Group
+            options={FILTER_ATTRIBUTE_OPTIONS}
+            value={filterConditions}
+            onChange={handleFilterConditionsChance}
+          />
+        </div>
+      </Col>
+    </Row>
   )
 }
 

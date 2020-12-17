@@ -24,7 +24,7 @@ const AggregationSelect: React.FC<AggregationSelectProps> = ({
       value={selectedAggregation}
       onChange={onSelectAggregation}
     >
-      {aggregations.map((aggregation: any) =>
+      {aggregations.filter((aggregation: any) => aggregation.id !== 'AVAILABILITY').map((aggregation: any) =>
       <Option key={aggregation.id} value={aggregation.id}>{aggregation.id}</Option>)}
     </Select>
     </>

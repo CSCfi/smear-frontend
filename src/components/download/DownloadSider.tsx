@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Layout } from 'antd'
 import { Moment } from 'moment'
 
-import { DownloadOptions } from '../../types'
+import { fetchAvailability } from '../../service/timeseries'
+import { fetchVariableMetadata } from '../../service/variable'
+import availabilitySlice from '../../store/availability'
+import downloadSlice, { downloadSelector } from '../../store/download'
+import { aggregationsSelector, qualitiesSelector } from '../../store/options'
+import { dataStructureSelector } from '../../store/treedata'
 
 import {
   CategorySelect,
@@ -10,58 +16,84 @@ import {
   QualitySelect,
   AggregationSelect,
   AveragingInput,
-  FilterInput,
-  StationRadio 
+  StationRadio
 } from '../forms'
 
-interface DownloadSiderProps {
-  aggregations: any[],
-  qualities: any[],
-  stations: any[],
-  options: DownloadOptions,
-  setOptions: (newOptions: DownloadOptions) => void,
-  onUpdateClick: (variables: any) => void
-}
+const {
+  setSelectedStation,
+  setSelectedCategory,
+  setSelectedVariables,
+  setOptions
+} = downloadSlice.actions
 
-const DownloadSider: React.FC<DownloadSiderProps> = ({
-  aggregations,
-  qualities,
-  stations,
-  options,
-  setOptions,
-  onUpdateClick
-}) => {
-  const [selectedStation, setSelectedStation] = useState<any>()
-  const [selectedCategory, setSelectedCategory] = useState<any>()
-  const [selectedFilter, setSelectedFilter] = useState<any>()
-  const [selectedFilterConditions, setSelectedFilterConditions] = useState<any[]>([])
+const { setFetching, setAvailaibility } = availabilitySlice.actions
+
+const DownloadSider = () => {
+  const dispatch = useDispatch()
+  const aggregations = useSelector(aggregationsSelector)
+  const qualities = useSelector(qualitiesSelector)
+  const treeData = useSelector(dataStructureSelector)
+  const {
+    selectedStation,
+    selectedCategory,
+    options
+  } = useSelector(downloadSelector)
 
   const { from, to, quality, aggregation, averaging } = options
 
   const handleSelectStation = (event: any) => {
     const station = event.target.value
-    setSelectedStation(station)
-    setSelectedCategory(station.children[0])
+    dispatch(setSelectedStation(station))
+    dispatch(setSelectedCategory(station.categories[0]))
   }
   const handleSelectCategory = (value: any) =>
-    setSelectedCategory(selectedStation.children
-                        .find((category: any) => category.key === value))
-  const handleDateRangeChange = ([from, to]: Moment[]) => {
-    setOptions({ ...options, from, to })
+    dispatch(setSelectedCategory(selectedStation.categories
+        .find((category: any) => category.id === value))
+    )
+  const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
+  const handleQualityChange = (quality: any) => dispatch(setOptions({ ...options, quality }))
+  const handleAggregationChange = (aggregation: string) => {
+    if (aggregation === 'NONE') {
+      dispatch(setOptions({ ...options, aggregation, averaging: 1 }))
+    } else if (averaging === 1) {
+      dispatch(setOptions({ ...options, aggregation, averaging: 60 }))
+    } else {
+      dispatch(setOptions({ ...options, aggregation }))
+    }
   }
-  const handleQualityChange = (quality: any) => setOptions({ ...options, quality })
-  const handleAveragingChange = (averaging: any) => setOptions({ ...options, averaging })
-  const handleAggregationChange = (aggregation: any) => setOptions({ ...options, aggregation })
+  const handleAveragingChange = (averaging: any) => {
+    if (averaging === 1) {
+      dispatch(setOptions({ ...options, aggregation: 'NONE', averaging }))
+    } else if (aggregation === 'NONE') {
+      dispatch(setOptions({ ...options, aggregation: 'ARITHMETIC', averaging }))
+    } else {
+      dispatch(setOptions({ ...options, averaging }))
+    }
+  }
 
-  const handleFilterChange = (event: any) => setSelectedFilter(event.target.value)
-  const handleFilterConditionChange = (value: any) => setSelectedFilterConditions(value)
+  const handleUpdateClick = (value: any) => {
+    const selectedVariables = selectedCategory.variables
+      .map((variable:any) => variable.tablevariable)
 
-  const handleUpdateClick = (value: any) => onUpdateClick(selectedCategory.children)
+    dispatch(setSelectedVariables(selectedCategory.variables))
+    dispatch(fetchVariableMetadata(
+      selectedStation.title,
+      selectedCategory.title,
+      selectedVariables
+    ))
+
+    dispatch(fetchAvailability(
+      selectedVariables,
+      options,
+      setAvailaibility,
+      setFetching
+    ))
+  }
 
   return (
     <Layout.Sider breakpoint='md' collapsedWidth={0} width={340}>
       <StationRadio
-        stations={stations}
+        stations={treeData}
         selectedStation={selectedStation}
         onSelectStation={handleSelectStation}
       />
@@ -87,12 +119,6 @@ const DownloadSider: React.FC<DownloadSiderProps> = ({
         aggregations={aggregations}
         selectedAggregation={aggregation}
         onSelectAggregation={handleAggregationChange}
-      />
-      <FilterInput
-        selectedFilter={selectedFilter}
-        onChangeFilter={handleFilterChange}
-        selectedFilterConditions={selectedFilterConditions}
-        onChangeFilterConditions={handleFilterConditionChange}
       />
       <Button
         style={{ width: '100%' }}
