@@ -262,6 +262,7 @@ export const FRONT_PAGE_CHARTS = [
       }
     ],
   },
+  /*
   {
     name: "Soil temperature",
     tableVariable: "HYY_META.tsoil_A",
@@ -278,6 +279,7 @@ export const FRONT_PAGE_CHARTS = [
       }
     ],
   },
+ */
 ]
 
 export const STATIONS = [
