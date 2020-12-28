@@ -24,7 +24,7 @@ const FrontPage = () => {
   const timeSeries = useSelector(timeSeriesSelector)
 
   const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(1, "day").startOf('day'),
+    from: moment().subtract(2, "day").startOf('day'),
     to: moment().endOf('day'),
     quality: 'ANY',
     aggregation: 'NONE',
