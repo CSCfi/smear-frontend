@@ -8,8 +8,6 @@ import { DownloadOptions } from '../../types'
 
 import { DateRangePicker } from '../forms'
 
-import { formStyle } from '../forms/styles'
-
 const { Item } = Form
 
 interface FrontPageFormProps {
@@ -42,7 +40,7 @@ const FrontPageForm: React.FC<FrontPageFormProps> = ({
 
   const { from, to } = options
   return (
-    <Form style={formStyle} layout="inline">
+    <Form className= 'smear-form' layout="inline">
       <Item
         name="time-interval"
       >
