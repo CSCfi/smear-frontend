@@ -38,6 +38,19 @@ const Instructions = () =>
         processing level = Any when downloading data.
       </p>
     </div>
+    <h1 id='known_issues'>Known Issues</h1>
+    <div>
+      <p>
+        The aggregation does not produce data with evenly spaced timestamps
+        when applied to intermittent measurements or data with irregular time
+        intervals, for instance, tree gas exchange.
+      </p>
+      <p>
+        Median and Circular aggregation result in data with timestamps offset
+        by one row, time is ahead of data values by one interval and the last
+        row of data is missing.
+      </p>
+    </div>
   </>
 
 export default Instructions

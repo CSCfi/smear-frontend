@@ -18,7 +18,12 @@ const SearchPage: React.FC = () => {
         <SearchForm />
         <SearchPageCharts />
       </Layout.Content>
-      <Layout.Sider breakpoint='xl' collapsedWidth={0} width={300}>
+      <Layout.Sider
+        breakpoint='xl'
+        collapsedWidth={0}
+        reverseArrow
+        width={300}
+      >
         <OpenStreetMap />
       </Layout.Sider>
     </Layout>

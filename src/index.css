@@ -10,6 +10,17 @@ body {
   height: 100%;
 }
 
+.smear-form {
+  align-items: end;
+}
+
+@media (max-width: 768px) {
+  .smear-form {
+    margin: 0 10%;
+    maxWidth: 90%;
+  }
+}
+
 .title-header {
   color: #00a83b;
 }

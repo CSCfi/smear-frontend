@@ -4,8 +4,6 @@ import { Checkbox, Col, Input, Row } from 'antd'
 
 import downloadSlice, { downloadSelector } from '../../store/download'
 
-import { inputStyle } from './styles'
-
 const { Group } = Checkbox
 
 const { setFilter, setFilterConditions } = downloadSlice.actions

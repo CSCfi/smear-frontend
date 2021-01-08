@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Layout, List } from 'antd'
+import { Layout } from 'antd'
 
 const SmearIVPage: React.FC = () => {
   useEffect(() => {

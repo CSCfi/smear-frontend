@@ -47,7 +47,7 @@ export const fetchAvailability = (
   setAvailability: any,
   setFetchingAvailability: any
 ) => {
-  const { from, to, quality, aggregation, averaging } = options
+  const { from, to, quality, averaging } = options
   const params = new URLSearchParams()
   tablevariables.forEach(tablevariable =>
       params.append('tablevariable', tablevariable)

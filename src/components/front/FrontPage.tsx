@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Layout } from 'antd'
+import { Divider, Layout } from 'antd'
 import moment from 'moment'
 
 import { fetchTimeSeries } from '../../service/timeseries'
@@ -24,7 +24,7 @@ const FrontPage = () => {
   const timeSeries = useSelector(timeSeriesSelector)
 
   const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(1, "day").startOf('day'),
+    from: moment().subtract(2, "day").startOf('day'),
     to: moment().endOf('day'),
     quality: 'ANY',
     aggregation: 'NONE',
@@ -58,12 +58,14 @@ const FrontPage = () => {
       <Content>
         <About /><br />
         <div>
+          <Divider />
           <FrontPageForm
             options={options}
             setOptions={setOptions}
             handlePlot={handlePlotClick}
           />
           <FrontPageCharts timeSeries={timeSeries} />
+          <Divider />
         </div><br />
         <Instructions /><br />
         <Acknowledgements />

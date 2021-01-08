@@ -8,8 +8,6 @@ import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import searchSlice, { searchSelector } from '../../store/search'
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
 
-import { formStyle } from '../forms/styles'
-
 const { setOptions, setTimeSeries } = searchSlice.actions
 
 const SearchForm = () => {
@@ -49,7 +47,7 @@ const SearchForm = () => {
   const onPlotClick = () =>  dispatch(fetchTimeSeries(tablevariables, options, setTimeSeries))
 
   return (
-    <Form style={formStyle} layout="inline">
+    <Form className= 'smear-form' layout="inline">
       <Form.Item
         name="time-interval"
         rules={[{required: true, message: "Select time range"}]}
