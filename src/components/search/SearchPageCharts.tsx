@@ -18,6 +18,11 @@ const SearchPageCharts = () => {
     return variableMetadata ? variableMetadata.title : tablevariable
   }
 
+  const getVariableUnit = (tablevariable: any) => {
+    const variableMetadata = variables.find((v: any) => v.tableName + '.' + v.name === tablevariable)
+    return variableMetadata && variableMetadata.unit
+  }
+
   const renderItem = (variableName: string) => {
     const data = [{
       name: variableName,
@@ -29,6 +34,7 @@ const SearchPageCharts = () => {
         <TimeSeriesChart
           name={getVariableTitle(variableName)}
           data={data}
+          unit={getVariableUnit(variableName)}
         />
       </Item>
     )
