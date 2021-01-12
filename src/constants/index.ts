@@ -242,7 +242,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.WS0",
+        tableVariable: "VAR_META.WS00",
       }
     ],
   },
