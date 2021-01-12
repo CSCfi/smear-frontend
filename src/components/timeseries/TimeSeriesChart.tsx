@@ -5,18 +5,19 @@ import HighchartsReact from 'highcharts-react-official'
 require('highcharts/modules/no-data-to-display')(Highcharts);
 require('highcharts/modules/accessibility')(Highcharts);
 
-type TimeSeriesData = {
+interface TimeSeriesData {
   name: string
   color: string
   data: Array<number[]>|number[]
 }
 
-type TimeSeriesChartProps = {
+interface TimeSeriesChartProps {
   name: string
   data: TimeSeriesData[]
+  unit?: string
 }
 
-const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
+const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) => {
   const options: Highcharts.Options = {
     title: {
       text: name,
@@ -41,8 +42,8 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
     },
     yAxis: {
       title: {
-        text: null,
-      },
+        text: unit
+      }
     },
     chart: {
       zoomType: 'xy',
