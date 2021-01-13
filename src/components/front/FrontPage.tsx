@@ -12,7 +12,7 @@ import About from './About'
 import Instructions from './Instructions'
 import Acknowledgements from './Acknowledgements'
 
-import { FRONT_PAGE_CHARTS } from '../../constants'
+import { FRONT_PAGE_CHARTS, ISO_8601_DATE_TIME } from '../../constants'
 import { DownloadOptions } from '../../types'
 
 const { Content } = Layout
@@ -24,8 +24,8 @@ const FrontPage = () => {
   const timeSeries = useSelector(timeSeriesSelector)
 
   const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(2, "day").startOf('day'),
-    to: moment().endOf('day'),
+    from: moment().subtract(2, "day").startOf('day').format(ISO_8601_DATE_TIME),
+    to: moment().endOf('day').format(ISO_8601_DATE_TIME),
     quality: 'ANY',
     aggregation: 'NONE',
     averaging: 30,

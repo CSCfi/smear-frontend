@@ -9,6 +9,7 @@ export const ISO_8601_DATE_TIME = 'YYYY-MM-DDTHH:mm:ss.SSS'
 export const FRONT_PAGE_CHARTS = [
   {
     name: "CO₂ flux",
+    unit: "µmol m⁻² s⁻¹",
     series: [
       {
         caption: "Hyytiälä",
@@ -29,6 +30,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "CO₂",
+    unit: "ppm",
     series: [
       {
         caption: "Hyytiälä",
@@ -49,6 +51,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Evapotranspiration",
+    unit: "mmol m⁻² s⁻¹",
     series: [
       {
         caption: "Hyytiälä",
@@ -77,6 +80,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Ozone",
+    unit: "ppb",
     series: [
       {
         caption: "Hyytiälä",
@@ -97,6 +101,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "SO₂ 15-16m",
+    unit: "ppb",
     series: [
       {
         caption: "Hyytiälä",
@@ -117,6 +122,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "NO 15-16m",
+    unit: "ppb",
     series: [
       {
         caption: "Hyytiälä",
@@ -137,6 +143,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "NOx 15-16m",
+    unit: "ppb",
     series: [
       {
         caption: "Hyytiälä",
@@ -157,6 +164,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Global shortwave radiation",
+    unit: "W m⁻²",
     series: [
       {
         caption: "Hyytiälä",
@@ -177,7 +185,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Temperature 15-16m",
-    tableVariable: "HYY_META.T672",
+    unit: "°C",
     series: [
       {
         caption: "Hyytiälä",
@@ -198,7 +206,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Air pressure",
-    tableVariable: "HYY_META.Pamb0",
+    unit: "hPa",
     series: [
       {
         caption: "Hyytiälä",
@@ -219,7 +227,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Windspeed 15-16m",
-    tableVariable: "HYY_META.WSU168",
+    unit: "m s⁻¹",
     series: [
       {
         caption: "Hyytiälä",
@@ -234,7 +242,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.WS0",
+        tableVariable: "VAR_META.WS00",
       }
     ],
   },
@@ -244,6 +252,7 @@ export const FRONT_PAGE_CHARTS = [
   },
   {
     name: "Relative humidity",
+    unit: "%",
     series: [
       {
         caption: "Hyytiälä",

@@ -5,7 +5,6 @@ import { Button, Input, Modal } from 'antd'
 import { downloadSelector } from '../../store/download'
 import { variablesSelector } from '../../store/variables'
 import { getDownloadLink, getVariableMetaLink } from '../../service/timeseries'
-import { ISO_8601_DATE_TIME } from '../../constants'
 
 const { TextArea } = Input
 
@@ -65,8 +64,8 @@ const DownloadModal: React.FC<DownloadModalProps> = ({
       </div>
       <div><b>Options:</b></div>
       <div>
-        From: {from.format(ISO_8601_DATE_TIME)}<br />
-        To: {to.format(ISO_8601_DATE_TIME)}<br />
+        From: {from}<br />
+        To: {to}<br />
         Averaging: {averaging}<br />
         Averaging Type: {aggregation}<br />
         Quality: {quality}

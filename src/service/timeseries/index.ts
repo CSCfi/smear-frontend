@@ -2,7 +2,6 @@ import axios from 'axios'
 import { AppDispatch } from '../../store/index'
 import searchSlice from '../../store/search'
 import { TimeSeries, DownloadOptions } from '../../types'
-import { ISO_8601_DATE_TIME } from '../../constants'
 import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../../constants'
 
 const { setFetching } = searchSlice.actions
@@ -17,8 +16,8 @@ export const fetchTimeSeries = (
   tablevariables.forEach(tablevariable =>
       params.append('tablevariable', tablevariable)
   )
-  params.append('from', from.format(ISO_8601_DATE_TIME))
-  params.append('to', to.format(ISO_8601_DATE_TIME))
+  params.append('from', from)
+  params.append('to', to)
   params.append('quality', quality)
   params.append('aggregation', aggregation)
   params.append('interval', averaging.toString())
@@ -52,8 +51,8 @@ export const fetchAvailability = (
   tablevariables.forEach(tablevariable =>
       params.append('tablevariable', tablevariable)
   )
-  params.append('from', from.format(ISO_8601_DATE_TIME))
-  params.append('to', to.format(ISO_8601_DATE_TIME))
+  params.append('from', from)
+  params.append('to', to)
   params.append('quality', quality)
   params.append('aggregation', 'AVAILABILITY')
   params.append('interval', averaging.toString())
@@ -86,8 +85,8 @@ export const getDownloadLink = (
   tablevariables.forEach(tablevariable =>
       params.append('tablevariable', tablevariable)
   )
-  params.append('from', from.format(ISO_8601_DATE_TIME))
-  params.append('to', to.format(ISO_8601_DATE_TIME))
+  params.append('from', from)
+  params.append('to', to)
   params.append('quality', quality)
   params.append('aggregation', aggregation)
   params.append('interval', averaging.toString())

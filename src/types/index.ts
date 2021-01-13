@@ -13,8 +13,8 @@ export type TimeSeries = {
 }
 
 export type DownloadOptions = {
-  from: Moment,
-  to: Moment,
+  from: string,
+  to: string,
   quality: string,
   aggregation: string,
   averaging: number,

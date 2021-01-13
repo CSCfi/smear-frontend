@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { message, Button, Form, Spin } from 'antd'
 import moment, { Moment } from 'moment'
 
+import { ISO_8601_DATE_TIME } from '../../constants'
 import { fetchTimeSeries } from '../../service/timeseries'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import searchSlice, { searchSelector } from '../../store/search'
@@ -40,7 +41,11 @@ const SearchForm = () => {
     if (to.isAfter(moment().endOf('day'))) {
       message.info('Please do not select a date interval that is in the future')
     } else {
-      dispatch(setOptions({ ...options, from, to: to.endOf('day') }))
+      dispatch(setOptions({
+        ...options,
+        from: from.format(ISO_8601_DATE_TIME),
+        to: to.endOf('day').format(ISO_8601_DATE_TIME)
+      }))
     }
   }
 
@@ -53,7 +58,7 @@ const SearchForm = () => {
         rules={[{required: true, message: "Select time range"}]}
       >
         <DateRangePicker
-          selectedDateRange={[from, to]}
+          selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
           onSelectDateRange={onDateRangeChange}
         />
       </Form.Item>

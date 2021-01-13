@@ -19,6 +19,7 @@ const FrontPageCharts: React.FC<FrontPageChartsProps> = ({ timeSeries }) => {
         {item.series !== undefined
           && <TimeSeriesChart
               name={item.name}
+              unit={item.unit}
               data={item.series.map((seriesItem: any) => {
                 return {
                   name: seriesItem.caption,
