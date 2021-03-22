@@ -52,13 +52,17 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
 
   const getAvailability = (variableKey : string) => {
     const { data } = availability
-    if(data.length > 0) {
-      return variableKey in data[0]
-        ? variableKey === 'HYY_TREE.cuv_no' ? 100.0 : (data[0][variableKey] / 100.0).toFixed(1)
-        : '-'
-    } else {
-      return '-'
-    }
+    let result = '-'
+    data.forEach(results => {
+      if (variableKey in results) {
+        if (variableKey === 'HYY_TREE.cuv_no') {
+          result = '100.0'
+        } else if (results[variableKey] !== null && results[variableKey] > 0) {
+          result = (results[variableKey] / 100.0).toFixed(1)
+        }
+      }
+    })
+    return result
   }
 
   const variableSort = (v1: any, v2: any) => {
