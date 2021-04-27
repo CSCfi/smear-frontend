@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () =>
   <>
-    <h1>About SmartSMEAR</h1>
+    <h1>Hello Openshift!!!! CX</h1>
     <div>
       SmartSMEAR is a data visualization and download tool for the database of
       continuous atmospheric, flux, soil, tree physiological and water quality
