@@ -7,7 +7,7 @@ import { API_URL } from './constants'
 const { Header } = Layout
 const { Item } = Menu
 
-const ATHMOSPHERIC_SCIENCES_HREF = "http://www.helsinki.fi/inar"
+const ATHMOSPHERIC_SCIENCES_HREF = "https://www2.helsinki.fi/en/inar-institute-for-atmospheric-and-earth-system-research"
 
 const AppHeader = () =>
   <Header>
@@ -35,9 +35,12 @@ const AppHeader = () =>
             <Link to="/terms-of-use">Terms Of Use</Link>
           </Item>
           <Item key="6">
-            <a href={ATHMOSPHERIC_SCIENCES_HREF}>INAR</a>
+            <a href="/contact">Contact</a>
           </Item>
           <Item key="7">
+            <a href={ATHMOSPHERIC_SCIENCES_HREF}>INAR</a>
+          </Item>
+          <Item key="8">
             <Link to="/smear-iv">SMEAR IV</Link>
           </Item>
         </Menu>

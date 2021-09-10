@@ -24,7 +24,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data }) => {
       },
     ],
     lang: {
-      noData: 'No data available'
+      noData: 'Loading data...'
     },
     xAxis: {
       type: 'datetime',
