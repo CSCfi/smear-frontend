@@ -16,6 +16,8 @@ import DownloadPage from './components/download/DownloadPage'
 
 import 'antd/dist/antd.css'
 
+import useScript from './hooks/useScript';
+
 Boost(Highcharts)
 
 function App() {
@@ -25,32 +27,35 @@ function App() {
   }, [dispatch])
 
   return (
-    <Layout style={{ backgroundColor: 'white' }}>
-      <Router>
-        <AppHeader />
-        <Switch>
-          <Route path="/preview">
-            <SearchPage />
-          </Route>
-          <Route path="/download">
-            <DownloadPage />
-          </Route>
-          <Route path="/terms-of-use">
-            <TermsOfUsePage />
-          </Route>
-          <Route path="/contact">
-            <ContactPage />
-          </Route>
-          <Route path="/smear-iv">
-            <SmearIVPage />
-          </Route>
-          <Route path="/">
-            <FrontPage />
-          </Route>
-        </Switch>
-        <AppFooter />
-      </Router>
-    </Layout>
+    <>
+      {useScript("https://metrics.fairdata.fi/fdwe.js")}
+      <Layout style={{ backgroundColor: 'white' }}>
+        <Router>
+          <AppHeader />
+          <Switch>
+            <Route path="/preview">
+              <SearchPage />
+            </Route>
+            <Route path="/download">
+              <DownloadPage />
+            </Route>
+            <Route path="/terms-of-use">
+              <TermsOfUsePage />
+            </Route>
+            <Route path="/contact">
+              <ContactPage />
+            </Route>
+            <Route path="/smear-iv">
+              <SmearIVPage />
+            </Route>
+            <Route path="/">
+              <FrontPage />
+            </Route>
+          </Switch>
+          <AppFooter />
+        </Router>
+      </Layout>
+    </>
   )
 }
 

@@ -1,5 +1,3 @@
-import { Moment } from 'moment'
-
 export type TreeNode = {
   key: string
   title: string

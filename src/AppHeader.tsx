@@ -20,19 +20,19 @@ const AppHeader = () =>
       <Col>
         <Menu mode="horizontal" inlineIndent={7}>
           <Item key="1">
-            <Link to="/">About</Link>
+            <a href="/">About</a>
           </Item>
           <Item key="2">
-            <Link to="/preview">Preview</Link>
+            <a href="/preview">Preview</a>
           </Item>
           <Item key="3">
-            <Link to="/download">Download</Link>
+            <a href="/download">Download</a>
           </Item>
           <Item key="4">
             <a href={`${API_URL}/swagger-ui`}>API</a>
           </Item>
           <Item key="5">
-            <Link to="/terms-of-use">Terms Of Use</Link>
+            <a href="/terms-of-use">Terms Of Use</a>
           </Item>
           <Item key="6">
             <a href="/contact">Contact</a>
@@ -41,7 +41,7 @@ const AppHeader = () =>
             <a href={ATHMOSPHERIC_SCIENCES_HREF}>INAR</a>
           </Item>
           <Item key="8">
-            <Link to="/smear-iv">SMEAR IV</Link>
+            <a href="/smear-iv">SMEAR IV</a>
           </Item>
         </Menu>
       </Col>

@@ -54,23 +54,27 @@ const FrontPage = () => {
   const handlePlotClick = () => fetchData()
 
   return (
-    <Layout>
-      <Content>
-        <About /><br />
-        <div>
-          <Divider />
-          <FrontPageForm
-            options={options}
-            setOptions={setOptions}
-            handlePlot={handlePlotClick}
-          />
-          <FrontPageCharts timeSeries={timeSeries} />
-          <Divider />
-        </div><br />
-        <Instructions /><br />
-        <Acknowledgements />
-      </Content>
-    </Layout>
+    <>
+      <meta name="fdwe-service" content="SMARTSMEAR" />
+      <meta name="fdwe-scope" content="ABOUT" />
+      <Layout>
+        <Content>
+          <About /><br />
+          <div>
+            <Divider />
+            <FrontPageForm
+              options={options}
+              setOptions={setOptions}
+              handlePlot={handlePlotClick}
+            />
+            <FrontPageCharts timeSeries={timeSeries} />
+            <Divider />
+          </div><br />
+          <Instructions /><br />
+          <Acknowledgements />
+        </Content>
+      </Layout>
+    </>
   )
 }
 

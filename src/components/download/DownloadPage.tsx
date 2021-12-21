@@ -27,25 +27,29 @@ const DownloadPage: React.FC = () => {
   }
 
   return (
-    <Layout>
-      <DownloadSider />
-      <Layout.Content>
-        <DownloadTable
-          onDownload={handleDownload}
-          onDownloadSelected={handleDownloadSelected}
+    <>
+      <meta name="fdwe-service" content="SMARTSMEAR" />
+      <meta name="fdwe-scope" content="DOWNLOAD" />
+      <Layout>
+        <DownloadSider />
+        <Layout.Content>
+          <DownloadTable
+            onDownload={handleDownload}
+            onDownloadSelected={handleDownloadSelected}
+          />
+        </Layout.Content>
+        <DownloadModal
+          visible={modalVisible}
+          setVisible={setModalVisible}
+          variable={downloadVariable}
         />
-      </Layout.Content>
-      <DownloadModal
-        visible={modalVisible}
-        setVisible={setModalVisible}
-        variable={downloadVariable}
-      />
-      <DownloadSelectedModal
-        visible={selectedModalVisible}
-        setVisible={setSelectedModalVisible}
-        variables={downloadVariables}
-      />
-    </Layout>
+        <DownloadSelectedModal
+          visible={selectedModalVisible}
+          setVisible={setSelectedModalVisible}
+          variables={downloadVariables}
+        />
+      </Layout>
+    </>
   )
 }
 

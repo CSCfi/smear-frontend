@@ -12,21 +12,25 @@ const SearchPage: React.FC = () => {
   }, [])
 
   return (
-    <Layout>
-      <SearchSider />
-      <Layout.Content>
-        <SearchForm />
-        <SearchPageCharts />
-      </Layout.Content>
-      <Layout.Sider
-        breakpoint='xl'
-        collapsedWidth={0}
-        reverseArrow
-        width={300}
-      >
-        <OpenStreetMap />
-      </Layout.Sider>
-    </Layout>
+    <>
+      <meta name="fdwe-service" content="SMARTSMEAR" />
+      <meta name="fdwe-scope" content="PREVIEW" />
+      <Layout>
+        <SearchSider />
+        <Layout.Content>
+          <SearchForm />
+          <SearchPageCharts />
+        </Layout.Content>
+        <Layout.Sider
+          breakpoint='xl'
+          collapsedWidth={0}
+          reverseArrow
+          width={300}
+        >
+          <OpenStreetMap />
+        </Layout.Sider>
+      </Layout>
+    </>
   )
 }
 
