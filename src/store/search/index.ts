@@ -5,11 +5,18 @@ import { ISO_8601_DATE_TIME } from '../../constants'
 import { DownloadOptions, TimeSeries } from '../../types'
 
 type SearchState = {
+  errorMessage: string,
   fetching: boolean,
   options: DownloadOptions,
   tablevariables: string[],
-  timeseries: TimeSeries
+  timeseries: TimeSeries,
+  warningMessage: string
 }
+
+const setErrorMessage: CaseReducer<SearchState, PayloadAction<string>> = (state, action) => ({
+  ...state,
+  errorMessage: action.payload,
+})
 
 const setFetching: CaseReducer<SearchState, PayloadAction<boolean>> = (state, action) => ({
   ...state,
@@ -31,9 +38,15 @@ const setTimeSeries: CaseReducer<SearchState, PayloadAction<TimeSeries>> = (stat
   timeseries: action.payload,
 })
 
+const setWarningMessage: CaseReducer<SearchState, PayloadAction<string>> = (state, action) => ({
+  ...state,
+  warningMessage: action.payload,
+})
+
 const searchSlice = createSlice({
   name: 'search',
   initialState: {
+    errorMessage: '',
     fetching: false,
     options: {
       from: moment().subtract(1, "day").startOf('day').format(ISO_8601_DATE_TIME),
@@ -43,13 +56,16 @@ const searchSlice = createSlice({
       averaging: 1
     },
     tablevariables: [],
-    timeseries: {}
+    timeseries: {},
+    warningMessage: ''
   } as SearchState,
   reducers: {
+    setErrorMessage,
     setFetching,
     setOptions,
     setTablevariables,
-    setTimeSeries
+    setTimeSeries,
+    setWarningMessage
   },
 })
 
