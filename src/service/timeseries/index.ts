@@ -4,7 +4,7 @@ import searchSlice from '../../store/search'
 import { TimeSeries, DownloadOptions } from '../../types'
 import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../../constants'
 
-const { setFetching } = searchSlice.actions
+const { setFetching, setErrorMessage, setWarningMessage } = searchSlice.actions
 
 export const fetchTimeSeries = (
   tablevariables: string[],
@@ -25,15 +25,19 @@ export const fetchTimeSeries = (
   return async (dispatch: AppDispatch) => {
     if (tablevariables.length > 0) {
       dispatch(setFetching(true))
-      return axios
-        .get(API_URL + PATH_TIME_SERIES + '/chart', { params })
-        .then((response) => {
-          dispatch(setFetching(false))
-          dispatch(setTimeSeries(response.data))
-        })
-        .catch((error) => {
-          throw error
-        })
+      try {
+        const response = await axios.get(API_URL + PATH_TIME_SERIES + '/chart', { params })
+        dispatch(setFetching(false))
+        dispatch(setTimeSeries(response.data))
+        if (Object.keys(response.data).length === 0) {
+          dispatch(setWarningMessage("Response data is empty"))
+          setTimeout(() => dispatch(setWarningMessage('')), 3000)
+        }
+      } catch(error) {
+        dispatch(setFetching(false))
+        dispatch(setErrorMessage(error.message))
+        setTimeout(() => dispatch(setErrorMessage('')), 3000)
+      }
     } else {
       dispatch(setTimeSeries({} as TimeSeries))
     }

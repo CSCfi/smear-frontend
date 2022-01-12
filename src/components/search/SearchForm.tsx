@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { message, Button, Form, Spin } from 'antd'
+import { message, Alert, Button, Form, Spin } from 'antd'
 import moment, { Moment } from 'moment'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
@@ -10,6 +10,26 @@ import searchSlice, { searchSelector } from '../../store/search'
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
 
 const { setOptions, setTimeSeries } = searchSlice.actions
+
+const SearchErrorAlert = () => {
+  const { errorMessage } = useSelector(searchSelector)
+
+  if (!errorMessage) {
+    return null
+  } else {
+    return <Alert type="error" message={errorMessage} showIcon />
+  }
+}
+
+const SearchWarningAlert = () => {
+  const { warningMessage } = useSelector(searchSelector)
+
+  if (!warningMessage) {
+    return null
+  } else {
+    return <Alert type="warning" message={warningMessage} showIcon />
+  }
+}
 
 const SearchForm = () => {
   const dispatch = useDispatch()
@@ -89,6 +109,8 @@ const SearchForm = () => {
           disabled={!to || !from || !tablevariables.length || fetching}>
         Plot
       </Button>
+      <SearchErrorAlert />
+      <SearchWarningAlert />
       {fetching && <Spin />}
     </Form>
   )
