@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
-const useScript = url => {
+import { METRICS_SCRIPT_URL } from '../constants'
+
+const useScript = () => {
   useEffect(() => {
     const script = document.createElement('script');
 
-    script.src = url;
+    script.src = METRICS_SCRIPT_URL;
     script.async = true;
 
     document.body.appendChild(script);
@@ -12,7 +14,7 @@ const useScript = url => {
     return () => {
       document.body.removeChild(script);
     }
-  }, [url]);
+  }, []);
 };
 
 export default useScript;

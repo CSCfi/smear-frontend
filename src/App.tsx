@@ -28,7 +28,7 @@ function App() {
 
   return (
     <>
-      {useScript("https://metrics.fairdata.fi/fdwe.js")}
+      {useScript()}
       <Layout style={{ backgroundColor: 'white' }}>
         <Router>
           <AppHeader />

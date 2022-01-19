@@ -1,4 +1,5 @@
 export const API_URL = `${process.env.REACT_APP_API_URL}`
+export const METRICS_SCRIPT_URL = `${process.env.REACT_APP_METRICS_SCRIPT_URL}`
 export const PATH_AGGREGATION = '/aggregation'
 export const PATH_QUALITY = '/quality'
 export const PATH_STRUCTURE = '/structure'
