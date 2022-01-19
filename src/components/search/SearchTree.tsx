@@ -52,7 +52,7 @@ const VariableTooltip: React.FC<VariableTooltipProps> = ({ variableData }) => {
   )
 }
 
-const TreeMenu = () => {
+const SearchTree = () => {
   const dispatch = useDispatch()
   const treeData = useSelector(dataStructureSelector)
   const variables = useSelector(variablesSelector)
@@ -120,6 +120,7 @@ const TreeMenu = () => {
 
   return (
     <Tree
+      className="SearchTree"
       checkable
       onExpand={onExpand}
       expandedKeys={expandedKeys}
@@ -168,4 +169,4 @@ const TreeMenu = () => {
   )
 }
 
-export default TreeMenu
+export default SearchTree

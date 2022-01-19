@@ -14,10 +14,6 @@ h1 {
   font-size: 1.4rem !important;
 }
 
-.Container {
-  padding: 0 20px !important;
-}
-
 #root {
   height: 100%;
 }
@@ -33,26 +29,10 @@ h1 {
   }
 }
 
-.title-header {
-  color: #00a83b;
-}
-
-.ant-layout {
-  min-height: 100%;
-}
-
 .ant-layout-header {
   background: white;
   margin-bottom: 2px;
   height: 136px;
-}
-
-.ant-layout-content, .ant-layout-sider-children, .ant-tree {
-  background: #e5f2f7;
-}
-
-.ant-layout-content {
-  padding: 8px;
 }
 
 .ant-btn, .ant-list-item {

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Instructions = () =>
-  <div className="Container">
+  <div className="AppContainer">
     <h1 id='instructions'>Instructions</h1>
     <p>
       The temporal resolution of the data is usually 1 min or 30 min. Many

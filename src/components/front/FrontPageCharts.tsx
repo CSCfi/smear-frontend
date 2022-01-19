@@ -14,10 +14,12 @@ interface FrontPageChartsProps {
 const FrontPageCharts: React.FC<FrontPageChartsProps> = ({ timeSeries }) => {
   const charts = FRONT_PAGE_CHARTS
   return (
-    <List dataSource={charts.filter(chart => chart.series !== undefined)} renderItem={(item: any) => (
-      <Item>
-        {item.series !== undefined
-          && <TimeSeriesChart
+    <List
+      dataSource={charts.filter(chart => chart.series !== undefined)}
+      renderItem={(item: any) => (
+        <Item>
+          {item.series !== undefined
+            && <TimeSeriesChart
               name={item.name}
               unit={item.unit}
               data={item.series.map((seriesItem: any) => {
@@ -27,10 +29,10 @@ const FrontPageCharts: React.FC<FrontPageChartsProps> = ({ timeSeries }) => {
                   data: timeSeries[seriesItem.tableVariable] || []
                 }
               })}
-             />}
-      </Item>
-    )}>
-    </List>
+            />}
+        </Item>
+      )}
+    />
   )
 }
 

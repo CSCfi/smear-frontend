@@ -30,27 +30,25 @@ const DownloadPage: React.FC = () => {
   }
 
   return (
-    <>
-      <Layout>
-        <DownloadSider />
-        <Layout.Content>
-          <DownloadTable
-            onDownload={handleDownload}
-            onDownloadSelected={handleDownloadSelected}
-          />
-        </Layout.Content>
-        <DownloadModal
-          visible={modalVisible}
-          setVisible={setModalVisible}
-          variable={downloadVariable}
+    <Layout className="AppPage">
+      <DownloadSider />
+      <Layout.Content>
+        <DownloadTable
+          onDownload={handleDownload}
+          onDownloadSelected={handleDownloadSelected}
         />
-        <DownloadSelectedModal
-          visible={selectedModalVisible}
-          setVisible={setSelectedModalVisible}
-          variables={downloadVariables}
-        />
-      </Layout>
-    </>
+      </Layout.Content>
+      <DownloadModal
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        variable={downloadVariable}
+      />
+      <DownloadSelectedModal
+        visible={selectedModalVisible}
+        setVisible={setSelectedModalVisible}
+        variables={downloadVariables}
+      />
+    </Layout>
   )
 }
 

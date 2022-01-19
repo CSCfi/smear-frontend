@@ -96,7 +96,7 @@ const DownloadSider = () => {
   }
 
   return (
-    <Layout.Sider breakpoint='md' collapsedWidth={0} width={340}>
+    <Layout.Sider className="AppSider" breakpoint='md' collapsedWidth={0} width={340}>
       <StationRadio
         stations={treeData}
         selectedStation={selectedStation}

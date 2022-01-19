@@ -18,7 +18,6 @@ import { DownloadOptions } from '../../types'
 
 const { Content } = Layout
 
-
 const { setTimeSeries } = timeSeriesSlice.actions
 
 const FrontPage = () => {
@@ -57,25 +56,23 @@ const FrontPage = () => {
   const handlePlotClick = () => fetchData()
 
   return (
-    <>
-      <Layout>
-        <Content>
-          <About /><br />
-          <div>
-            <Divider />
-            <FrontPageForm
-              options={options}
-              setOptions={setOptions}
-              handlePlot={handlePlotClick}
-            />
-            <FrontPageCharts timeSeries={timeSeries} />
-            <Divider />
-          </div><br />
-          <Instructions /><br />
-          <Acknowledgements />
-        </Content>
-      </Layout>
-    </>
+    <Layout className="AppPage">
+      <Content>
+        <About />
+        <div className="AppContainer">
+          <Divider />
+          <FrontPageForm
+            options={options}
+            setOptions={setOptions}
+            handlePlot={handlePlotClick}
+          />
+          <FrontPageCharts timeSeries={timeSeries} />
+          <Divider />
+        </div><br />
+        <Instructions /><br />
+        <Acknowledgements />
+      </Content>
+    </Layout>
   )
 }
 

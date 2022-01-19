@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Acknowledgements = () =>
-  <div className="Container">
+  <div className="AppContainer">
     <h1>Acknowledgements</h1>
     <p>
       The web interface was developed as the successor of the original

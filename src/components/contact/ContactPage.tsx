@@ -10,9 +10,8 @@ const ContactPage: React.FC = () => {
   }, [])
 
   return (
-    <>
-      <Layout>
-        <Layout.Content>
+      <Layout className="AppPage">
+        <Layout.Content className="AppContainer">
         <h1>Site support</h1>
           <p>
 
@@ -33,7 +32,6 @@ const ContactPage: React.FC = () => {
           </p>
         </Layout.Content>
       </Layout>
-    </>
   )
 }
 

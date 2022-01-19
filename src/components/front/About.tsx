@@ -1,7 +1,7 @@
 import React from 'react'
 
 const About = () =>
-  <div className="Container">
+  <div className="AppContainer">
     <h1>About SmartSMEAR</h1>
     <p>
       SmartSMEAR is a data visualization and download tool for the database of
