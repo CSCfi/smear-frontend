@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Divider, Layout } from 'antd'
 import moment from 'moment'
 
+import { recordMetricsEvent } from '../../service/metrics'
 import { fetchTimeSeries } from '../../service/timeseries'
 import timeSeriesSlice, { timeSeriesSelector } from '../../store/timeseries'
 
@@ -16,6 +17,7 @@ import { FRONT_PAGE_CHARTS, ISO_8601_DATE_TIME } from '../../constants'
 import { DownloadOptions } from '../../types'
 
 const { Content } = Layout
+
 
 const { setTimeSeries } = timeSeriesSlice.actions
 
@@ -48,6 +50,7 @@ const FrontPage = () => {
 
   useEffect(() => {
     document.title = "SmartSMEAR - About"
+    recordMetricsEvent("ABOUT")
     fetchData()
   }, [])
 
@@ -55,8 +58,6 @@ const FrontPage = () => {
 
   return (
     <>
-      <meta name="fdwe-service" content="SMARTSMEAR" />
-      <meta name="fdwe-scope" content="ABOUT" />
       <Layout>
         <Content>
           <About /><br />

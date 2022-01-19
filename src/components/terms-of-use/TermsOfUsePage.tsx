@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import { Layout } from 'antd'
 
+import { recordMetricsEvent } from '../../service/metrics'
+
 const TermsOfUsePage: React.FC = () => {
   useEffect(() => {
     document.title = "SmartSMEAR - Terms Of Use"
+    recordMetricsEvent("TERMS-OF-USE")
   }, [])
 
   return (
     <>
-      <meta name="fdwe-service" content="SMARTSMEAR" />
-      <meta name="fdwe-scope" content="TERMS-OF-USE" />
       <Layout>
         <Layout.Content>
           <p>

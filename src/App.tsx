@@ -16,8 +16,6 @@ import DownloadPage from './components/download/DownloadPage'
 
 import 'antd/dist/antd.css'
 
-import useScript from './hooks/useScript';
-
 Boost(Highcharts)
 
 function App() {
@@ -28,7 +26,6 @@ function App() {
 
   return (
     <>
-      {useScript()}
       <Layout style={{ backgroundColor: 'white' }}>
         <Router>
           <AppHeader />

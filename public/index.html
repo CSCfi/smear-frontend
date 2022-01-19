@@ -10,6 +10,14 @@
       content="Data visualization and download tool for the database of continuous atmospheric, flux, soil, tree physiological and water quality measurements at SMEAR research stations of the University of Helsinki and the University of Eastern Finland"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <% if (process.env.REACT_APP_METRICS_SCRIPT_URL) { %>
+    <!--
+      Fairdata metrics
+    -->
+    <meta name="fdwe-service" content="SMARTSMEAR" />
+    <meta name="fdwe-scope" />
+    <script src="%REACT_APP_METRICS_SCRIPT_URL%" ></script>
+    <% } %>
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/

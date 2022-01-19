@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import { Layout } from 'antd'
 
+import { recordMetricsEvent } from '../../service/metrics'
+
 const SmearIVPage: React.FC = () => {
   useEffect(() => {
     document.title = "SmartSMEAR - SMEAR IV"
+    recordMetricsEvent("SMEAR-IV")
   }, [])
 
   return (
     <>
-      <meta name="fdwe-service" content="SMARTSMEAR" />
-      <meta name="fdwe-scope" content="SMEAR-IV" />
       <Layout>
         <Layout.Content>
           <h1>SMEAR IV Puijo</h1>
