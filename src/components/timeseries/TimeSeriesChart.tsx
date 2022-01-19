@@ -36,7 +36,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     xAxis: {
       type: 'datetime',
       labels: {
-        format: '{value:%Y-%m-%d %H:%M:%S}',
+        format: '{value:%Y-%m-%d %H:%M}',
         padding: 10,
       },
     },
