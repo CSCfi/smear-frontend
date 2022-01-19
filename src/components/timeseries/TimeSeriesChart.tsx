@@ -48,6 +48,11 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     chart: {
       zoomType: 'xy',
       height: 360,
+      panning: {
+        enabled: true,
+        type: 'xy'
+      },
+      panKey: 'ctrl',
       width: 360
     },
     plotOptions: {
