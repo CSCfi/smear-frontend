@@ -1,0 +1,21 @@
+.AppFooter {
+  background: rgb(0, 127, 173) !important;
+  box-shadow: 0 -3px 5px #efeFEFEB;
+  color: #ffffff !important;
+}
+
+.AppFooter span {
+  display: block;
+  text-transform: uppercase;
+  margin-top: .75rem;
+}
+
+.AppFooter a {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.AppFooter p {
+  margin-top: .1rem;
+  margin-bottom: 0;
+}

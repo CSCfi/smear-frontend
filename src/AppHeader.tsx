@@ -16,8 +16,6 @@ const AppHeader = () =>
         <img className="logo" src="AVAA_300px.png" alt="Smart" />
       </Col>
     </Row>
-    <Row>
-      <Col>
         <Menu mode="horizontal" inlineIndent={7}>
           <Item key="1">
             <Link to="/">About</Link>
@@ -44,8 +42,6 @@ const AppHeader = () =>
             <Link to="/smear-iv">SMEAR IV</Link>
           </Item>
         </Menu>
-      </Col>
-    </Row>
   </Header>
 
 export default AppHeader
