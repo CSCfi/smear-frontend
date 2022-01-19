@@ -6,6 +6,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  font-size: 1rem !important;
+}
+
+h1 {
+  font-size: 1.4rem !important;
+}
+
+.Container {
+  padding: 0 20px !important;
+}
+
 #root {
   height: 100%;
 }

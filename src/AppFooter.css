@@ -19,3 +19,10 @@
   margin-top: .1rem;
   margin-bottom: 0;
 }
+
+@media (max-width: 768px) {
+  .AppFooter {
+    padding: 0 2rem 2rem 2rem !important;
+  }
+}
+

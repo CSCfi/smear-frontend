@@ -1,9 +1,9 @@
 import React from 'react'
 
 const About = () =>
-  <>
+  <div className="Container">
     <h1>About SmartSMEAR</h1>
-    <div>
+    <p>
       SmartSMEAR is a data visualization and download tool for the database of
       continuous atmospheric, flux, soil, tree physiological and water quality
       measurements at <a href='https://www.atm.helsinki.fi/SMEAR/'>SMEAR</a>
@@ -13,7 +13,7 @@ const About = () =>
       interface (API) provides access to additional variables and more complete
       metadata than the graphical user interface (UI). See use instruction
       later in this page.
-    </div>
-  </>
+    </p>
+  </div>
 
 export default About
