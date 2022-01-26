@@ -9,7 +9,7 @@ const { Sider } = Layout
 
 const SearchSider = () => {
   return (
-    <Sider className="AppSider" breakpoint='md' collapsedWidth={0} width={340}>
+    <Sider className="AppSider" breakpoint='lg' collapsedWidth={0} width={260}>
       <Tooltip placement="rightBottom" title={VARIABLES_TOOLTIP_TEXT}>
         <span><b>Variables:</b></span>
       </Tooltip>

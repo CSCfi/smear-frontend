@@ -15,6 +15,26 @@
   background: #e5f2f7;
 }
 
+.AppSider .ant-layout-sider-zero-width-trigger {
+  top: -32px;
+}
+
+.AppForm {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.ant-picker {
+  width: 100%;
+}
+
 .SearchTree {
   background: inherit;
+}
+
+.AppButton {
+  color: #ffffff;
+  background: #03881c;
+  border-color: #03881c;
+  width: 100%;
 }

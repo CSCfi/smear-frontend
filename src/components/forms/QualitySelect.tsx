@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select } from 'antd'
+import { Form, Select } from 'antd'
 
 import { inputStyle } from './styles'
 
@@ -17,17 +17,15 @@ const QualitySelect: React.FC<QualitySelectProps> = ({
   onSelectQuality
 }) => {
   return (
-    <>
-    <div><b>Processing Level:</b></div>
-    <Select
-      style={inputStyle}
-      value={selectedQuality}
-      onChange={onSelectQuality}
-    >
-      {qualities.map((quality: any) =>
-      <Option key={quality.id} value={quality.id}>{quality.id}</Option>)}
-    </Select>
-    </>
+    <Form.Item name="quality-level" label="Processing Level" initialValue={selectedQuality}>
+      <Select
+        style={inputStyle}
+        onChange={onSelectQuality}
+      >
+        {qualities.map((quality: any) =>
+        <Option key={quality.id} value={quality.id}>{quality.id}</Option>)}
+      </Select>
+    </Form.Item>
   )
 }
 

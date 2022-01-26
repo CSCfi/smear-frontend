@@ -3,7 +3,6 @@ import { Layout } from 'antd'
 
 import { recordMetricsEvent } from '../../service/metrics'
 
-import SearchForm from './SearchForm'
 import SearchSider from './SearchSider'
 import SearchPageCharts from './SearchPageCharts'
 import OpenStreetMap from '../OpenStreetMap'
@@ -18,7 +17,6 @@ const SearchPage: React.FC = () => {
     <Layout className="AppPage">
       <SearchSider />
       <Layout.Content>
-        <SearchForm />
         <SearchPageCharts />
       </Layout.Content>
       <Layout.Sider

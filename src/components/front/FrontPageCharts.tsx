@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Divider } from 'antd'
+import { Row } from 'antd'
 import moment from 'moment'
 
 import { FRONT_PAGE_CHARTS, ISO_8601_DATE_TIME } from '../../constants'
@@ -41,12 +41,13 @@ const FrontPageCharts = () => {
 
   return (
     <div className="AppContainer">
-      <FrontPageForm
-        options={options}
-        setOptions={setOptions}
-        handlePlot={fetchData}
-      />
-      <Divider />
+      <Row justify={"space-around"}>
+        <FrontPageForm
+          options={options}
+          setOptions={setOptions}
+          handlePlot={fetchData}
+        />
+      </Row>
       <TimeSeriesGrid timeSeries={timeSeries} chartData={dataSource} />
     </div>
   )

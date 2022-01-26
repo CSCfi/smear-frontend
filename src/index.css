@@ -18,32 +18,10 @@ h1 {
   height: 100%;
 }
 
-.smear-form {
-  align-items: end;
-}
-
-@media (max-width: 768px) {
-  .smear-form {
-    margin: 0 10%;
-    maxWidth: 90%;
-  }
-}
-
 .ant-layout-header {
   background: white;
   margin-bottom: 2px;
   height: 136px;
-}
-
-.ant-btn, .ant-list-item {
-  float: left;
-  margin: 4px;
-}
-
-.ant-btn {
-  color: #ffffff;
-  background: #03881c;
-  border-color: #03881c;
 }
 
 .ant-tooltip-inner {

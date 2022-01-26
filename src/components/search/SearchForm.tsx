@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { message, Alert, Button, Form, Spin } from 'antd'
+import { message, Alert, Button, Col, Form, Row, Spin } from 'antd'
 import moment, { Moment } from 'moment'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
@@ -72,46 +72,62 @@ const SearchForm = () => {
   const onPlotClick = () =>  dispatch(fetchTimeSeries(tablevariables, options, setTimeSeries))
 
   return (
-    <Form className= 'smear-form' layout="inline">
-      <Form.Item
-        name="time-interval"
-        rules={[{required: true, message: "Select time range"}]}
-      >
-        <DateRangePicker
-          selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
-          onSelectDateRange={onDateRangeChange}
-        />
-      </Form.Item>
-      <Form.Item name="quality-level">
-        <QualitySelect
-          qualities={qualities}
-          selectedQuality={quality}
-          onSelectQuality={onQualityChange}
-        />
-      </Form.Item>
-      <Form.Item name="averaging" initialValue={30}>
-        <AveragingInput
-          selectedAveraging={averaging}
-          onSelectAveraging={onIntervalChange}
-        />
-      </Form.Item>
-      <Form.Item name="averaging-type">
-        <AggregationSelect
-          aggregations={aggregations}
-          selectedAggregation={aggregation}
-          onSelectAggregation={onAggregationChange}
-        />
-      </Form.Item>
-      <Button
-          style={{ margin: '4px' }}
-          onClick={onPlotClick}
-          type="primary"
-          disabled={!to || !from || !tablevariables.length || fetching}>
-        Plot
-      </Button>
-      <SearchErrorAlert />
-      <SearchWarningAlert />
-      {fetching && <Spin />}
+    <Form
+      className='AppForm'
+      layout="vertical"
+      fields={[
+        { name: ['averaging-type'], value: aggregation },
+        { name: ['averaging'], value: averaging }
+      ]}
+    >
+      <Row>
+        <Col xs={24}>
+          <DateRangePicker
+            selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
+            onSelectDateRange={onDateRangeChange}
+          />
+        </Col>
+      </Row>
+      <Row justify={"space-between"}>
+        <Col xs={11}>
+          <QualitySelect
+            qualities={qualities}
+            selectedQuality={quality}
+            onSelectQuality={onQualityChange}
+          />
+        </Col>
+        <Col xs={11}>
+          <AveragingInput onSelectAveraging={onIntervalChange} />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={24}>
+          <AggregationSelect
+            aggregations={aggregations}
+            onSelectAggregation={onAggregationChange}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={24}>
+          <Form.Item>
+            <Button
+              style={{ width: "100%" }}
+              onClick={onPlotClick}
+              type="primary"
+              disabled={!to || !from || !tablevariables.length || fetching}>
+              Plot
+            </Button>
+          </Form.Item>
+          {fetching && <Spin />}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={24}>
+          <SearchErrorAlert />
+          <SearchWarningAlert />
+        </Col>
+      </Row>
     </Form>
   )
 }

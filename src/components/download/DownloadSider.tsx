@@ -116,15 +116,8 @@ const DownloadSider = () => {
         selectedQuality={quality}
         onSelectQuality={handleQualityChange}
       />
-      <AveragingInput
-        selectedAveraging={averaging}
-        onSelectAveraging={handleAveragingChange}
-      />
-      <AggregationSelect
-        aggregations={aggregations}
-        selectedAggregation={aggregation}
-        onSelectAggregation={handleAggregationChange}
-      />
+      <AveragingInput onSelectAveraging={handleAveragingChange} />
+      <AggregationSelect aggregations={aggregations} onSelectAggregation={handleAggregationChange} />
       <Button
         style={{ width: '100%' }}
         onClick={handleUpdateClick}
