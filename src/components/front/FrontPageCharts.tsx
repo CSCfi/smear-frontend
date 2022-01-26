@@ -1,38 +1,54 @@
-import React from 'react'
-import { List } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Divider } from 'antd'
+import moment from 'moment'
 
-import { FRONT_PAGE_CHARTS } from '../../constants'
+import { FRONT_PAGE_CHARTS, ISO_8601_DATE_TIME } from '../../constants'
+import { fetchTimeSeries } from '../../service/timeseries'
+import timeSeriesSlice, { timeSeriesSelector } from '../../store/timeseries'
+import { DownloadOptions } from '../../types'
 
-import TimeSeriesChart from '../timeseries/TimeSeriesChart'
+import FrontPageForm from './FrontPageForm'
+import TimeSeriesGrid from '../timeseries/TimeSeriesGrid'
 
-const { Item } = List
+const { setTimeSeries } = timeSeriesSlice.actions
 
-interface FrontPageChartsProps {
-  timeSeries: any
-}
+const FrontPageCharts = () => {
+  const dispatch = useDispatch()
+  const timeSeries = useSelector(timeSeriesSelector)
 
-const FrontPageCharts: React.FC<FrontPageChartsProps> = ({ timeSeries }) => {
-  const charts = FRONT_PAGE_CHARTS
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const [options, setOptions] = useState<DownloadOptions>({
+    from: moment().subtract(2, "day").startOf('day').format(ISO_8601_DATE_TIME),
+    to: moment().endOf('day').format(ISO_8601_DATE_TIME),
+    quality: 'ANY',
+    aggregation: 'NONE',
+    averaging: 30,
+  })
+
+  const dataSource = FRONT_PAGE_CHARTS.filter(chart => chart.series !== undefined)
+
+  const fetchData = () => {
+    dispatch(fetchTimeSeries(
+      dataSource.flatMap(chart => chart.series === undefined ? [] : chart.series.map(serie => serie.tableVariable)),
+      options,
+      setTimeSeries
+    ))
+  }
+
   return (
-    <List
-      dataSource={charts.filter(chart => chart.series !== undefined)}
-      renderItem={(item: any) => (
-        <Item>
-          {item.series !== undefined
-            && <TimeSeriesChart
-              name={item.name}
-              unit={item.unit}
-              data={item.series.map((seriesItem: any) => {
-                return {
-                  name: seriesItem.caption,
-                  color: seriesItem.color,
-                  data: timeSeries[seriesItem.tableVariable] || []
-                }
-              })}
-            />}
-        </Item>
-      )}
-    />
+    <div className="AppContainer">
+      <FrontPageForm
+        options={options}
+        setOptions={setOptions}
+        handlePlot={fetchData}
+      />
+      <Divider />
+      <TimeSeriesGrid timeSeries={timeSeries} chartData={dataSource} />
+    </div>
   )
 }
 
