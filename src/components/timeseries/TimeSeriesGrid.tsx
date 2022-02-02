@@ -8,7 +8,7 @@ const TimeSeriesGrid = ({ timeSeries, chartData }) => {
   return (
     <Row justify={"space-around"} gutter={[16, 16]}>
       {chartData.map(item => (
-        <Col flex="100%">
+        <Col key={item.name} flex="100%">
           <TimeSeriesChart
             name={item.name}
             unit={item.unit}

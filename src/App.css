@@ -20,12 +20,17 @@
 }
 
 .AppSider {
-  background: #e5f2f7;
+  background: inherit;
+  margin: 0 40px;
 }
 
 .AppSider .ant-layout-sider-zero-width-trigger {
-  background: rgb(0, 127, 173) !important;
+  background: rgb(0, 127, 173);
   top: -32px;
+}
+
+.ant-layout-sider-collapsed {
+  margin: 0;
 }
 
 .AppForm {

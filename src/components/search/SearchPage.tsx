@@ -21,7 +21,7 @@ const SearchPage: React.FC = () => {
       </Layout.Content>
       <Layout.Sider
         className="AppSider"
-        breakpoint='xl'
+        breakpoint='xxl'
         collapsedWidth={0}
         reverseArrow
         width={300}
