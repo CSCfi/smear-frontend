@@ -106,9 +106,8 @@ const SearchForm = () => {
         <Col xs={8}>
           <Form.Item>
             <Button
-              style={{ width: "100%" }}
+              className="AppButton"
               onClick={onPlotClick}
-              type="primary"
               disabled={!to || !from || !tablevariables.length || fetching}>
               Plot
             </Button>

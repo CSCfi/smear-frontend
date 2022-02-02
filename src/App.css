@@ -24,6 +24,7 @@
 }
 
 .AppSider .ant-layout-sider-zero-width-trigger {
+  background: rgb(0, 127, 173) !important;
   top: -32px;
 }
 
@@ -42,8 +43,8 @@
 }
 
 .AppButton {
+  background: rgb(0, 127, 173);
   color: #ffffff;
-  background: #03881c;
   border-color: #03881c;
   width: 100%;
 }
