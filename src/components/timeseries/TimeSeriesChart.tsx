@@ -24,10 +24,13 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     },
     series: data.map(seriesdata => {
       return {
+        marker: {
+          enabled: false
+        },
         name: seriesdata.name,
         type: 'line',
         color: seriesdata.color,
-        data: seriesdata.data,
+        data: seriesdata.data
       }
     }),
     lang: {
