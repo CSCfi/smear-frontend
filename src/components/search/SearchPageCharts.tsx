@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Row } from 'antd'
+import { Divider, Row } from 'antd'
 
 import { searchSelector } from '../../store/search'
 import { variablesSelector } from '../../store/variables'
@@ -37,6 +37,7 @@ const SearchPageCharts = () => {
       <Row justify={"space-around"}>
         <SearchForm />
       </Row>
+      <Divider />
       <Row justify={"space-around"}>
       </Row>
       <TimeSeriesGrid timeSeries={timeseries} chartData={chartData} />

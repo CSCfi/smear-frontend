@@ -1,8 +1,6 @@
 import React from 'react'
 import { Form, Select } from 'antd'
 
-import { inputStyle } from './styles'
-
 const { Option } = Select
 
 interface QualitySelectProps {
@@ -19,7 +17,6 @@ const QualitySelect: React.FC<QualitySelectProps> = ({
   return (
     <Form.Item name="quality-level" label="Processing Level" initialValue={selectedQuality}>
       <Select
-        style={inputStyle}
         onChange={onSelectQuality}
       >
         {qualities.map((quality: any) =>

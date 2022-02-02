@@ -80,36 +80,30 @@ const SearchForm = () => {
         { name: ['averaging'], value: averaging }
       ]}
     >
-      <Row>
-        <Col xs={24}>
+      <Row align={'bottom'} gutter={[8, 0]} justify={"space-between"}>
+        <Col xs={16}>
           <DateRangePicker
             selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
             onSelectDateRange={onDateRangeChange}
           />
         </Col>
-      </Row>
-      <Row justify={"space-between"}>
-        <Col xs={11}>
+        <Col xs={8}>
           <QualitySelect
             qualities={qualities}
             selectedQuality={quality}
             onSelectQuality={onQualityChange}
           />
         </Col>
-        <Col xs={11}>
+        <Col xs={8}>
           <AveragingInput onSelectAveraging={onIntervalChange} />
         </Col>
-      </Row>
-      <Row>
-        <Col xs={24}>
+        <Col xs={8}>
           <AggregationSelect
             aggregations={aggregations}
             onSelectAggregation={onAggregationChange}
           />
         </Col>
-      </Row>
-      <Row>
-        <Col xs={24}>
+        <Col xs={8}>
           <Form.Item>
             <Button
               style={{ width: "100%" }}
@@ -119,14 +113,12 @@ const SearchForm = () => {
               Plot
             </Button>
           </Form.Item>
-          {fetching && <Spin />}
         </Col>
       </Row>
-      <Row>
-        <Col xs={24}>
-          <SearchErrorAlert />
-          <SearchWarningAlert />
-        </Col>
+      <Row style={{ height: "28px" }} justify={"space-around"}>
+        <Spin spinning={fetching} />
+        <SearchErrorAlert />
+        <SearchWarningAlert />
       </Row>
     </Form>
   )
