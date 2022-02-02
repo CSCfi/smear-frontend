@@ -1,9 +1,17 @@
 .App {
   min-height: 100%;
+  background: inherit;
 }
 
 .AppContainer {
+  margin: auto 48px;
   padding: 0 20px !important;
+}
+
+@media (max-width: 768px) {
+  .AppContainer {
+    margin: auto 0px;
+  }
 }
 
 .AppPage {
@@ -22,6 +30,7 @@
 .AppForm {
   margin-top: 12px;
   width: 100%;
+  max-width: 512px;
 }
 
 .ant-picker {

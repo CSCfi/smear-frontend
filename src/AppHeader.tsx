@@ -4,15 +4,13 @@ import { Col, Layout, Menu, Row } from 'antd'
 
 import { API_URL } from './constants'
 
-import './AppHeader.css'
-
 const { Header } = Layout
 const { Item } = Menu
 
 const ATHMOSPHERIC_SCIENCES_HREF = "https://www2.helsinki.fi/en/inar-institute-for-atmospheric-and-earth-system-research"
 
 const AppHeader = () =>
-  <Header className="AppHeader">
+  <Header className="AppContainer">
     <Row>
       <Col>
         <img className="logo" src="AVAA_300px.png" alt="Smart" />
