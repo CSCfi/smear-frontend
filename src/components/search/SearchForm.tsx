@@ -4,6 +4,7 @@ import { message, Alert, Button, Col, Form, Row, Spin } from 'antd'
 import moment, { Moment } from 'moment'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
+import { recordMetricsEvent } from '../../service/metrics'
 import { fetchTimeSeries } from '../../service/timeseries'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import searchSlice, { searchSelector } from '../../store/search'
@@ -69,7 +70,15 @@ const SearchForm = () => {
     }
   }
 
-  const onPlotClick = () =>  dispatch(fetchTimeSeries(tablevariables, options, setTimeSeries))
+  const onPlotClick = () =>  {
+    // Read tablevariable prefix for tracking
+    let tables = tablevariables.map(tv => tv.split('.')[0])
+    // Remove duplicate tables for tracking data
+    tables = tables.filter((table, index) => tables.indexOf(table) === index)
+
+    recordMetricsEvent(`PREVIEW / ${tables.join(',')} / ${from} - ${to}`)
+    dispatch(fetchTimeSeries(tablevariables, options, setTimeSeries))
+  }
 
   return (
     <Form
