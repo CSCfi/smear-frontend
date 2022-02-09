@@ -27,7 +27,7 @@ const AppHeader = () =>
             <Link to="/download">Download</Link>
           </Item>
           <Item key="4">
-            <a href={`${API_URL}/swagger-ui`}>API</a>
+            <a href={`${API_URL}/swagger-ui`} target="blank">API</a>
           </Item>
           <Item key="5">
             <Link to="/terms-of-use">Terms Of Use</Link>
@@ -36,7 +36,7 @@ const AppHeader = () =>
             <Link to="/contact">Contact</Link>
           </Item>
           <Item key="7">
-            <a href={ATHMOSPHERIC_SCIENCES_HREF}>INAR</a>
+            <a href={ATHMOSPHERIC_SCIENCES_HREF} target="blank">INAR</a>
           </Item>
           <Item key="8">
             <Link to="/smear-iv">SMEAR IV</Link>
