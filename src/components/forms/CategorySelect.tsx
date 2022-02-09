@@ -1,7 +1,5 @@
 import React from 'react'
-import { Select } from 'antd'
-
-import { inputStyle } from './styles'
+import { Form, Select } from 'antd'
 
 const { Option } = Select
 
@@ -20,17 +18,15 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   const categories = station !== undefined ? station.categories : []
 
   return (
-    <>
-    <div><b>Select variable category</b></div>
-    <Select
-      style={inputStyle}
-      value={value}
-      onChange={onSelectCategory}
-    >
-      {categories.map((category: any) =>
-      <Option key={category.id} value={category.id}>{category.name}</Option>)}
-    </Select>
-    </>
+    <Form.Item label="Select variable category" >
+      <Select
+        value={value}
+        onChange={onSelectCategory}
+      >
+        {categories.map((category: any) =>
+        <Option key={category.id} value={category.id}>{category.name}</Option>)}
+      </Select>
+    </Form.Item>
   )
 }
 
