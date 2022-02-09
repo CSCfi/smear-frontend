@@ -112,7 +112,7 @@ const DownloadTable: React.FC<DownloadTableProps> = ({
   })
 
   return (
-    <div>
+    <div className="AppContainer">
       <FilterInput />
       <Table
         rowSelection={rowSelection}

@@ -10,7 +10,7 @@
 
 @media (max-width: 768px) {
   .AppContainer {
-    margin: auto 0px;
+    margin: 24px 0 auto;
   }
 }
 
@@ -34,9 +34,16 @@
 }
 
 .AppForm {
-  margin-top: 12px;
   width: 100%;
   max-width: 512px;
+}
+
+.AppFilterInput {
+  width: 80%;
+}
+
+.ant-form-item {
+  margin-bottom: 12px;
 }
 
 .ant-form-item-label {
