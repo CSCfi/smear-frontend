@@ -24,6 +24,10 @@
   margin: 0 40px;
 }
 
+.ant-layout-header {
+  margin-bottom: 0px !important;
+}
+
 .AppSider .ant-layout-sider-zero-width-trigger {
   background: rgb(0, 127, 173);
   top: -32px;
