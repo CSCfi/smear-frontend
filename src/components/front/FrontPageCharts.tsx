@@ -19,6 +19,7 @@ const FrontPageCharts = () => {
 
   useEffect(() => {
     fetchData()
+    // eslint-disable-next-line
   }, [])
 
   const [options, setOptions] = useState<DownloadOptions>({
