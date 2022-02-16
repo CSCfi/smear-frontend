@@ -1,8 +1,8 @@
 import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import moment from 'moment'
-import { RootState } from '../index'
-import { ISO_8601_DATE_TIME } from '../../constants'
-import { DownloadOptions, TimeSeries } from '../../types'
+import { RootState } from './index'
+import { ISO_8601_DATE_TIME } from '../constants'
+import { DownloadOptions, TimeSeries } from '../types'
 
 type SearchState = {
   errorMessage: string,

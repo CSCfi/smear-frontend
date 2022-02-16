@@ -1,5 +1,5 @@
 import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../index'
+import { RootState } from './index'
 
 type Quality = {
   id: string
