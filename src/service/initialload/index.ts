@@ -14,7 +14,7 @@ const fetch = (path: string, callback: Function, dispatch: AppDispatch) =>
       dispatch(callback(response.data))
     })
     .catch((error) => {
-      throw error
+      console.error(error)
     })
 
 export const fetchInitialData = () => {

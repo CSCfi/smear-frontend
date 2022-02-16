@@ -1,0 +1,70 @@
+.App {
+  min-height: 100%;
+  background: inherit;
+}
+
+.AppContainer {
+  margin: auto 48px;
+  padding: 0 20px !important;
+}
+
+@media (max-width: 768px) {
+  .AppContainer {
+    margin: 24px 0 auto;
+  }
+}
+
+.AppPage {
+  background: #e5f2f7;
+  padding: 40px 0;
+}
+
+.AppSider {
+  background: inherit;
+  margin: 0 40px;
+}
+
+.ant-layout-header {
+  margin-bottom: 0px !important;
+}
+
+.AppSider .ant-layout-sider-zero-width-trigger {
+  background: rgb(0, 127, 173);
+  top: -32px;
+}
+
+.ant-layout-sider-collapsed {
+  margin: 0;
+}
+
+.AppForm {
+  width: 100%;
+  max-width: 512px;
+}
+
+.AppFilterInput {
+  width: 80%;
+}
+
+.ant-form-item {
+  margin-bottom: 12px;
+}
+
+.ant-form-item-label {
+  font-weight: bold;
+}
+
+.ant-picker {
+  width: 100%;
+}
+
+.SearchTree {
+  background: inherit;
+}
+
+.AppButton {
+  background: rgb(0, 127, 173);
+  color: #ffffff;
+  border-color: #03881c;
+  width: 100%;
+}

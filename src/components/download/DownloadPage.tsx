@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Layout } from 'antd'
 
+import { recordMetricsEvent } from '../../service/metrics'
+
 import DownloadSelectedModal from './DownloadSelectedModal'
 import DownloadModal from './DownloadModal'
 import DownloadSider from './DownloadSider'
@@ -14,6 +16,7 @@ const DownloadPage: React.FC = () => {
 
   useEffect(() => {
     document.title = "SmartSMEAR - Download"
+    recordMetricsEvent("DOWNLOAD")
   }, [])
 
   const handleDownload = (variable: any) => {
@@ -27,29 +30,25 @@ const DownloadPage: React.FC = () => {
   }
 
   return (
-    <>
-      <meta name="fdwe-service" content="SMARTSMEAR" />
-      <meta name="fdwe-scope" content="DOWNLOAD" />
-      <Layout>
-        <DownloadSider />
-        <Layout.Content>
-          <DownloadTable
-            onDownload={handleDownload}
-            onDownloadSelected={handleDownloadSelected}
-          />
-        </Layout.Content>
-        <DownloadModal
-          visible={modalVisible}
-          setVisible={setModalVisible}
-          variable={downloadVariable}
+    <Layout className="AppPage">
+      <DownloadSider />
+      <Layout.Content>
+        <DownloadTable
+          onDownload={handleDownload}
+          onDownloadSelected={handleDownloadSelected}
         />
-        <DownloadSelectedModal
-          visible={selectedModalVisible}
-          setVisible={setSelectedModalVisible}
-          variables={downloadVariables}
-        />
-      </Layout>
-    </>
+      </Layout.Content>
+      <DownloadModal
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        variable={downloadVariable}
+      />
+      <DownloadSelectedModal
+        visible={selectedModalVisible}
+        setVisible={setSelectedModalVisible}
+        variables={downloadVariables}
+      />
+    </Layout>
   )
 }
 

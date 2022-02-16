@@ -24,10 +24,13 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     },
     series: data.map(seriesdata => {
       return {
+        marker: {
+          enabled: false
+        },
         name: seriesdata.name,
         type: 'line',
         color: seriesdata.color,
-        data: seriesdata.data,
+        data: seriesdata.data
       }
     }),
     lang: {
@@ -36,7 +39,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     xAxis: {
       type: 'datetime',
       labels: {
-        format: '{value:%Y-%m-%d %H:%M:%S}',
+        format: '{value:%Y-%m-%d %H:%M}',
         padding: 10,
       },
     },
@@ -47,8 +50,11 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     },
     chart: {
       zoomType: 'xy',
-      height: 360,
-      width: 360
+      panning: {
+        enabled: true,
+        type: 'xy'
+      },
+      panKey: 'ctrl'
     },
     plotOptions: {
       series: {

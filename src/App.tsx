@@ -14,9 +14,7 @@ import TermsOfUsePage from './components/terms-of-use/TermsOfUsePage'
 import ContactPage from './components/contact/ContactPage'
 import DownloadPage from './components/download/DownloadPage'
 
-import 'antd/dist/antd.css'
-
-import useScript from './hooks/useScript';
+import './App.css'
 
 Boost(Highcharts)
 
@@ -27,9 +25,7 @@ function App() {
   }, [dispatch])
 
   return (
-    <>
-      {useScript("https://metrics.fairdata.fi/fdwe.js")}
-      <Layout style={{ backgroundColor: 'white' }}>
+      <Layout className="App">
         <Router>
           <AppHeader />
           <Switch>
@@ -55,7 +51,6 @@ function App() {
           <AppFooter />
         </Router>
       </Layout>
-    </>
   )
 }
 

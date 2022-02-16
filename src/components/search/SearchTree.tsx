@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Tooltip, Tree } from 'antd'
 import 'antd/dist/antd.css'
@@ -8,7 +8,6 @@ import { fetchVariableMetadata } from '../../service/variable'
 import searchSlice from '../../store/search'
 import { dataStructureSelector } from '../../store/treedata'
 import { variablesSelector } from '../../store/variables'
-import { TreeNode } from '../../types'
 
 const { setTablevariables } = searchSlice.actions
 
@@ -52,32 +51,10 @@ const VariableTooltip: React.FC<VariableTooltipProps> = ({ variableData }) => {
   )
 }
 
-const TreeMenu = () => {
+const SearchTree = () => {
   const dispatch = useDispatch()
   const treeData = useSelector(dataStructureSelector)
   const variables = useSelector(variablesSelector)
-
-  const [expandedKeys, setExpandedKeys] = useState([])
-  const [checkedKeys, setCheckedKeys] = useState([])
-  const [selectedKeys, setSelectedKeys] = useState([])
-  const [autoExpandParent, setAutoExpandParent] = useState(true)
-
-  const onExpand = (expandedKeys: any) => {
-    setExpandedKeys(expandedKeys)
-    setAutoExpandParent(false)
-  }
-
-  const onCheck = (checkedKeys: any, info: any) => {
-    const tablevariables = info.checkedNodes
-      .filter((node: TreeNode) => node.isLeaf)
-      .map((node: TreeNode) => node.key)
-    dispatch(setTablevariables(tablevariables))
-    setCheckedKeys(checkedKeys)
-  }
-
-  const onSelect = (selectedKeys: any, info: any) => {
-    setSelectedKeys(selectedKeys)
-  }
 
   const onLoadData = (node: any) => new Promise<void>(resolve => {
     if (node.children === 0 || !node.children[0].isLeaf) {
@@ -114,58 +91,47 @@ const TreeMenu = () => {
     return stationToTitle ? stationToTitle.title : stationName
   }
 
-  const getVariableData = (variable: any) => {
-    return variables.find((v: any) => v.tableName + '.' + v.name === variable.tablevariable)
+  const getVariableData = (tablevariable: string) => {
+    return variables.find((v: any) => v.tableName + '.' + v.name === tablevariable)
+  }
+
+  const renderNodeTitle = (nodeData) => {
+    if (nodeData.isLeaf) {
+      return (
+        <Tooltip title={<VariableTooltip variableData={getVariableData(nodeData.key)} />} placement="bottomLeft">
+          <span>{nodeData.title}</span>
+        </Tooltip>
+      )
+    } else {
+      return <span>{nodeData.title}</span>
+    }
   }
 
   return (
     <Tree
+      className="SearchTree"
       checkable
-      onExpand={onExpand}
-      expandedKeys={expandedKeys}
-      autoExpandParent={autoExpandParent}
-      onCheck={onCheck}
-      checkedKeys={checkedKeys}
-      onSelect={onSelect}
-      selectedKeys={selectedKeys}
+      onCheck={(checkedKeys: any, info: any) => dispatch(setTablevariables(checkedKeys))}
       loadData={onLoadData}
-    >
-      {treeData.slice().sort(stationSort).map((station: any) => (
-        <Tree.TreeNode
-          key={station.id}
-          checkable={false}
-          title={getStationTitle(station.name)}
-        >
-          {station.categories
-              .filter((category: any) => category.id !== 'Tree2')
-              .map((category: any) => (
-            <Tree.TreeNode
-              key={category.id}
-              checkable={false}
-              title={category.name}
-            >
-              {category.variables.slice().sort(variableSort).map((variable: any) => (
-                  <Tree.TreeNode
-                    key={variable.tablevariable}
-                    checkable
-                    isLeaf
-                    title={
-                      <Tooltip
-                        title={<VariableTooltip variableData={getVariableData(variable)} />}
-                        placement="bottomLeft"
-                      >
-                        <span>{variable.title}</span>
-                      </Tooltip>
-                    }
-                  >
-                  </Tree.TreeNode>
-              ))}
-            </Tree.TreeNode>
-          ))}
-        </Tree.TreeNode>
-      ))}
-    </Tree>
+      titleRender={renderNodeTitle}
+      treeData={treeData.slice().sort(stationSort).map(station => ({
+        ...station,
+        checkable: false,
+        key: station.id,
+        title: getStationTitle(station.name),
+        children: station.categories.filter((category: any) => category.id !== 'Tree2').map(category => ({
+          checkable: false,
+          key: category.id,
+          title: category.name,
+          children: category.variables.slice().sort(variableSort).map(variable => ({
+            isLeaf: true,
+            key: variable.tablevariable,
+            title: variable.title
+          }))
+        }))
+      }))}
+    />
   )
 }
 
-export default TreeMenu
+export default SearchTree

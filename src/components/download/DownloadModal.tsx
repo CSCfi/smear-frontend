@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Button, Input, Modal } from 'antd'
 
+import { recordMetricsEvent } from '../../service/metrics'
 import { downloadSelector } from '../../store/download'
 import { variablesSelector } from '../../store/variables'
 import { getDownloadLink, getVariableMetaLink } from '../../service/timeseries'
@@ -50,7 +51,13 @@ const DownloadModal: React.FC<DownloadModalProps> = ({
         <Button key="1" onClick={(e:any) => setSelectedType('csv')}>CSV</Button>,
         <Button key="2" onClick={(e:any) => setSelectedType('tsv')}>TXT</Button>,
         <Button key="3" onClick={(e:any) => setSelectedType('meta')}>Meta</Button>,
-        <Button key="5" type="primary" href={downloadLink}>Download</Button>
+        <Button
+          key="5"
+          type="primary"
+          href={downloadLink}
+          onClick={(e:any) => recordMetricsEvent(`DOWNLOAD / ${selectedStation.name.toUpperCase()} / ${from} - ${to}`)}
+          target="blank"
+        >Download</Button>
       ]}
     >
       <div><b>Variable:</b></div>

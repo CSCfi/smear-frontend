@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Layout } from 'antd'
+import { Button, Form, Layout } from 'antd'
 import moment, { Moment } from 'moment'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
@@ -96,7 +96,15 @@ const DownloadSider = () => {
   }
 
   return (
-    <Layout.Sider breakpoint='md' collapsedWidth={0} width={340}>
+    <Layout.Sider className="AppSider" breakpoint='xl' collapsedWidth={0} width={340}>
+    <Form
+      className='AppForm'
+      layout="vertical"
+      fields={[
+        { name: ['averaging-type'], value: aggregation },
+        { name: ['averaging'], value: averaging }
+      ]}
+    >
       <StationRadio
         stations={treeData}
         selectedStation={selectedStation}
@@ -116,20 +124,14 @@ const DownloadSider = () => {
         selectedQuality={quality}
         onSelectQuality={handleQualityChange}
       />
-      <AveragingInput
-        selectedAveraging={averaging}
-        onSelectAveraging={handleAveragingChange}
-      />
-      <AggregationSelect
-        aggregations={aggregations}
-        selectedAggregation={aggregation}
-        onSelectAggregation={handleAggregationChange}
-      />
+      <AveragingInput onSelectAveraging={handleAveragingChange} />
+      <AggregationSelect aggregations={aggregations} onSelectAggregation={handleAggregationChange} />
       <Button
         style={{ width: '100%' }}
         onClick={handleUpdateClick}
         disabled={!selectedCategory}
       >Update</Button>
+    </Form>
     </Layout.Sider>
   )
 }

@@ -53,21 +53,13 @@ const FrontPageForm: React.FC<FrontPageFormProps> = ({
 
   const { from, to } = options
   return (
-    <Form className= 'smear-form' layout="inline">
-      <Item
-        name="time-interval"
-      >
-        <DateRangePicker
-          selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
-          onSelectDateRange={handleRangePickerChange}
-        />
-      </Item>
+    <Form className="AppForm" layout="vertical">
+      <DateRangePicker
+        selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
+        onSelectDateRange={handleRangePickerChange}
+      />
       <Item>
-        <Button
-            type="primary"
-            onClick={handlePlot}
-            disabled={fetching}
-        >
+        <Button className="AppButton" type="primary" onClick={handlePlot} disabled={fetching}>
           Plot
         </Button>
       </Item>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { DatePicker } from 'antd'
+import { DatePicker, Form } from 'antd'
 
 const { RangePicker } = DatePicker
 
@@ -13,16 +13,17 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   onSelectDateRange
 }) => {
   return (
-    <>
-    <div><b>Date Range</b></div>
-    <RangePicker
-      format="YYYY-MM-DD"
-      value={selectedDateRange}
-      onChange={onSelectDateRange}
-      allowClear={false}
-      style={{ margin: '4px', width: '240px' }}
-    />
-    </>
+    <Form.Item
+      label="Date Range"
+      rules={[{required: true, message: "Select time range"}]}
+    >
+      <RangePicker
+        format="YYYY-MM-DD"
+        value={selectedDateRange}
+        onChange={onSelectDateRange}
+        allowClear={false}
+      />
+    </Form.Item>
   )
 }
 

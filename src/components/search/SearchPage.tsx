@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { Layout } from 'antd'
 
-import SearchForm from './SearchForm'
+import { recordMetricsEvent } from '../../service/metrics'
+
 import SearchSider from './SearchSider'
 import SearchPageCharts from './SearchPageCharts'
 import OpenStreetMap from '../OpenStreetMap'
@@ -9,28 +10,25 @@ import OpenStreetMap from '../OpenStreetMap'
 const SearchPage: React.FC = () => {
   useEffect(() => {
     document.title = "SmartSMEAR - Preview"
+    recordMetricsEvent("PREVIEW")
   }, [])
 
   return (
-    <>
-      <meta name="fdwe-service" content="SMARTSMEAR" />
-      <meta name="fdwe-scope" content="PREVIEW" />
-      <Layout>
-        <SearchSider />
-        <Layout.Content>
-          <SearchForm />
-          <SearchPageCharts />
-        </Layout.Content>
-        <Layout.Sider
-          breakpoint='xl'
-          collapsedWidth={0}
-          reverseArrow
-          width={300}
-        >
-          <OpenStreetMap />
-        </Layout.Sider>
-      </Layout>
-    </>
+    <Layout className="AppPage">
+      <SearchSider />
+      <Layout.Content>
+        <SearchPageCharts />
+      </Layout.Content>
+      <Layout.Sider
+        className="AppSider"
+        breakpoint='xxl'
+        collapsedWidth={0}
+        reverseArrow
+        width={300}
+      >
+        <OpenStreetMap />
+      </Layout.Sider>
+    </Layout>
   )
 }
 
