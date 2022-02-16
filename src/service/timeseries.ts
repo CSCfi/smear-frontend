@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { AppDispatch } from '../../store/index'
-import searchSlice from '../../store/search'
-import { TimeSeries, DownloadOptions } from '../../types'
-import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../../constants'
+import { AppDispatch } from '../store/index'
+import searchSlice from '../store/search'
+import { TimeSeries, DownloadOptions } from '../types'
+import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../constants'
 
 const { setFetching, setErrorMessage, setWarningMessage } = searchSlice.actions
 

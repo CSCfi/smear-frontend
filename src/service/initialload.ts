@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { AppDispatch } from '../../store/index'
-import optionsSlice from '../../store/options'
-import treeDataSlice from '../../store/treedata'
-import { API_URL, PATH_AGGREGATION, PATH_QUALITY, PATH_STRUCTURE } from '../../constants'
+import { AppDispatch } from '../store/index'
+import optionsSlice from '../store/options'
+import treeDataSlice from '../store/treedata'
+import { API_URL, PATH_AGGREGATION, PATH_QUALITY, PATH_STRUCTURE } from '../constants'
 
 const { setAggregations, setQualities } = optionsSlice.actions
 const { setDataStructure } = treeDataSlice.actions
