@@ -14,7 +14,7 @@ const TermsOfUsePage: React.FC = () => {
       <Layout.Content className="AppContainer">
         <p>
           The data are licensed under{' '}
-          <a href='http://creativecommons.org/licenses/by/4.0/'>
+          <a href='http://creativecommons.org/licenses/by/4.0/' target='_blank' rel='noopener noreferrer'>
             Creative Commons 4.0 Attribution (CC BY)
           </a>{' '}
           license. For scientific purposes, data users are expected to follow the
@@ -28,18 +28,22 @@ const TermsOfUsePage: React.FC = () => {
           Citable datasets with persistent identifiers (URN, DOI) are
           periodically produced from final quality-checked data. Those data are
           accessible via the Finnish metadata catalogue{' '}
-          <a href='https://etsin.fairdata.fi/datasets/SmartSMEAR'>Etsin</a>.
+          <a href='https://etsin.fairdata.fi/datasets/SmartSMEAR' target='_blank' rel='noopener noreferrer'>Etsin</a>.
         </p>
         <p>
           All data is provided "as is" and any data is subject to update or
           revision. The responsibility of proper data interpretation is solely on
           the data user. Users are encouraged to contact the {' '}
-          <a href='https://wiki.helsinki.fi/display/SMEAR/Data+contact+persons'>
+          <a href='https://wiki.helsinki.fi/display/SMEAR/Data+contact+persons'
+             target='_blank'
+             rel='noopener noreferrer'>
             original data contributors
           </a> or <a href='mailto:atm-data@helsinki.fi'>atm-data@helsinki.fi</a>
           {' '} for questions or clarifications. More detailed information on the
           measurements is provided at{' '}
-          <a href='https://wiki.helsinki.fi/display/SMEAR/The+SMEAR+Wikispace'>
+          <a href='https://wiki.helsinki.fi/display/SMEAR/The+SMEAR+Wikispace'
+             target='_blank'
+             rel='noopener noreferrer'>
             SMEAR wikispace
           </a>.
         </p>

@@ -6,7 +6,7 @@ const About = () =>
     <p>
       SmartSMEAR is a data visualization and download tool for the database of
       continuous atmospheric, flux, soil, tree physiological and water quality
-      measurements at <a href='https://www.atm.helsinki.fi/SMEAR/'>SMEAR</a>
+      measurements at <a href='https://www.atm.helsinki.fi/SMEAR/' target='_blank' rel='noopener noreferrer'>SMEAR</a>
       {' '}research stations of the University of Helsinki and the University
       of Eastern Finland. Data with basic metadata can be visualized and
       downloaded using Preview and Download pages. Application programming

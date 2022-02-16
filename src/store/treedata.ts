@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { createSelector } from 'reselect'
-import { RootState } from '../index'
-import { TreeNode } from '../../types'
-import { STATION_NAMES_TO_TITLES } from '../../constants'
+import { RootState } from './index'
+import { TreeNode } from '../types'
+import { STATION_NAMES_TO_TITLES } from '../constants'
 
 type Variable = {
   tablevariable: string

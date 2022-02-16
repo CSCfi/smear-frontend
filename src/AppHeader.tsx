@@ -27,7 +27,7 @@ const AppHeader = () =>
             <Link to="/download">Download</Link>
           </Item>
           <Item key="4">
-            <a href={`${API_URL}/swagger-ui`} target="blank">API</a>
+            <a href={`${API_URL}/q/openapi-ui`} target="blank">API</a>
           </Item>
           <Item key="5">
             <Link to="/terms-of-use">Terms Of Use</Link>

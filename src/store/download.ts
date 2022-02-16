@@ -1,9 +1,9 @@
 import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import moment from 'moment'
-import { RootState } from '../index'
+import { RootState } from './index'
 
-import { ISO_8601_DATE_TIME } from '../../constants'
-import { DownloadOptions } from '../../types'
+import { ISO_8601_DATE_TIME } from '../constants'
+import { DownloadOptions } from '../types'
 
 type DownloadState = {
   selectedStation: any

@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { AppDispatch } from '../../store/index'
-import searchSlice from '../../store/search'
-import { TimeSeries, DownloadOptions } from '../../types'
-import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../../constants'
+import { AppDispatch } from '../store/index'
+import searchSlice from '../store/search'
+import { TimeSeries, DownloadOptions } from '../types'
+import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../constants'
 
 const { setFetching, setErrorMessage, setWarningMessage } = searchSlice.actions
 
@@ -35,7 +35,24 @@ export const fetchTimeSeries = (
         }
       } catch(error) {
         dispatch(setFetching(false))
-        dispatch(setErrorMessage(error.message))
+
+        if (error.response === undefined) {
+          console.error(error)
+          return
+        }
+
+        const { data, status } = error.response
+        if (status === 400) {
+          // API sets invalid query parameter errors to this field
+          const { parameterViolations } = data
+
+          if (parameterViolations && parameterViolations.length > 0) {
+            dispatch(setErrorMessage(parameterViolations[0].message))
+          }
+        } else {
+          dispatch(setErrorMessage(`Request failed with status code ${status}`))
+        }
+
         setTimeout(() => dispatch(setErrorMessage('')), 3000)
       }
     } else {
