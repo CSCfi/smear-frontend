@@ -42,11 +42,6 @@ const Instructions = () =>
       when applied to intermittent measurements or data with irregular time
       intervals, for instance, tree gas exchange.
     </p>
-    <p>
-      Median and Circular aggregation result in data with timestamps offset
-      by one row, time is ahead of data values by one interval and the last
-      row of data is missing.
-    </p>
   </div>
 
 export default Instructions
