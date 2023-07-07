@@ -26,7 +26,7 @@ const FrontPageCharts = () => {
     from: moment().subtract(2, "day").startOf('day').format(ISO_8601_DATE_TIME),
     to: moment().endOf('day').format(ISO_8601_DATE_TIME),
     quality: 'ANY',
-    aggregation: 'NONE',
+    aggregation: 'ARITHMETIC',
     averaging: 30,
   })
 
