@@ -1,5 +1,11 @@
 FROM node:16
 
+# Setting up the environment variables
+ARG REACT_APP_API_URL=https://smear-backend-avaa-smear-dev.rahtiapp.fi
+ARG REACT_APP_METRICS_SCRIPT_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+ENV REACT_APP_METRICS_SCRIPT_URL=$REACT_APP_METRICS_SCRIPT_URL
+
 RUN apt update -y
 
 # Install application

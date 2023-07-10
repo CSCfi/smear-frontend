@@ -18,14 +18,21 @@ The repository contains Dockerfiles for both local development and production de
 
 ### Development with Docker
 
-Run the following command to build the development docker image:
+Build the development docker image with the following command:
 ```
 docker build . -f Dockerfile.dev -t smear-frontend:dev
+```
+The default backend API address is `https://smear-backend-avaa-smear-dev.rahtiapp.fi`. If you want to use a different backend API address, you can use a build-arg.
+```
+docker build . --build-arg REACT_APP_API_URL=<foo> -f Dockerfile.dev -t smear-frontend:dev
+
+# For example to use a local backend running in localhost:8080
+docker build . --build-arg REACT_APP_API_URL=http://172.17.0.1:8080 -f Dockerfile.dev -t smear-frontend:dev
 ```
 
 After the image is successfully built, start a local development server by running the following command:
 ```
-docker run --rm -v $PWD:/app -p 3000:3000 -it smear-frontend:dev
+docker run --rm -it -v $PWD/src:/app/src --name smear-frontend -p 3000:3000 smear-frontend:dev
 ```
 
 ### Production deployment in OpenShift
