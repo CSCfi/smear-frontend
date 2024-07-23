@@ -19,11 +19,15 @@ The repository contains Dockerfiles for both local development and production de
 ### Development with Docker
 
 Build the development docker image with the following command:
-```
+
+```bash
 docker build . -f Dockerfile.dev -t smear-frontend:dev
 ```
-The default backend API address is `https://smear-backend-avaa-smear-dev.rahtiapp.fi`. If you want to use a different backend API address, you can use a build-arg.
-```
+
+* The default development backend API address is `https://smear-backend-dev.2.rahtiapp.fi`
+* If you want to use a different backend API address, you can use a build argument:
+
+```bash
 docker build . --build-arg REACT_APP_API_URL=<foo> -f Dockerfile.dev -t smear-frontend:dev
 
 # For example to use a local backend running in localhost:8080
@@ -31,22 +35,25 @@ docker build . --build-arg REACT_APP_API_URL=http://172.17.0.1:8080 -f Dockerfil
 ```
 
 After the image is successfully built, start a local development server by running the following command:
-```
+
+```bash
 docker run --rm -it -v $PWD/src:/app/src --name smear-frontend -p 3000:3000 smear-frontend:dev
 ```
 
 ### Production deployment in OpenShift
 
-Application can be deployed to OpenShift by using `oc new-app` command. Specify the wanted environment variables either
+* The application can be deployed to OpenShift by using `oc new-app` command
+* Specify the wanted environment variables either
 inline (as below) or by using an environment variable file passed to the `new-app` command.
 
-```
+```bash
 oc new-app https://github.com/cscfi/smear-frontend.git -e "REACT_APP_API_URL"="https://smear-api.example.com" --allow-missing-images
 ```
 
-After the application is created, you may want to expose the application with an edge route, by running the following
-command:
-```
+* After the application is created, expose the application with an edge route
+* Run the following command:
+
+```bash
 oc create route edge --service=smear-frontend
 ```
 
