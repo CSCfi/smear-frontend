@@ -34,14 +34,14 @@ const TermsOfUsePage: React.FC = () => {
           All data is provided "as is" and any data is subject to update or
           revision. The responsibility of proper data interpretation is solely on
           the data user. Users are encouraged to contact the {' '}
-          <a href='https://wiki.helsinki.fi/display/SMEAR/Data+contact+persons'
+          <a href='https://wiki.helsinki.fi/xwiki/bin/view/SMEAR/The%20SMEAR%20Wikispace/SMEAR%20database/Data%20contact%20persons'
              target='_blank'
              rel='noopener noreferrer'>
             original data contributors
           </a> or <a href='mailto:atm-data@helsinki.fi'>atm-data@helsinki.fi</a>
           {' '} for questions or clarifications. More detailed information on the
           measurements is provided at{' '}
-          <a href='https://wiki.helsinki.fi/display/SMEAR/The+SMEAR+Wikispace'
+          <a href='https://wiki.helsinki.fi/xwiki/bin/view/SMEAR/The%20SMEAR%20Wikispace'
              target='_blank'
              rel='noopener noreferrer'>
             SMEAR wikispace
