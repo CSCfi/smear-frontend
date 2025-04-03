@@ -4,12 +4,11 @@ This repository contains sources for SmartSMEAR front end application, implement
 
 ## Environment variables
 
-Set the following environment variables at build time in order to configure the application against different
-environments.
+Create a local copy of the `.env.template` named `.env` and set the following environment variables in `.env` file **before** building the image.
 
-| Variable                     | Required | Description                         |
-| ---------------------------- | -------- | ----------------------------------- |
-| REACT_APP_API_URL            | true     | URL used to contact the API server. |
+| Variable                     | Required | Description |
+| ---------------------------- | -------- | ----------- |
+| REACT_APP_API_URL            | true     | URL used to contact the API server. Default is `http://localhost:3000`. To use dev-backend in Rahti, use `https://smear-backend-dev.2.rahtiapp.fi` |
 | REACT_APP_METRICS_SCRIPT_URL | false    | URL pointing to fairdata metrics tracking script. When not specified, browser tracking is disabled |
 
 ## Docker
@@ -25,7 +24,7 @@ docker build . -f Dockerfile.dev -t smear-frontend:dev
 
 After the image is successfully built, start a local development server by running the following command:
 ```
-docker run --rm -v $PWD:/app -p 3000:3000 -it smear-frontend:dev
+docker run --rm --name smear-frontend -v $PWD/src:/app/src -p 3000:3000 -d -it smear-frontend:dev
 ```
 
 ### Production deployment in OpenShift
