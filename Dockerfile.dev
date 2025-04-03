@@ -19,7 +19,7 @@ RUN groupadd -g $DEVELOPER_GID developer
 RUN useradd -m -s /bin/bash -u $DEVELOPER_UID -g $DEVELOPER_GID developer
 
 # Set locale
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8
 
 # Start application
 EXPOSE 3000
