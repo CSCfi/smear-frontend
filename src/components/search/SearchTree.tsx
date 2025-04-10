@@ -10,6 +10,7 @@ import { dataStructureSelector } from '../../store/treedata'
 import { variablesSelector } from '../../store/variables'
 
 const { setTablevariables } = searchSlice.actions
+const { DirectoryTree } = Tree
 
 interface VariableTooltipProps {
   variableData: any|null
@@ -108,7 +109,7 @@ const SearchTree = () => {
   }
 
   return (
-    <Tree
+    <DirectoryTree
       className="SearchTree"
       checkable
       onCheck={(checkedKeys: any, info: any) => dispatch(setTablevariables(checkedKeys))}
