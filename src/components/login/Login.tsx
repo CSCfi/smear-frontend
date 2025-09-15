@@ -1,25 +1,38 @@
-import React from 'react'
 import { Button, Dropdown, Menu } from 'antd'
-
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
+import { SSO_URL } from '../../constants'
 import authSlice, { isLoggedInSelector, userSelector } from '../../store/auth'
 
 const Login = () => {
     const isLoggedIn = useSelector(isLoggedInSelector)
     const user = useSelector(userSelector)
     const dispatch = useDispatch()
-    const {setUser, resetUser} = authSlice.actions
+    const { resetUser } = authSlice.actions
 
-    // in demo state, in real life will go to login page and init login
+    const redirectToLogin = () => {
+        window.location.href = SSO_URL + `/login?service=SMARTSMEAR&redirect_url=${encodeURIComponent(window.location.href)}`
+    }
+
+    const redirectToLogout = () => {
+        window.location.href = SSO_URL + `/logout?service=SMARTSMEAR&redirect_url=${encodeURIComponent(window.location.href)}`
+    }
+
+    const performLogout = () => {
+        resetUser()
+        redirectToLogout()
+    }
+
     const LoginButton = () => 
-        <Button className="AppButton loginButton" data-cy="loginButton" type="primary" onClick={()=>{dispatch(setUser())}} disabled={false}>
+        <Button className="AppButton loginButton" data-cy="loginButton" type="primary" onClick={()=>redirectToLogin()} disabled={false}>
             Login
         </Button>
 
     const userActions = [
         {
             key: 1,
-            label: (<a data-cy="logoutButton" onClick={()=>{dispatch(resetUser())}}>Logout</a>),
+            label: (<a data-cy="logoutButton" onClick={()=>{dispatch(performLogout())}}>Logout</a>),
         }
     ]
 

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import * as Highcharts from 'highcharts'
 import Boost from 'highcharts/modules/boost'
 import { fetchInitialData } from './service/initialload'
+import { fetchUserDetails } from './store/auth'
 import AppFooter from './AppFooter'
 import AppHeader from './AppHeader'
 import FrontPage from './components/front/FrontPage'
@@ -22,6 +23,7 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchInitialData())
+    dispatch(fetchUserDetails())
   }, [dispatch])
 
   return (
