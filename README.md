@@ -6,12 +6,12 @@ This repository contains sources for SmartSMEAR front end application, implement
 
 Create a local copy of the `.env.template` (or `.env.sso` if you want to use Nginx and Fairdata SSO) named `.env` and set the following environment variables in `.env` file **before** building the image.
 
-| Variable                     | Required | Description |
-| ---------------------------- | -------- | ----------- |
+| Variable                     | Required | Description                                                                                                                                        |
+| ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | REACT_APP_API_URL            | true     | URL used to contact the API server. Default is `http://localhost:3000`. To use dev-backend in Rahti, use `https://smear-backend-dev.2.rahtiapp.fi` |
-| REACT_APP_METRICS_SCRIPT_URL | false    | URL pointing to fairdata metrics tracking script. When not specified, browser tracking is disabled |
-| REACT_APP_SSO_URL            | false    | URL pointing to fairdata SSO server. When not specified, login functionality doesn't work          |
-| HOST                         | false    | FQDN of the frontend server. If using Nginx and SSO this needs to be specified                     |
+| REACT_APP_METRICS_SCRIPT_URL | false    | URL pointing to fairdata metrics tracking script. When not specified, browser tracking is disabled                                                 |
+| REACT_APP_SSO_URL            | false    | URL pointing to fairdata SSO server. When not specified, login functionality doesn't work                                                          |
+| HOST                         | false    | FQDN of the frontend server. If using Nginx and SSO this needs to be specified                                                                     |
 
 ## Docker
 
