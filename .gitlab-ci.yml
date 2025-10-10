@@ -1,5 +1,5 @@
 include:
   - project: fairdata/fairdata-ci
-    ref: master
+    ref: CSCFAIRADM-4261 
     file:
       - /templates/pipelines/.smear-frontend.yaml

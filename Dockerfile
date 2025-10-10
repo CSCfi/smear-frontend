@@ -1,5 +1,5 @@
 # build environment
-FROM docker.io/library/node:12.18.0-alpine as build
+FROM docker.io/library/node:20-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY . ./
