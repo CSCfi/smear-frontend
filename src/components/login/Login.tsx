@@ -30,18 +30,16 @@ const Login = () => {
 
     // ToDo: This is very crude implementation and should be used only for demonstration purposes.
     // Should be replaced with a proper implementation.
-    const createDataset = createAsyncThunk(
-        '/api/dataset',
-        async () => {
-            try {
-                const response = await axios.post(API_URL + '/metax-client/dataset', {}, {withCredentials: true})
-                console.log(response)
-                return response.data
-            } catch (err) {
-                console.error(err)
-                return {'status_code': err.response.status, 'message': err.message}
-            }
-        })
+    const createDataset = async () => {
+        try {
+            const response = await axios.post(API_URL + '/metax-client/dataset', {}, {withCredentials: true})
+            console.log(response)
+            return response.data
+        } catch (err) {
+            console.error(err)
+            return {'status_code': err.response.status, 'message': err.message}
+        }
+    }
 
     const LoginButton = () => 
         <Button className="AppButton loginButton" data-cy="loginButton" type="primary" onClick={()=>redirectToLogin()} disabled={false}>
@@ -55,7 +53,7 @@ const Login = () => {
         },
         {
             key: 2,
-            label: (<a data-cy="createDatasetButton" onClick={()=>{dispatch(createDataset())}}>Create dataset</a>),
+            label: (<a data-cy="createDatasetButton" onClick={()=>(createDataset())}>Create dataset</a>),
         }
     ]
 
