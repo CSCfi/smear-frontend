@@ -175,7 +175,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.Tower_GLOB_32m",
+        tableVariable: "KUM_RAD.Tower_GLOB_32m",
       },
       {
         caption: "Värriö",
