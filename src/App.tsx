@@ -8,6 +8,7 @@ import { fetchInitialData } from './service/initialload'
 import { fetchUserDetails } from './store/auth'
 import AppFooter from './AppFooter'
 import AppHeader from './AppHeader'
+import { NEW_UI } from './constants'
 import FrontPage from './components/front/FrontPage'
 import SearchPage from './components/search/SearchPage'
 import SmearIVPage from './components/smear-iv/SmearIVPage'
@@ -21,10 +22,18 @@ Boost(Highcharts)
 
 function App() {
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchInitialData())
-    dispatch(fetchUserDetails())
-  }, [dispatch])
+
+  if (NEW_UI) {
+    useEffect(() => {
+      dispatch(fetchInitialData())
+      dispatch(fetchUserDetails())
+    }, [dispatch])
+  }
+  else {
+    useEffect(() => {
+      dispatch(fetchInitialData())
+    }, [dispatch])
+  }
 
   return (
       <Layout className="App">
