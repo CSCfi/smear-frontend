@@ -17,7 +17,8 @@ const StationRadio: React.FC<StationRadioProps> = ({
   onSelectStation
 }) => {
   const radioStyle = {
-    display: 'block'
+    margin: '0.20em',
+    fontSize: '14.5px'
   }
   const getStationTitle = (stationName: string) => {
     const stationToTitle = STATION_NAMES_TO_TITLES

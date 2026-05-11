@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AppDispatch } from '../store/index'
+import type { AppDispatch } from '../store/index'
 import variablesSlice from '../store/variables'
 import { PATH_VARIABLE } from '../constants'
 

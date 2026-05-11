@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { message, Button, Form } from 'antd'
-import moment, { Moment } from 'moment'
+import dayjs, { Dayjs } from 'dayjs'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
 import { fetchingSelector } from '../../store/search'
-import { DownloadOptions } from '../../types'
+import type { DownloadOptions } from '../../types'
 
 import { DateRangePicker } from '../forms'
 
@@ -24,24 +24,29 @@ const FrontPageForm: React.FC<FrontPageFormProps> = ({
 }) => {
   const fetching = useSelector(fetchingSelector)
 
-  const handleRangePickerChange = ([from, to]:Moment[]) => {
+  const handleRangePickerChange = (values: [Dayjs, Dayjs] | null) => {
+    if (!values) return;
+    const [from, to] = values;
+
     if (to.diff(from, 'days') > 15) {
       message.info('Please select a date interval no longer than 15 days')
-      if (from === moment(options.from, ISO_8601_DATE_TIME)) {
+      const currentOptionsFrom = dayjs(options.from, ISO_8601_DATE_TIME);
+
+      if (from.isSame(currentOptionsFrom, 'day')) {
         setOptions({
           ...options,
-          from: moment(to).subtract(15, 'days').format(ISO_8601_DATE_TIME),
+          from: to.subtract(15, 'days').format(ISO_8601_DATE_TIME),
           to: to.endOf('day').format(ISO_8601_DATE_TIME)
-        })
+        });
       } else {
         setOptions({
           ...options,
           from: from.format(ISO_8601_DATE_TIME),
-          to: moment(from).add(15, 'days').endOf('day').format(ISO_8601_DATE_TIME)
-        })
+          to: from.add(15, 'days').endOf('day').format(ISO_8601_DATE_TIME)
+        });
       }
-    } else if (to.isAfter(moment().endOf('day'))) {
-      message.info('Please do not select a date interval that is in the future')
+    } else if (to.isAfter(dayjs().endOf('day'))) {
+      message.info('Please do not select a date interval that is in the future');
     } else {
       setOptions({
         ...options,
@@ -55,7 +60,7 @@ const FrontPageForm: React.FC<FrontPageFormProps> = ({
   return (
     <Form className="AppForm" layout="vertical">
       <DateRangePicker
-        selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
+        selectedDateRange={[dayjs(from, ISO_8601_DATE_TIME), dayjs(to, ISO_8601_DATE_TIME)]}
         onSelectDateRange={handleRangePickerChange}
       />
       <Item>

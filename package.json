@@ -2,71 +2,45 @@
   "name": "smear-frontend",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@reduxjs/toolkit": "^1.2.5",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/ol": "^6.4.1",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^7.1.7",
-    "@types/react-router-dom": "^5.1.5",
-    "antd": "^4.18.5",
-    "axios": "^0.21.1",
-    "highcharts": "^9.0.0",
-    "highcharts-react-official": "^3.0.0",
-    "moment": "^2.26.0",
-    "ol": "^6.4.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
-    "reselect": "^4.0.0",
-    "typescript": "~3.8.2"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .ts,.tsx",
+    "prettier": "prettier --write 'src/**/*.{ts,tsx,json,css,scss,md}'"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
+    "antd": "^6.3.4",
+    "axios": "^1.15.0",
+    "dayjs": "^1.11.20",
+    "highcharts": "^11.0.0",
+    "highcharts-react-official": "^3.2.1",
+    "ol": "^10.8.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^7.13.1",
+    "reselect": "^5.1.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:8080",
   "devDependencies": {
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.6",
-    "prettier": "^2.0.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.2.0",
+    "eslint": "^10.0.3",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.2"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "src/**/*.{ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ],
-    "src/**/*.{js,jsx,ts,tsx}": [
+    "src/**/*.{ts,tsx}": [
       "eslint --max-warnings 0"
     ]
   }

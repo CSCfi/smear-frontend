@@ -1,9 +1,11 @@
 import React from 'react'
 import * as Highcharts from 'highcharts'
+import NoDataToDisplay from 'highcharts/modules/no-data-to-display'
+import Accessibility from 'highcharts/modules/accessibility'
 import HighchartsReact from 'highcharts-react-official'
 
-require('highcharts/modules/no-data-to-display')(Highcharts);
-require('highcharts/modules/accessibility')(Highcharts);
+NoDataToDisplay(Highcharts);
+Accessibility(Highcharts);
 
 interface TimeSeriesData {
   name: string
@@ -38,6 +40,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     },
     xAxis: {
       type: 'datetime',
+      tickAmount: 9,
       labels: {
         format: '{value:%Y-%m-%d %H:%M}',
         padding: 10,
@@ -49,7 +52,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
       }
     },
     chart: {
-      zoomType: 'xy',
+      zooming: {type: 'xy'},
       panning: {
         enabled: true,
         type: 'xy'
@@ -59,6 +62,7 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ name, data, unit }) =
     plotOptions: {
       series: {
         boostThreshold: 1,
+        lineWidth: 1,
       },
     },
     legend: {

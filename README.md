@@ -4,14 +4,15 @@ This repository contains sources for SmartSMEAR front end application, implement
 
 ## Environment variables
 
-Create a local copy of the `.env.template` (or `.env.sso` if you want to use Nginx and Fairdata SSO) named `.env` and set the following environment variables in `.env` file **before** building the image.
+Create a local copy of the `.env.template` (or `.env.sso` if you want to use Nginx and Fairdata SSO) named `.env` and set the following environment variables in `.env` file.
 
 | Variable                     | Required | Description                                                                                                                                        |
 | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| REACT_APP_API_URL            | true     | URL used to contact the API server. Default is `http://localhost:3000`. To use dev-backend in Rahti, use `https://smear-backend-dev.2.rahtiapp.fi` |
-| REACT_APP_METRICS_SCRIPT_URL | false    | URL pointing to fairdata metrics tracking script. When not specified, browser tracking is disabled                                                 |
-| REACT_APP_SSO_URL            | false    | URL pointing to fairdata SSO server. When not specified, login functionality doesn't work                                                          |
-| HOST                         | false    | FQDN of the frontend server. If using Nginx and SSO this needs to be specified                                                                     |
+| VITE_API_URL            | true     | URL used to contact the API server. Default is `http://localhost:3000`. To use dev-backend in Rahti, use `https://smear-backend-dev.2.rahtiapp.fi` |
+| VITE_METRICS_SCRIPT_URL | false    | URL pointing to fairdata metrics tracking script. When not specified, browser tracking is disabled |
+| VITE_SSO_URL            | false    | URL pointing to fairdata SSO server. When not specified, login functionality doesn't work          |
+| VITE_NEW_UI             | false    | Boolean indicating whether the new SmartSMEAR features (login, etc.) should be enabled in UI or not |
+| HOST                         | false    | FQDN of the frontend server. If using Nginx and SSO this needs to be specified                     |
 
 ## Docker
 
@@ -19,7 +20,7 @@ The repository contains Dockerfiles for both local development and production de
 
 ### Development with Docker
 
-Run the following command to build the development docker image:
+`Dockerfile.dev` can be used for developing SmartSMEAR frontend. To build the image run the following command:
 ```
 docker build . -f Dockerfile.dev -t smear-frontend:dev
 ```
@@ -28,6 +29,18 @@ After the image is successfully built, start a local development server by runni
 ```
 docker run --rm --name smear-frontend -v $PWD/src:/app/src -p 3000:3000 -d -it smear-frontend:dev
 ```
+
+### Production Docker image
+There's also `Dockerfile` which is used for building the production Docker image. When building the image with `Dockerfile` the environment variables are read from `.env` file. The variables are read build-time and can't be updated after building the image. Thus the environment variables need to be set **before** building the image. To build the production Docker image run the following command:
+```
+docker build . -f Dockerfile -t smear-frontend:prod
+```
+
+After the image is successfully built, start a local development server by running the following command:
+```
+docker run --rm --name smear-frontend -p 8081:8080 -d -it smear-frontend:prod
+```
+
 
 ### Production deployment in OpenShift
 

@@ -1,9 +1,9 @@
-import { createSlice, CaseReducer, PayloadAction } from '@reduxjs/toolkit'
-import moment from 'moment'
-import { RootState } from './index'
+import { createSlice, type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
+import dayjs from 'dayjs'
+import type { RootState } from './index'
 
 import { ISO_8601_DATE_TIME } from '../constants'
-import { DownloadOptions } from '../types'
+import type { DownloadOptions } from '../types'
 
 type DownloadState = {
   selectedStation: any
@@ -51,8 +51,8 @@ const downloadSlice = createSlice({
     selectedCategory: undefined,
     selectedVariables: [],
     options: {
-      from: moment().subtract(1, "day").startOf('day').format(ISO_8601_DATE_TIME),
-      to: moment().endOf('day').format(ISO_8601_DATE_TIME),
+      from: dayjs().subtract(1, "day").startOf('day').format(ISO_8601_DATE_TIME),
+      to: dayjs().endOf('day').format(ISO_8601_DATE_TIME),
       quality: 'ANY',
       aggregation: 'NONE',
       averaging: 1

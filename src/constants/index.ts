@@ -1,6 +1,7 @@
-export const API_URL = `${process.env.REACT_APP_API_URL}`
-export const SSO_URL = `${process.env.REACT_APP_SSO_URL}`
-export const METRICS_SCRIPT_URL = `${process.env.REACT_APP_METRICS_SCRIPT_URL}`
+export const API_URL = `${import.meta.env.VITE_API_URL}`
+export const METRICS_SCRIPT_URL = `${import.meta.env.VITE_METRICS_SCRIPT_URL}`
+export const SSO_URL = `${import.meta.env.VITE_SSO_URL}`
+export const NEW_UI = `${import.meta.env.VITE_NEW_UI}` === 'true'
 export const PATH_AGGREGATION = '/aggregation'
 export const PATH_QUALITY = '/quality'
 export const PATH_STRUCTURE = '/structure'
@@ -87,12 +88,12 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.O3168",
+        tableVariable: "HYY_GAS.O3168",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.O_3",
+        tableVariable: "KUM_GAS.O_3",
       },
       {
         caption: "Värriö",
@@ -108,12 +109,12 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.SO2168",
+        tableVariable: "HYY_GAS.SO2168",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.SO_2",
+        tableVariable: "KUM_GAS.SO_2",
       },
       {
         caption: "Värriö",
@@ -129,12 +130,12 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.NO168",
+        tableVariable: "HYY_GAS.NO168",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.NO",
+        tableVariable: "KUM_GAS.NO",
       },
       {
         caption: "Värriö",
@@ -150,12 +151,12 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.NOx168",
+        tableVariable: "HYY_GAS.NOx168",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.NO_x",
+        tableVariable: "KUM_GAS.NO_x",
       },
       {
         caption: "Värriö",
@@ -171,17 +172,17 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.Glob67",
+        tableVariable: "HYY_RAD.Glob67",
       },
       {
         caption: "Kumpula",
         color: "black",
-        tableVariable: "KUM_META.Tower_GLOB_32m",
+        tableVariable: "KUM_RAD.Tower_GLOB_32m",
       },
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.GLOB",
+        tableVariable: "VAR_RAD.GLOB",
       }
     ],
   },
@@ -259,7 +260,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Hyytiälä",
         color: "red",
-        tableVariable: "HYY_META.RH168icos",
+        tableVariable: "HYY_META.RHst168",
       },
       {
         caption: "Kumpula",

@@ -1,4 +1,4 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import { configureStore, type ThunkAction, type Action } from '@reduxjs/toolkit'
 import authSlice from './auth'
 import availabilitySlice from './availability'
 import downloadSlice from './download'

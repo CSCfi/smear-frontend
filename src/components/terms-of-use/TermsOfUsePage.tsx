@@ -28,7 +28,7 @@ const TermsOfUsePage: React.FC = () => {
           Citable datasets with persistent identifiers (URN, DOI) are
           periodically produced from final quality-checked data. Those data are
           accessible via the Finnish metadata catalogue{' '}
-          <a href='https://etsin.fairdata.fi/datasets/SmartSMEAR' target='_blank' rel='noopener noreferrer'>Etsin</a>.
+          <a href='https://etsin.fairdata.fi/datasets?search=smartsmear' target='_blank' rel='noopener noreferrer'>Etsin</a>.
         </p>
         <p>
           All data is provided "as is" and any data is subject to update or

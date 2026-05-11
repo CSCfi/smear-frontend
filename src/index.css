@@ -1,9 +1,10 @@
 body {
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif !important;
   font-size: 1.1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5715;
 }
 
 p {
@@ -12,10 +13,18 @@ p {
 
 h1 {
   font-size: 1.4rem !important;
+  font-weight: normal;
 }
 
 #root {
   height: 100%;
+}
+
+.ant-layout {
+  font-family: 'Lato', serif !important;
+  font-size: 1.1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .ant-layout-header {

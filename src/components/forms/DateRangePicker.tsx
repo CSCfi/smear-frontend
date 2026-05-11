@@ -1,11 +1,12 @@
 import React from 'react'
 import { DatePicker, Form } from 'antd'
+import { Dayjs } from 'dayjs'
 
 const { RangePicker } = DatePicker
 
 interface DateRangePickerProps {
-  selectedDateRange: any,
-  onSelectDateRange(event: any): void
+  selectedDateRange: [Dayjs | null, Dayjs | null],
+  onSelectDateRange(values: [Dayjs, Dayjs] | null): void
 }
 
 const DateRangePicker: React.FC<DateRangePickerProps> = ({
@@ -20,7 +21,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       <RangePicker
         format="YYYY-MM-DD"
         value={selectedDateRange}
-        onChange={onSelectDateRange}
+        onChange={(values) => onSelectDateRange(values as [Dayjs, Dayjs])}
         allowClear={false}
       />
     </Form.Item>

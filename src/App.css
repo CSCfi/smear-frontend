@@ -13,7 +13,7 @@
 }
 
 .App {
-  min-height: 100%;
+  min-height: 100vh;
   background: inherit;
 }
 
@@ -125,15 +125,23 @@
   text-transform: uppercase;
   margin: 0 15px;
   text-wrap: nowrap;
-  & a {
-    color: #4f4f4f;
-  }
   &:hover {
     & a {
       color: #007fad !important;
       text-decoration: underline;
     }
   }
+}
+
+.ant-menu-item{
+    color: #4f4f4f !important;
+    &:after {
+      border-bottom: none !important;
+    }
+}
+
+.ant-menu-item-selected  {
+    color: #007fad !important;
 }
 
 .loginButton {
@@ -152,7 +160,7 @@
 .ant-dropdown-menu {
   margin: 0 auto;
   padding: 0;
-  width: max-content;
+  width: 100%;
   min-width: 6em;
   border-radius: 0.3em;
   box-shadow: 0px 1px 3px 0px;
@@ -162,8 +170,8 @@
   & li {
     padding: 0.5rem 1rem;
     justify-self: left;
-    font-size: 16px;
-    color: #4f4f4f;
+    font-size: 16px !important;
+    color: #4f4f4f !important;
     background-color: transparent;
   }
 }

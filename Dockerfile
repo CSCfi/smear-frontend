@@ -1,13 +1,13 @@
 # build environment
-FROM docker.io/library/node:12.18.0-alpine as build
+FROM docker.io/library/node:24.14.1-alpine AS build
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 COPY . ./
 RUN yarn install
 RUN yarn build
 
 # production environment
-FROM docker.io/nginxinc/nginx-unprivileged:1.18-alpine
+FROM docker.io/nginxinc/nginx-unprivileged:1.29-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080

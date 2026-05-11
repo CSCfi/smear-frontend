@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Tooltip, Tree } from 'antd'
 import 'antd/dist/antd.css'
 
@@ -8,6 +8,7 @@ import { fetchVariableMetadata } from '../../service/variable'
 import searchSlice from '../../store/search'
 import { dataStructureSelector } from '../../store/treedata'
 import { variablesSelector } from '../../store/variables'
+import { useAppDispatch } from '../../hooks'
 
 const { setTablevariables } = searchSlice.actions
 const { DirectoryTree } = Tree
@@ -53,11 +54,11 @@ const VariableTooltip: React.FC<VariableTooltipProps> = ({ variableData }) => {
 }
 
 const SearchTree = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const treeData = useSelector(dataStructureSelector)
   const variables = useSelector(variablesSelector)
 
-  const onLoadData = (node: any) => new Promise<void>(resolve => {
+  const onExpand = (expandedKeys, {expanded, node}) => new Promise<void>(resolve => {
     if (node.children === 0 || !node.children[0].isLeaf) {
       resolve()
       return
@@ -109,11 +110,11 @@ const SearchTree = () => {
   }
 
   return (
-    <DirectoryTree
+    <Tree
       className="SearchTree"
       checkable
       onCheck={(checkedKeys: any, info: any) => dispatch(setTablevariables(checkedKeys))}
-      loadData={onLoadData}
+      onExpand={onExpand}
       titleRender={renderNodeTitle}
       treeData={treeData.slice().sort(stationSort).map(station => ({
         ...station,
@@ -123,6 +124,7 @@ const SearchTree = () => {
         children: station.categories.filter((category: any) => category.id !== 'Tree2').map(category => ({
           checkable: false,
           key: category.id,
+          isLeaf: false,
           title: category.name,
           children: category.variables.slice().sort(variableSort).map(variable => ({
             isLeaf: true,

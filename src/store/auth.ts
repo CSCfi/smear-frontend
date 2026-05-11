@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { createAsyncThunk, createSlice, CaseReducer } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, type CaseReducer } from '@reduxjs/toolkit'
 
-import { RootState } from './index'
+import type { RootState } from './index'
 import { API_URL } from '../constants'
 
 // waiting for information on relevant fields
@@ -18,7 +18,7 @@ export const fetchUserDetails = createAsyncThunk(
         try {
             const response = await axios.get(API_URL + '/auth', {withCredentials: true})
             return response.data
-        } catch (err) {
+        } catch (err: any) {
             return {'status_code': err.response.status, 'message': err.message}
         }
     })

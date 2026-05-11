@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { TimeSeries } from '../types'
-import { RootState } from './index'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import type { TimeSeries } from '../types'
+import type { RootState } from './index'
 
 const timeSeriesSlice = createSlice({
   name: 'timeSeries',

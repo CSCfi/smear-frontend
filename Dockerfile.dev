@@ -1,12 +1,10 @@
-FROM docker.io/library/node:16
-
-RUN apt update -y
+FROM node:24.14.1
 
 # Install application
 WORKDIR /app
 COPY package.json .
-COPY yarn.lock .
 
+RUN rm -fr node_modules
 RUN yarn install
 
 COPY . .
@@ -24,4 +22,4 @@ ENV LANG=C.UTF-8
 # Start application
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]

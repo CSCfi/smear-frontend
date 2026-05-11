@@ -37,7 +37,7 @@ const DownloadSelectedModal: React.FC<DownloadSelectedModalProps> = ({
   return (
     <Modal
       title="Select download format"
-      visible={visible}
+      open={visible}
       onCancel={(e:any) => setVisible(false)}
       footer={[
         <Button key="1" onClick={(e:any) => setSelectedType('csv')}>CSV</Button>,

@@ -1,8 +1,12 @@
+import axios from 'axios'
+import { createAsyncThunk, createSlice, type CaseReducer } from '@reduxjs/toolkit'
+
 import { Button, Dropdown, Menu } from 'antd'
+import type { MenuProps } from 'antd'
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { SSO_URL } from '../../constants'
+import { API_URL, SSO_URL } from '../../constants'
 import authSlice, { isLoggedInSelector, userSelector } from '../../store/auth'
 
 const Login = () => {
@@ -24,27 +28,41 @@ const Login = () => {
         redirectToLogout()
     }
 
+
+    // ToDo: This is very crude implementation and should be used only for demonstration purposes.
+    // Should be replaced with a proper implementation.
+    const createDataset = async () => {
+        try {
+            const response = await axios.post(API_URL + '/metax-client/dataset', {}, {withCredentials: true})
+            console.log(response)
+            return response.data
+        } catch (err: any) {
+            console.error(err)
+            return {'status_code': err.response.status, 'message': err.message}
+        }
+    }
+
     const LoginButton = () => 
         <Button className="AppButton loginButton" data-cy="loginButton" type="primary" onClick={()=>redirectToLogin()} disabled={false}>
             Login
         </Button>
 
-    const userActions = [
+    const items: MenuProps['items'] =  [
         {
-            key: 1,
-            label: (<a data-cy="logoutButton" onClick={()=>{dispatch(performLogout())}}>Logout</a>),
+            key: '1',
+            label: (<a data-cy="logoutButton" onClick={()=>(performLogout())}>Logout</a>),
+        },
+        {
+            key: '2',
+            label: (<a data-cy="createDatasetButton" onClick={()=>(createDataset())}>Create dataset</a>),
         }
     ]
 
+
     const UserButton = () => {
-        const menu = (
-            <Menu>
-                {userActions.map(action => <Menu.Item key={action.key}>{action.label}</Menu.Item>)}
-            </Menu>
-        )
         return <>
-            <Dropdown overlay={menu} placement="bottomCenter" trigger= {["click"]} className="AppButton loginButton">
-                <span data-cy="userActions">
+            <Dropdown menu={{ items }} placement="bottom" trigger= {["click"]}>
+                <span data-cy="userActions" className="AppButton loginButton">
                     <svg
                         xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 448 512"

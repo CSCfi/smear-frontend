@@ -25,7 +25,7 @@ const stationFeatures = () => {
         textAlign: 'left'
       }),
       image: new Icon({
-        imgSize: [20, 24],
+        size: [20, 24],
         scale: .5,
         src: iconSrc
       }),
@@ -34,9 +34,9 @@ const stationFeatures = () => {
   })
 }
 
-const OpenStreetMap = () => {
+function OpenStreetMap() {
   useEffect(() => {
-    new Map({
+    const map = new Map({
       target: 'map',
       layers: [
         new TileLayer({ source: new OSM() }),
@@ -48,7 +48,10 @@ const OpenStreetMap = () => {
         center: fromLonLat([22, 63]),
         zoom: 4
       })
-    })
+    });
+    return () => {
+      map.setTarget();
+    };
   }, [])
   return (
     <div id='map' />

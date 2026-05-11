@@ -1,7 +1,7 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { message, Alert, Button, Col, Form, Row, Spin } from 'antd'
-import moment, { Moment } from 'moment'
+import dayjs, { Dayjs } from 'dayjs'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
 import { recordMetricsEvent } from '../../service/metrics'
@@ -9,6 +9,7 @@ import { fetchTimeSeries } from '../../service/timeseries'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import searchSlice, { searchSelector } from '../../store/search'
 import { AggregationSelect, AveragingInput, DateRangePicker, QualitySelect } from '../forms'
+import { useAppDispatch } from '../../hooks'
 
 const { setOptions, setTimeSeries } = searchSlice.actions
 
@@ -33,7 +34,7 @@ const SearchWarningAlert = () => {
 }
 
 const SearchForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const aggregations = useSelector(aggregationsSelector)
   const qualities = useSelector(qualitiesSelector)
   const { fetching, options, tablevariables } = useSelector(searchSelector)
@@ -58,8 +59,11 @@ const SearchForm = () => {
       dispatch(setOptions({ ...options, averaging }))
     }
   }
-  const onDateRangeChange = ([from, to]: Moment[]) => {
-    if (to.isAfter(moment().endOf('day'))) {
+  const onDateRangeChange = (values: [Dayjs, Dayjs] | null) => {
+    if (!values) return;
+    const [from, to] = values;
+    
+    if (to.isAfter(dayjs().endOf('day'))) {
       message.info('Please do not select a date interval that is in the future')
     } else {
       dispatch(setOptions({
@@ -92,7 +96,7 @@ const SearchForm = () => {
       <Row align={'bottom'} gutter={[8, 0]} justify={"space-between"}>
         <Col xs={16}>
           <DateRangePicker
-            selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
+            selectedDateRange={[dayjs(from, ISO_8601_DATE_TIME), dayjs(to, ISO_8601_DATE_TIME)]}
             onSelectDateRange={onDateRangeChange}
           />
         </Col>

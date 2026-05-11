@@ -1,7 +1,7 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Button, Form, Layout } from 'antd'
-import moment, { Moment } from 'moment'
+import dayjs, { Dayjs } from 'dayjs'
 
 import { ISO_8601_DATE_TIME } from '../../constants'
 import { fetchAvailability } from '../../service/timeseries'
@@ -10,6 +10,7 @@ import availabilitySlice from '../../store/availability'
 import downloadSlice, { downloadSelector } from '../../store/download'
 import { aggregationsSelector, qualitiesSelector } from '../../store/options'
 import { dataStructureSelector } from '../../store/treedata'
+import { useAppDispatch } from '../../hooks'
 
 import {
   CategorySelect,
@@ -30,7 +31,7 @@ const {
 const { setFetching, setAvailaibility } = availabilitySlice.actions
 
 const DownloadSider = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const aggregations = useSelector(aggregationsSelector)
   const qualities = useSelector(qualitiesSelector)
   const treeData = useSelector(dataStructureSelector)
@@ -51,11 +52,15 @@ const DownloadSider = () => {
     dispatch(setSelectedCategory(selectedStation.categories
         .find((category: any) => category.id === value))
     )
-  const handleDateRangeChange = ([from, to]: Moment[]) => dispatch(setOptions({
-    ...options,
-    from: from.format(ISO_8601_DATE_TIME),
-    to: to.endOf('day').format(ISO_8601_DATE_TIME)
-  }))
+  const handleDateRangeChange = (values: [Dayjs, Dayjs] | null) => {
+    if (!values) return;
+    const [from, to] = values;
+    
+    dispatch(setOptions({
+      ...options,
+      from: from.format(ISO_8601_DATE_TIME),
+      to: to.endOf('day').format(ISO_8601_DATE_TIME)
+  }))}
   const handleQualityChange = (quality: any) => dispatch(setOptions({ ...options, quality }))
   const handleAggregationChange = (aggregation: string) => {
     if (aggregation === 'NONE') {
@@ -116,7 +121,7 @@ const DownloadSider = () => {
         onSelectCategory={handleSelectCategory}
       />
       <DateRangePicker
-        selectedDateRange={[moment(from, ISO_8601_DATE_TIME), moment(to, ISO_8601_DATE_TIME)]}
+        selectedDateRange={[dayjs(from, ISO_8601_DATE_TIME), dayjs(to, ISO_8601_DATE_TIME)]}
         onSelectDateRange={handleDateRangeChange}
       />
       <QualitySelect

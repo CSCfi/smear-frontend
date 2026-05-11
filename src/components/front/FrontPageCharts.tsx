@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Row } from 'antd'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 import { FRONT_PAGE_CHARTS, ISO_8601_DATE_TIME } from '../../constants'
 import { fetchTimeSeries } from '../../service/timeseries'
 import timeSeriesSlice, { timeSeriesSelector } from '../../store/timeseries'
-import { DownloadOptions } from '../../types'
+import type { DownloadOptions } from '../../types'
+import { useAppDispatch } from '../../hooks'
 
 import FrontPageForm from './FrontPageForm'
 import TimeSeriesGrid from '../timeseries/TimeSeriesGrid'
@@ -14,7 +15,7 @@ import TimeSeriesGrid from '../timeseries/TimeSeriesGrid'
 const { setTimeSeries } = timeSeriesSlice.actions
 
 const FrontPageCharts = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const timeSeries = useSelector(timeSeriesSelector)
 
   useEffect(() => {
@@ -23,8 +24,8 @@ const FrontPageCharts = () => {
   }, [])
 
   const [options, setOptions] = useState<DownloadOptions>({
-    from: moment().subtract(2, "day").startOf('day').format(ISO_8601_DATE_TIME),
-    to: moment().endOf('day').format(ISO_8601_DATE_TIME),
+    from: dayjs().subtract(2, "day").startOf('day').format(ISO_8601_DATE_TIME),
+    to: dayjs().endOf('day').format(ISO_8601_DATE_TIME),
     quality: 'ANY',
     aggregation: 'NONE',
     averaging: 30,

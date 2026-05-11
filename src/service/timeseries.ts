@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { AppDispatch } from '../store/index'
+import type { AppDispatch } from '../store/index'
 import searchSlice from '../store/search'
-import { TimeSeries, DownloadOptions } from '../types'
+import { type TimeSeries, type DownloadOptions } from '../types'
 import { API_URL, PATH_TIME_SERIES, PATH_VARIABLE_CSV } from '../constants'
 
 const { setFetching, setErrorMessage, setWarningMessage } = searchSlice.actions
@@ -33,15 +33,15 @@ export const fetchTimeSeries = (
           dispatch(setWarningMessage("Response data is empty"))
           setTimeout(() => dispatch(setWarningMessage('')), 3000)
         }
-      } catch(error) {
+      } catch(e:any) {
         dispatch(setFetching(false))
 
-        if (error.response === undefined) {
-          console.error(error)
+        if (e.response === undefined) {
+          console.error(e)
           return
         }
 
-        const { data, status } = error.response
+        const { data, status } = e.response
         if (status === 400) {
           // API sets invalid query parameter errors to this field
           const { parameterViolations } = data
