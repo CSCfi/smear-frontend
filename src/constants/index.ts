@@ -98,7 +98,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.O3_1",
+        tableVariable: "VAR_GAS.O3_1",
       }
     ],
   },
@@ -119,7 +119,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.SO2_1",
+        tableVariable: "VAR_GAS.SO2_1",
       }
     ],
   },
@@ -140,7 +140,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.NO_1",
+        tableVariable: "VAR_GAS.NO_1",
       }
     ],
   },
@@ -161,7 +161,7 @@ export const FRONT_PAGE_CHARTS = [
       {
         caption: "Värriö",
         color: "blue",
-        tableVariable: "VAR_META.NOX_1",
+        tableVariable: "VAR_GAS.NOX_1",
       }
     ],
   },
