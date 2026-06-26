@@ -33,17 +33,30 @@ h1 {
   height: 136px;
 }
 
-.ant-tooltip-inner {
-  width: 400px;
+.ant-tooltip {
+  max-width: 400px;
 }
 
 .logo {
   float: left;
 }
 
+.ant-tooltip-inner table {
+  width: 100%;
+}
+
 .tooltip-data {
   vertical-align: top;
   padding: 4px;
+}
+
+.ant-tooltip-inner table td:first-child {
+  white-space: nowrap;
+}
+
+.ant-tooltip-inner table td:last-child {
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 #map {
